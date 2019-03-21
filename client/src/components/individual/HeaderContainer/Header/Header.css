@@ -1,0 +1,31 @@
+.header__logo {
+    width: 34px;
+    height: auto;
+    position: absolute;
+    top: 15px;
+    z-index: 9999;
+    left: 20px;
+}
+
+.logo-img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+.appbar-autocomplete-cities, .appbar-autocomplete-locations {
+    left: 60px;
+    border-color: white;
+    background-color: white !important;
+    border-radius: 4px;
+    padding-left: 2px;
+    font-size: 18px !important;
+}
+
+.header {
+    position: fixed !important;
+    top: 0px !important;
+	width: 100%;
+	z-index: 99999;
+}
+

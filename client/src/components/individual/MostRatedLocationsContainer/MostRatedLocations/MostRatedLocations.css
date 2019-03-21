@@ -1,0 +1,15 @@
+.header-p {
+    font-size: 30px;
+    text-align: center;
+    padding: 50px 50px 80px 50px; 
+}
+
+.most-rated-locations {
+    background-color: white;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.most-rated-location__header {
+    margin-top: 64px;
+}

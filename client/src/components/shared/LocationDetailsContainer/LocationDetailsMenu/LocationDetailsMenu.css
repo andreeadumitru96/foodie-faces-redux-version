@@ -1,0 +1,10 @@
+.location-details-menu__title {
+    padding: 70px 0px 30px 30px;
+    font-size: 34px;   
+}
+
+.title-no-items {
+    font-size: 24px;
+    padding-top: 20px;
+    font-style: italic;
+}

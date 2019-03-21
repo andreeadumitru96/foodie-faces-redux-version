@@ -1,0 +1,21 @@
+.location-filters {
+    display: flex;
+    direction: row;
+    justify-content: center !important;
+    /* text-align: center; */
+    /* position: fixed !important; */
+    /* top: 0px !important; */
+	width: 100%;
+	z-index: 99999;
+}
+
+ .location-filters__meals > div, .location-filters__goodFor > div, .location-filters__cuisine > div{
+    width: 250px !important;
+    display: flex;
+}
+
+.location-filters__search-button > div {
+    margin-left: 10px;
+    margin-top: 2px;
+    width: 50px !important;
+}

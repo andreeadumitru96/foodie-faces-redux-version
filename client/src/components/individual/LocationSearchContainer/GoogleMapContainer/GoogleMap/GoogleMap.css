@@ -1,0 +1,21 @@
+.google-maps {
+    width: 50%;
+    height: 88vh;
+    margin: 80px 10px;
+
+}
+
+.google-maps > div > div {
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+}
+
+.location-search .google-maps {
+    width: 30%;
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}

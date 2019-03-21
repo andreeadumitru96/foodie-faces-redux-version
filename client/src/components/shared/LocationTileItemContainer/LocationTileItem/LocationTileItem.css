@@ -1,0 +1,11 @@
+.location-tile {
+    cursor: pointer;
+}
+
+.location-tile__button-marked {
+    color: #006600 !important;
+}
+
+.location-tile__button {
+    color: white !important;
+}

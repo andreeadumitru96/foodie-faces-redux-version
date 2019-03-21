@@ -1,0 +1,21 @@
+.pin-point i{
+    width: 32px;
+    height: 32px;
+    color: #696969;
+    font-size: 40px;
+    position: absolute;
+    left: -16px;
+    top: -16px;
+}
+
+.pin-point-hovered i {
+    width: 32px;
+    height: 32px;
+    color: black;
+    font-size: 50px;
+    position: absolute;
+    left: -16px;
+    top: -16px;
+    /* optimized: false; */
+    z-index: 99999999;
+}

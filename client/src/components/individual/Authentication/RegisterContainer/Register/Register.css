@@ -1,0 +1,40 @@
+.register {
+    height: 100vh;
+    width: auto;
+    background-image: url("../../../../../assets/login-background.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+    background-position: center center;
+}
+
+.register__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    color: white;
+    font-size: 18px;
+    font-weight: bold; 
+    /* margin-top: 25px; */ 
+}
+
+.register__form-sign-up-button {
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	margin-top: 2%;
+}
+
+.register__form-forgot-password-anchor {
+    color: white;
+    cursor: pointer;
+}
+
+.register__form-forgot-password {
+    font-size: 15;
+    margin-top: 2%;
+    color: white;
+    cursor: pointer;
+}

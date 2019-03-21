@@ -1,0 +1,41 @@
+.location-details-add-dish-dialog > div > div {
+    height: 600px;
+    overflow: auto;
+}
+
+.location-details-add-dish__buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.location-details-add-dish-dialog > div > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}   
+
+.location-details-add-dish__score {
+    justify-content: center;
+}
+
+.photos-add-photo {
+    padding-top: 20px;
+}
+
+.fa-plus { 
+    font-size: 22px;
+    color: green;
+}
+
+.location-details-add-dish__image-preview {
+    width: 100px;
+    height: auto;
+}
+
+.location-details-add-dish__image-preview img {
+    width: 100%;
+    height: auto;
+}
+
