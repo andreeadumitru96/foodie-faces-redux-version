@@ -2,35 +2,42 @@
 const FETCH_CITIES = 'FETCH_CITIES';
 const FETCH_LOCATIONS = 'FETCH_LOCATIONS';
 const SET_SELECTED_CITY = 'SET_SELECTED_CITY';
+const FETCH_MOST_RATED_LOCATIONS = 'FETCH_MOST_RATED_LOCATIONS';
 
 const initialState = {
   citiesList: [],
   locationsListByCity: [],
-  selectedCity: null
+  selectedCity: null,
+  mostRatedLocationsList: []
 };
 
 
 //Reducer
 export const locationReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case FETCH_CITIES:
-      return {
-          ...state,
-          citiesList: action.payload
-      };
-    case FETCH_LOCATIONS:
-      return {
-          ...state,
-          locationsListByCity: action.payload
-      };
-    case SET_SELECTED_CITY: 
-      return {
-          ...state,
-          selectedCity: action.payload
-      }
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case FETCH_CITIES:
+          return {
+              ...state,
+              citiesList: action.payload
+          };
+        case FETCH_LOCATIONS:
+          return {
+              ...state,
+              locationsListByCity: action.payload
+          };
+        case SET_SELECTED_CITY: 
+          return {
+              ...state,
+              selectedCity: action.payload
+          }
+        case FETCH_MOST_RATED_LOCATIONS: 
+          return {
+            ...state,
+            mostRatedLocationsList: action.payload
+          }
+        default:
+          return state;
+    }
 }
 
 
@@ -105,4 +112,25 @@ const setDefaultCoordinates = (locationsListByCity) => {
         return location;
     });      
     return formattedLocationsList;
+}
+
+export const fetchMostRatedLocations = () => {
+    return (dispatch) => {
+        fetch('http://localhost:3001/api/location/getMostRatedLocations', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'get',
+        }).then(function(response){
+            if(response.status === 200) {
+                response.json().then((mostRatedLocationsList) => {
+                  dispatch({
+                    type: FETCH_MOST_RATED_LOCATIONS,
+                    payload: mostRatedLocationsList
+                  });
+                });
+            }
+        });
+    }
 }

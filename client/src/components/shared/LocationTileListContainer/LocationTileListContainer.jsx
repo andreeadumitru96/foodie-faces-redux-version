@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 import LocationTileList from '../LocationTileListContainer/LocationTileList/LocationTileList';
 
-import { fetchLocationsByCity } from '../../../reducers/locationReducer/index.js';
+// import { fetchLocationsByCity } from '../../../reducers/locationReducer/index.js';
 
 const numberOfPassedLocations = 9;
 
@@ -11,6 +11,7 @@ class LocationTileListContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            locationsList: [],
             passedLocations: [],
             lastPassedLocationsIndex: 0,
 			isDataLeftToRender: true,
@@ -22,6 +23,7 @@ class LocationTileListContainer extends Component {
     render() {
         return (
             <LocationTileList 
+
                 passedLocations = {this.state.passedLocations}
                 triggeredBody = {this.props.triggeredBody}
                 onScrollEnd={this._onScrollEnd}
@@ -34,7 +36,7 @@ class LocationTileListContainer extends Component {
     }
 
     _onScrollEnd() {
-		let passedLocations = this.state.locationsList.slice(this.state.lastPassedLocationsIndex, this.state.lastPassedLocationsIndex + numberOfPassedLocations);
+		let passedLocations = this.props.locationsList.slice(this.state.lastPassedLocationsIndex, this.state.lastPassedLocationsIndex + numberOfPassedLocations);
 		let isDataLeftInArray = true;
 		
 		if(passedLocations.length < numberOfPassedLocations) {
@@ -50,7 +52,7 @@ class LocationTileListContainer extends Component {
     
     componentWillReceiveProps(newProps) {
 
-        if (this.props.locationsListByCity !== newProps.locationsList) {
+        if (this.props.locationsList !== newProps.locationsList) {
 			this.setState({
 				locationsList: newProps.locationsList,
 				passedLocations: [],
@@ -63,8 +65,5 @@ class LocationTileListContainer extends Component {
     }
     
 }
-const mapStateToProps = (state) => ({
-    locationsListByCity: state.locations.locationsListByCity,
-});
-  
-export default connect(mapStateToProps, { fetchLocationsByCity })(LocationTileListContainer);
+
+export default LocationTileListContainer;
