@@ -17,7 +17,7 @@ class MostRatedLocations extends Component {
                 </div>
                 <div className="most-rated-location__content">
                     <LocationTileListContainer 
-                        locationsList={this.props.locationsList}
+                        locationsList = {this.props.locationsList}
                         triggeredBody = {this.props.triggeredBody}
                     />
                 </div>

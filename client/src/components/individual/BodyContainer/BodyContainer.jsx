@@ -7,6 +7,8 @@ import MostRatedLocationsContainer from '../MostRatedLocationsContainer/MostRate
 import LocationSearchContainer from '../LocationSearchContainer/LocationSearchContainer';
 import LocationDetailsContainer from '../../shared/LocationDetailsContainer/LocationDetailsContainer';
 
+import { fetchMostRatedLocations } from '../../../reducers/locationReducer/index';
+
 import './Body.css';
 
 class BodyContainer extends Component {
@@ -37,7 +39,7 @@ class BodyContainer extends Component {
                 }
                 {this.state.isLocationDetailsMount ? 
                     <LocationDetailsContainer
-                        locationDetails = {this.state.locationDetails}
+                        locationDetails = {this.props.locationsListByCity}
                         triggeredBody = {this._triggeredBody}
                      /> 
                      : null
@@ -60,7 +62,7 @@ class BodyContainer extends Component {
         })
     }
 
-    _triggeredBody(componentToMount, data) {
+    _triggeredBody(componentToMount) {
         this.setState({
             isLocationDetailsMount: componentToMount === 'LocationDetailsComponent' ? true : false,
             isMostRatedLocationsMount: false,
@@ -71,6 +73,7 @@ class BodyContainer extends Component {
 
 const mapStateToProps = (state) => ({
     locationsListByCity: state.locations.locationsListByCity,
+    mostRatedLocationsList: state.locations.mostRatedLocationsList
 });
 
-export default connect(mapStateToProps, { fetchLocationsByCity })(BodyContainer);
+export default connect(mapStateToProps, { fetchLocationsByCity, fetchMostRatedLocations })(BodyContainer);

@@ -11,10 +11,11 @@ class LocationDetailsContainer extends Component {
 
     render() {
         return (
-            <LocationDetails
-                locationDetails = {this.props.locationDetails}
-                triggeredBody = {this.props.triggeredBody}
-            />
+            <div>dsasa</div>
+            // <LocationDetails
+            //     locationDetails = {this.props.locationDetails}
+            //     triggeredBody = {this.props.triggeredBody}
+            // />
 
         );
     }
