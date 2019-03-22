@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import Header from './Header/Header';
 // import {notificationError} from '../../shared/constants';
 
-import { fetchCities } from '../../../reducers/postReducer/index';
-import { setSelectedCity } from '../../../reducers/postReducer/index';
+import { fetchCities } from '../../../reducers/locationReducer/index';
+import { setSelectedCity } from '../../../reducers/locationReducer/index';
 
 class HeaderContainer extends Component {
     constructor(props) {
@@ -52,32 +52,6 @@ class HeaderContainer extends Component {
         
         let mountComponent = 'LocationSearchComponent' ;                  
         this.props.manageBodyComponents(mountComponent);
-
-        // fetch('http://localhost:3001/api/location/getLocationsByCity', {
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     method: 'post',
-        //     body: JSON.stringify(cityData)
-        // }).then(function(response) {
-        //     if(response.status === 200) {
-        //         response.json().then((locations) => {
-                    
-        //             for(index = 0; index < locations.length; index++) { 
-        //                 if(!locations[index].coordinates.longitude) {
-                            
-        //                     let coordinates = this._setDefaultCoordinates(locations[index].coordinates.latitude, locations[index].coordinates.longitude);
-                            
-        //                     locations[index].coordinates.latitude = coordinates.latitude;
-        //                     locations[index].coordinates.longitude = coordinates.longitude;
-        //                 }                      
-        //             }
-        //             let mountComponent = 'LocationSearchComponent'                    
-        //             this.props.manageBodyComponents(mountComponent, locations);
-        //         })
-        //     }
-        // }.bind(this))
     }
 
     _findLocationByName(){
@@ -101,12 +75,8 @@ class HeaderContainer extends Component {
     // }
 }
 
-HeaderContainer.propTypes = {
-   
-};
-
 const mapStateToProps = (state) => ({
-    citiesList: state.posts.citiesList,
+    citiesList: state.locations.citiesList,
 });
   
 export default connect(mapStateToProps, { fetchCities, setSelectedCity })(HeaderContainer);

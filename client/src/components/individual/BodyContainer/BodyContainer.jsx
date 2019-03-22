@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import { fetchLocationsByCity } from '../../../reducers/postReducer/index';
+import { fetchLocationsByCity } from '../../../reducers/locationReducer/index';
 // import Body from '../BodyContainer/Body/Body';
 import MostRatedLocationsContainer from '../MostRatedLocationsContainer/MostRatedLocationsContainer';
 import LocationSearchContainer from '../LocationSearchContainer/LocationSearchContainer';
@@ -16,7 +16,6 @@ class BodyContainer extends Component {
             isMostRatedLocationsMount: this.props.componentToMount === 'MostRatedLocationsComponent' ? true : false,
             isLocationSearchMount: this.props.componentToMount === 'LocationSearchComponent' ? true : false,
             isLocationDetailsMount: this.props.componentToMount === 'LocationDetailsComponent' ? true : false,
-            // receivedLocationsFromHeader: [],
             locationDetails: null
         };
         this._triggeredBody = this._triggeredBody.bind(this);
@@ -58,7 +57,6 @@ class BodyContainer extends Component {
             isMostRatedLocationsMount: newProps.componentToMount === 'MostRatedLocationsComponent' ? true : false,
             isLocationSearchMount: newProps.componentToMount === 'LocationSearchComponent' ? true : false,
             isLocationDetailsMount: newProps.componentToMount === 'LocationDetailsComponent' ? true : false,
-            // receivedLocationsFromHeader: newProps.receivedLocationsFromHeader
         })
     }
 
@@ -66,14 +64,13 @@ class BodyContainer extends Component {
         this.setState({
             isLocationDetailsMount: componentToMount === 'LocationDetailsComponent' ? true : false,
             isMostRatedLocationsMount: false,
-            isLocationSearchMount: false,
-            // locationDetails: data
+            isLocationSearchMount: false
         })
     }
 }
 
 const mapStateToProps = (state) => ({
-    locationsListByCity: state.posts.locationsListByCity,
+    locationsListByCity: state.locations.locationsListByCity,
 });
 
 export default connect(mapStateToProps, { fetchLocationsByCity })(BodyContainer);

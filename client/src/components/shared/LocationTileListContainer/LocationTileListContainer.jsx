@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 import LocationTileList from '../LocationTileListContainer/LocationTileList/LocationTileList';
+
+import { fetchLocationsByCity } from '../../../reducers/locationReducer/index.js';
 
 const numberOfPassedLocations = 9;
 
@@ -8,7 +11,6 @@ class LocationTileListContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            locationsList: this.props.locationsList,
             passedLocations: [],
             lastPassedLocationsIndex: 0,
 			isDataLeftToRender: true,
@@ -48,7 +50,7 @@ class LocationTileListContainer extends Component {
     
     componentWillReceiveProps(newProps) {
 
-        if (this.state.locationsList !== newProps.locationsList) {
+        if (this.props.locationsListByCity !== newProps.locationsList) {
 			this.setState({
 				locationsList: newProps.locationsList,
 				passedLocations: [],
@@ -61,5 +63,8 @@ class LocationTileListContainer extends Component {
     }
     
 }
-
-export default LocationTileListContainer;
+const mapStateToProps = (state) => ({
+    locationsListByCity: state.locations.locationsListByCity,
+});
+  
+export default connect(mapStateToProps, { fetchLocationsByCity })(LocationTileListContainer);

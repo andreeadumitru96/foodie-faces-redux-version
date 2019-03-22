@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchLocationsByCity } from '../../../reducers/postReducer/index';
+import { fetchLocationsByCity } from '../../../reducers/locationReducer/index';
 import LocationSearch from './LocationSearch/LocationSearch';
 
 class LocationSearchContainer extends Component {
@@ -50,7 +50,7 @@ class LocationSearchContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    locationsListByCity: state.posts.locationsListByCity,
+    locationsListByCity: state.locations.locationsListByCity,
 });
   
 export default connect(mapStateToProps, { fetchLocationsByCity })(LocationSearchContainer);

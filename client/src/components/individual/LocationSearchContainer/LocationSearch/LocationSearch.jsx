@@ -34,10 +34,9 @@ class LocationSearch extends Component {
                 </div>
 
                 <div className="location-search__google-map">
-                    <GoogleMapContainer
-                        locationsList={this.props.locationsList}
+                    {/* <GoogleMapContainer
                         ref={(googleMapChild) => {this.googleMapRef = googleMapChild} }
-                    />
+                    /> */}
                 </div>
 
 

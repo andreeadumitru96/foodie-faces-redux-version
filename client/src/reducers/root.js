@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import {postReducer} from './postReducer/index';
+import {locationReducer} from './locationReducer/index';
 
 /* Root Reducer - combine all reducers in here*/
 export default combineReducers({
-  posts: postReducer
+  locations: locationReducer
 });
