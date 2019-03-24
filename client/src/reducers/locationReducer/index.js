@@ -3,12 +3,14 @@ const FETCH_CITIES = 'FETCH_CITIES';
 const FETCH_LOCATIONS = 'FETCH_LOCATIONS';
 const SET_SELECTED_CITY = 'SET_SELECTED_CITY';
 const FETCH_MOST_RATED_LOCATIONS = 'FETCH_MOST_RATED_LOCATIONS';
+const FETCH_LOCATION_BY_ID = 'FETCH_LOCATION_ITEM_BY_ID';
 
 const initialState = {
   citiesList: [],
   locationsListByCity: [],
   selectedCity: null,
-  mostRatedLocationsList: []
+  mostRatedLocationsList: [],
+  locationItem: null,
 };
 
 
@@ -34,6 +36,11 @@ export const locationReducer = (state = initialState, action) => {
           return {
             ...state,
             mostRatedLocationsList: action.payload
+          }
+        case FETCH_LOCATION_BY_ID:
+          return {
+              ...state,
+              locationItem: action.payload
           }
         default:
           return state;
@@ -128,6 +135,28 @@ export const fetchMostRatedLocations = () => {
                   dispatch({
                     type: FETCH_MOST_RATED_LOCATIONS,
                     payload: mostRatedLocationsList
+                  });
+                });
+            }
+        });
+    }
+}
+
+export const fetchLocationItemById = (id) => {
+    // let id = this.state.locationData._id; 
+    return(dispatch) => {
+        fetch(`http://localhost:3001/api/location/getSingleLocation/${id}`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'get',
+        }).then(function(response){
+            if(response.status === 200) {
+                response.json().then((location) => {
+                  dispatch({
+                    type: FETCH_MOST_RATED_LOCATIONS,
+                    payload: location
                   });
                 });
             }

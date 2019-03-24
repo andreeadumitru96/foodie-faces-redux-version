@@ -48,23 +48,9 @@ class LocationTileItemContainer extends Component {
         this._setDefaultImage();
     }
 
-    _getLocationDetails = async() => {
-        let id = this.state.locationData._id; 
-        try {
-            const response = await fetch(`http://localhost:3001/api/location/getSingleLocation/${id}`, {
-                headers: {
-                     'Accept': 'application/json',
-                     'Content-Type': 'application/json'
-                },
-                method: 'get',
-             });
-            const data = await response.json();
-            return data;
-            
-        } catch(e) {
-            notificationError(e.message);
-        }
-    }
+    // _getLocationDetails = async() => {
+        // this.state.locationData._id
+    // }
 
     _onLocationClick = async() => {
         let mountComponent = 'LocationDetailsComponent';
