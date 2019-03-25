@@ -90,8 +90,7 @@ export const fetchLocationsByCity = function() {
                 if(response.status === 200) {
                     response.json().then((locations) => {
                         let locationsListByCity = [];
-                        locationsListByCity = setDefaultCoordinates(locations)
-                        console.log(locations);
+                        locationsListByCity = setDefaultCoordinates(locations);
                         dispatch({
                             type: FETCH_LOCATIONS,
                             payload: locationsListByCity
@@ -178,5 +177,14 @@ export const fetchLocationById = (id) => {
                 });
             }
         });
+    }
+}
+
+
+export const getLocationById = (locationId) => {
+    return(getState) => {
+        let locationsList = getState().locations.locationsList;
+        let locationItemById = locationsList.find(location => location._id === locationId);
+        console.log(locationItemById);
     }
 }

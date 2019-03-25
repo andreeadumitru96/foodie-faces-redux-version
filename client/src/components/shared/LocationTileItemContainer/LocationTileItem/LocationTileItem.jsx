@@ -52,6 +52,13 @@ class LocationTileItem extends Component {
         );
     }
 
+    componentWillReceiveProps(newProps) {
+        console.log(newProps);
+    }
+
+    componentDidMount() {
+        console.log(this.props.locationData);
+    }
 
 }
 

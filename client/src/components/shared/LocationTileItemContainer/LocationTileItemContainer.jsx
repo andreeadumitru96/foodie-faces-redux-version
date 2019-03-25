@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchLocationById } from '../../../reducers/locationReducer/index.js';
+// import { fetchLocationById } from '../../../reducers/locationReducer/index.js';
+import { getLocationById } from '../../../reducers/locationReducer/index.js';
 
 import LocationTileItem from './LocationTileItem/LocationTileItem';
 import { notificationError, successNotification } from '../constants';
@@ -12,11 +13,11 @@ class LocationTileItemContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // locationData: props.locationData,
+            locationItem: null,
             isLocationBookmarked: false
         };
         // this._setDefaultImage = this._setDefaultImage.bind(this);
-        this._onLocationClick = this._onLocationClick.bind(this);
+        // this._onLocationClick = this._onLocationClick.bind(this);
         this._saveLocationWishList = this._saveLocationWishList.bind(this);
         this._isLocationBookmarked = this._isLocationBookmarked.bind(this);
         this._removeLocationWishList = this._removeLocationWishList.bind(this);
@@ -26,48 +27,55 @@ class LocationTileItemContainer extends Component {
 
     render() {
         return (
-            // <div></div>
-            <LocationTileItem
-                locationData = {this.props.locationData}
-                onLocationClick = {this._onLocationClick}
-                saveLocationWishList = {this._saveLocationWishList}
-                isLocationBookmarked = {this.state.isLocationBookmarked}
-                removeLocationWishList = {this._removeLocationWishList}
-                triggerMouseHoverMapItem = {this._triggerMouseHoverMapItem}
-                triggerMouseUnhoverMapItem = {this._triggerMouseUnhoverMapItem}
-            />
+            <div></div>
+            // <LocationTileItem
+            //     locationData = {this.state.locationItem}
+            //     onLocationClick = {this._onLocationClick}
+            //     saveLocationWishList = {this._saveLocationWishList}
+            //     isLocationBookmarked = {this.state.isLocationBookmarked}
+            //     removeLocationWishList = {this._removeLocationWishList}
+            //     triggerMouseHoverMapItem = {this._triggerMouseHoverMapItem}
+            //     triggerMouseUnhoverMapItem = {this._triggerMouseUnhoverMapItem}
+            // />
         );
     }
 
     componentDidMount() {
-        this.props.fetchLocationById(this.props.locationId);
-
-        // this.setState({
-        //     isLocationBookmarked: this._isLocationBookmarked()
-        // });
-        // this._setDefaultImage();
+        
+        let locationItem = this.props.getLocationById(this.props.locationId);
+        this.setState({
+            locationItem: locationItem
+        });
+        
     }
 
     // _setDefaultImage() {
-    //     if (this.props.locationData.images.length === 0) {
-    //         this.props.locationData.images[0] = defaultImage;
+    //     if (this.state.locationItem.images.length === 0) {
+    //         this.state.locationItem.images[0] = defaultImage;
     //     }
     // }
 
     // componentWillMount() {
-       
+    //    this.setState({
+    //         isLocationBookmarked: this._isLocationBookmarked()
+    //     });
+    //     this._setDefaultImage();
     // }
+
+
 
     // _getLocationDetails = async() => {
     //     this.state.locationData._id
     // }
 
-    _onLocationClick = () => {
+    // _onLocationClick = () => {
 
-        let mountComponent = 'LocationDetailsComponent';
-        this.props.triggeredBody(mountComponent)
+    //     // this.props.fetchLocationById(this.props.locationId);
+    //     let mountComponent = 'LocationDetailsComponent';
+    //     this.props.triggeredBody(mountComponent);
+        
 
-    }
+    // }
 
     _saveLocationWishList(event) {
         event.preventDefault();
@@ -75,7 +83,7 @@ class LocationTileItemContainer extends Component {
         
         let data = {
             userId: cookies.get('user')._id,
-            locationId: this.props.locationData._id
+            locationId: this.state.locationItem._id
         };
 
         fetch('http://localhost:3001/api/saveLocationWishList', {
@@ -108,7 +116,7 @@ class LocationTileItemContainer extends Component {
         let isBookmarked = false;
         
         for(let bookmarkId of bookmarksList) {
-            if(bookmarkId === this.state.locationData._id) {
+            if(bookmarkId === this.state.locationItem._id) {
 				isBookmarked = true;
 			}
         }
@@ -122,7 +130,7 @@ class LocationTileItemContainer extends Component {
 
         let data = {
 			userId: cookies.get('user')._id,
-			locationId: this.state.locationData._id
+			locationId: this.state.locationItem._id
         }
         
         fetch('http://localhost:3001/api/removeLocationWishList', {
@@ -140,7 +148,7 @@ class LocationTileItemContainer extends Component {
                     this.setState({
                         isLocationBookmarked: false
                     });
-                    this.props.updateWishListAfterRemoving(this.state.locationData._id);                
+                    this.props.updateWishListAfterRemoving(this.state.locationItem._id);                
 				})
 			} else {
 				response.json().then((err) => {
@@ -156,7 +164,7 @@ class LocationTileItemContainer extends Component {
 
     _triggerMouseHoverMapItem() {
         if(this.props.isSiblingRendered) {
-            this.props.handleHoverTriggered(true, this.state.locationData._id);
+            this.props.handleHoverTriggered(true, this.state.locationItem._id);
         }
     }
 
@@ -168,7 +176,7 @@ class LocationTileItemContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    locationData: state.locations.locationData
+    // locationData: state.locations.locationData
 });
 
-export default connect(mapStateToProps, { fetchLocationById })(LocationTileItemContainer);
+export default connect(mapStateToProps, { getLocationById })(LocationTileItemContainer);
