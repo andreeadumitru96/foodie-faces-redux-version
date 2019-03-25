@@ -17,6 +17,7 @@ class MostRatedLocations extends Component {
                 </div>
                 <div className="most-rated-location__content">
                     <LocationTileListContainer 
+                        locationsTypeFlag = 'MostRatedLocationsComponent'
                         locationsList = {this.props.locationsList}
                         triggeredBody = {this.props.triggeredBody}
                     />

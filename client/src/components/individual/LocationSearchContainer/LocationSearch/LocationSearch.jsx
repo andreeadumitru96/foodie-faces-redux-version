@@ -26,7 +26,7 @@ class LocationSearch extends Component {
                 </div>
                 <div className="location-search__location-tile-list">
                     <LocationTileListContainer
-                        locationsList={this.props.locationsList}
+                        locationTypeFlag = 'LocationSearchComponent'
                         triggeredBody={this.props.triggeredBody}
                         handleHoverTriggered={this._handleHoverTriggered}
                         isSiblingRendered={true}

@@ -49,14 +49,13 @@ class LocationTileItemContainer extends Component {
     }
 
     // _getLocationDetails = async() => {
-        // this.state.locationData._id
+    //     this.state.locationData._id
     // }
 
-    _onLocationClick = async() => {
-        let mountComponent = 'LocationDetailsComponent';
-        let locationDetails = await this._getLocationDetails();
+    _onLocationClick = () => {
         
-        this.props.triggeredBody(mountComponent, locationDetails)
+        let mountComponent = 'LocationDetailsComponent';
+        this.props.triggeredBody(mountComponent)
 
     }
 

@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import LocationTileList from '../LocationTileListContainer/LocationTileList/LocationTileList';
 
-// import { fetchLocationsByCity } from '../../../reducers/locationReducer/index.js';
+import { fetchLocationsByCity } from '../../../reducers/locationReducer/index.js';
+import { fetchMostRatedLocations } from '../../../reducers/locationReducer/index.js';
 
 const numberOfPassedLocations = 9;
 
@@ -11,14 +12,14 @@ class LocationTileListContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            locationsList: [],
+            // locationsList: [],
+           
             passedLocations: [],
             lastPassedLocationsIndex: 0,
 			isDataLeftToRender: true,
         };
         this._onScrollEnd = this._onScrollEnd.bind(this);
     }
-
 
     render() {
         return (
@@ -35,6 +36,15 @@ class LocationTileListContainer extends Component {
 
     }
 
+    componentDidMount() {
+        if(this.props.locationsTypeFlag === 'MostRatedLocationsComponent') {
+            this.props.fetchMostRatedLocations();
+        } else if(this.props.locationsTypeFlag === 'LocationSearchComponent') {
+            this.props.fetchLocationsByCity();
+        }
+        
+    }
+
     _onScrollEnd() {
 		let passedLocations = this.props.locationsList.slice(this.state.lastPassedLocationsIndex, this.state.lastPassedLocationsIndex + numberOfPassedLocations);
 		let isDataLeftInArray = true;
@@ -47,14 +57,14 @@ class LocationTileListContainer extends Component {
 			lastPassedLocationsIndex: this.state.lastPassedLocationsIndex + numberOfPassedLocations,
 			passedLocations: this.state.passedLocations.concat(passedLocations),
 			isDataLeftToRender: isDataLeftInArray
-		})
+		});
     }
     
     componentWillReceiveProps(newProps) {
 
         if (this.props.locationsList !== newProps.locationsList) {
 			this.setState({
-				locationsList: newProps.locationsList,
+				// locationsList: newProps.locationsList,
 				passedLocations: [],
 				lastPassedLocationsIndex: 0,
 				isDataLeftToRender: true
@@ -65,5 +75,9 @@ class LocationTileListContainer extends Component {
     }
     
 }
+const mapStateToProps = (state) => ({
 
-export default LocationTileListContainer;
+    locationsList: state.locations.locationsList
+});
+
+export default connect(mapStateToProps, { fetchMostRatedLocations, fetchLocationsByCity })(LocationTileListContainer);

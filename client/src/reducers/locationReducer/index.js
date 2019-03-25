@@ -7,9 +7,10 @@ const FETCH_LOCATION_BY_ID = 'FETCH_LOCATION_ITEM_BY_ID';
 
 const initialState = {
   citiesList: [],
-  locationsListByCity: [],
+  locationsList: [],
+//   locationsListByCity: [],
   selectedCity: null,
-  mostRatedLocationsList: [],
+//   mostRatedLocationsList: {},
   locationItem: null,
 };
 
@@ -25,7 +26,7 @@ export const locationReducer = (state = initialState, action) => {
         case FETCH_LOCATIONS:
           return {
               ...state,
-              locationsListByCity: action.payload
+              locationsList: action.payload
           };
         case SET_SELECTED_CITY: 
           return {
@@ -35,7 +36,7 @@ export const locationReducer = (state = initialState, action) => {
         case FETCH_MOST_RATED_LOCATIONS: 
           return {
             ...state,
-            mostRatedLocationsList: action.payload
+            locationsList: action.payload
           }
         case FETCH_LOCATION_BY_ID:
           return {
@@ -67,7 +68,7 @@ export const fetchCities = function() {
                       })
                 })
             } else {
-                response.json().then((data) => {
+                response.json().then(() => {
                     console.log('Error while trying to fetch cities');
                 });
             }
@@ -100,6 +101,23 @@ export const fetchLocationsByCity = function() {
         });
     }
 }
+
+// export const fetchLocationsList = (flag) => {
+    
+//     return (dispatch, getState) => {
+//         let locationsList = [];
+//         if(flag === 'MostRatedLocationsComponent') {
+//             locationsList = getState().locations.mostRatedLocationsList
+//         } else if(flag === 'LocationSearchComponent') {
+//             locationsList = getState().locations.locationsListByCity
+//         }
+//         dispatch({
+//             type: FETCH_LOCATIONS_LIST,
+//             payload: locationsList
+//         });
+//     }
+// }
+
 
 
 export const setSelectedCity = (cityData) => {
@@ -142,8 +160,7 @@ export const fetchMostRatedLocations = () => {
     }
 }
 
-export const fetchLocationItemById = (id) => {
-    // let id = this.state.locationData._id; 
+export const fetchLocationById = (id) => {
     return(dispatch) => {
         fetch(`http://localhost:3001/api/location/getSingleLocation/${id}`, {
             headers: {
@@ -155,7 +172,7 @@ export const fetchLocationItemById = (id) => {
             if(response.status === 200) {
                 response.json().then((location) => {
                   dispatch({
-                    type: FETCH_MOST_RATED_LOCATIONS,
+                    type: FETCH_LOCATION_BY_ID,
                     payload: location
                   });
                 });
