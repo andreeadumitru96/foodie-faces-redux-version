@@ -3,7 +3,7 @@ const FETCH_CITIES = 'FETCH_CITIES';
 const FETCH_LOCATIONS = 'FETCH_LOCATIONS';
 const SET_SELECTED_CITY = 'SET_SELECTED_CITY';
 const FETCH_MOST_RATED_LOCATIONS = 'FETCH_MOST_RATED_LOCATIONS';
-const FETCH_LOCATION_BY_ID = 'FETCH_LOCATION_ITEM_BY_ID';
+const FETCH_LOCATION_BY_ID = 'FETCH_LOCATION_BY_ID';
 
 const initialState = {
   citiesList: [],
@@ -11,7 +11,7 @@ const initialState = {
 //   locationsListByCity: [],
   selectedCity: null,
 //   mostRatedLocationsList: {},
-  locationItem: null,
+  locationData: null,
 };
 
 
@@ -41,7 +41,7 @@ export const locationReducer = (state = initialState, action) => {
         case FETCH_LOCATION_BY_ID:
           return {
               ...state,
-              locationItem: action.payload
+              locationData: action.payload
           }
         default:
           return state;

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { fetchLocationById } from '../../../reducers/locationReducer/index.js';
 
 import LocationTileItem from './LocationTileItem/LocationTileItem';
 import { notificationError, successNotification } from '../constants';
@@ -9,10 +12,10 @@ class LocationTileItemContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            locationData: props.locationData,
+            // locationData: props.locationData,
             isLocationBookmarked: false
         };
-        this._setDefaultImage = this._setDefaultImage.bind(this);
+        // this._setDefaultImage = this._setDefaultImage.bind(this);
         this._onLocationClick = this._onLocationClick.bind(this);
         this._saveLocationWishList = this._saveLocationWishList.bind(this);
         this._isLocationBookmarked = this._isLocationBookmarked.bind(this);
@@ -23,8 +26,9 @@ class LocationTileItemContainer extends Component {
 
     render() {
         return (
+            // <div></div>
             <LocationTileItem
-                locationData = {this.state.locationData}
+                locationData = {this.props.locationData}
                 onLocationClick = {this._onLocationClick}
                 saveLocationWishList = {this._saveLocationWishList}
                 isLocationBookmarked = {this.state.isLocationBookmarked}
@@ -35,25 +39,31 @@ class LocationTileItemContainer extends Component {
         );
     }
 
-    _setDefaultImage() {
-        if (this.state.locationData.images.length === 0) {
-            this.state.locationData.images[0] = defaultImage;
-        }
+    componentDidMount() {
+        this.props.fetchLocationById(this.props.locationId);
+
+        // this.setState({
+        //     isLocationBookmarked: this._isLocationBookmarked()
+        // });
+        // this._setDefaultImage();
     }
 
-    componentWillMount() {
-        this.setState({
-            isLocationBookmarked: this._isLocationBookmarked()
-        });
-        this._setDefaultImage();
-    }
+    // _setDefaultImage() {
+    //     if (this.props.locationData.images.length === 0) {
+    //         this.props.locationData.images[0] = defaultImage;
+    //     }
+    // }
+
+    // componentWillMount() {
+       
+    // }
 
     // _getLocationDetails = async() => {
     //     this.state.locationData._id
     // }
 
     _onLocationClick = () => {
-        
+
         let mountComponent = 'LocationDetailsComponent';
         this.props.triggeredBody(mountComponent)
 
@@ -65,7 +75,7 @@ class LocationTileItemContainer extends Component {
         
         let data = {
             userId: cookies.get('user')._id,
-            locationId: this.state.locationData._id
+            locationId: this.props.locationData._id
         };
 
         fetch('http://localhost:3001/api/saveLocationWishList', {
@@ -157,4 +167,8 @@ class LocationTileItemContainer extends Component {
     }
 }
 
-export default LocationTileItemContainer;
+const mapStateToProps = (state) => ({
+    locationData: state.locations.locationData
+});
+
+export default connect(mapStateToProps, { fetchLocationById })(LocationTileItemContainer);
