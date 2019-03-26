@@ -16,7 +16,7 @@ class LocationDetailsContainer extends Component {
     render() {
         return (
             <LocationDetails
-                locationDetails = {this.props.locationItem}
+                locationDetails = {this.props.locationDetails}
                 triggeredBody = {this.props.triggeredBody}
             />
 
@@ -25,6 +25,7 @@ class LocationDetailsContainer extends Component {
 
     componentDidMount() {
         this.props.fetchLocationById(this.props.locationId);
+        console.log(this.props.locationDetails);
         window.scrollTo(0,0);
     }
 
@@ -35,7 +36,7 @@ class LocationDetailsContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    locationItem: state.locations.locationItem,
+    locationDetails: state.locations.locationDetails,
 });
 
 export default connect(mapStateToProps, { fetchLocationById })(LocationDetailsContainer);
