@@ -182,9 +182,9 @@ export const fetchLocationById = (id) => {
 
 
 export const getLocationById = (locationId) => {
-    return(getState) => {
-        let locationsList = getState().locations.locationsList;
-        let locationItemById = locationsList.find(location => location._id === locationId);
-        console.log(locationItemById);
+    return(dispatch, getState) => {
+        const locationsList = getState().locations.locationsList;
+        let locationItemById = locationsList.find(location => location._id == locationId);
+        return locationItemById;
     }
 }

@@ -27,22 +27,23 @@ class LocationTileItemContainer extends Component {
 
     render() {
         return (
-            <div></div>
-            // <LocationTileItem
-            //     locationData = {this.state.locationItem}
-            //     onLocationClick = {this._onLocationClick}
-            //     saveLocationWishList = {this._saveLocationWishList}
-            //     isLocationBookmarked = {this.state.isLocationBookmarked}
-            //     removeLocationWishList = {this._removeLocationWishList}
-            //     triggerMouseHoverMapItem = {this._triggerMouseHoverMapItem}
-            //     triggerMouseUnhoverMapItem = {this._triggerMouseUnhoverMapItem}
-            // />
+            // <div></div>
+            <LocationTileItem
+                locationData = {this.state.locationItem}
+                onLocationClick = {this._onLocationClick}
+                saveLocationWishList = {this._saveLocationWishList}
+                isLocationBookmarked = {this.state.isLocationBookmarked}
+                removeLocationWishList = {this._removeLocationWishList}
+                triggerMouseHoverMapItem = {this._triggerMouseHoverMapItem}
+                triggerMouseUnhoverMapItem = {this._triggerMouseUnhoverMapItem}
+            />
         );
     }
 
     componentDidMount() {
         
         let locationItem = this.props.getLocationById(this.props.locationId);
+        console.log(locationItem);
         this.setState({
             locationItem: locationItem
         });
@@ -176,7 +177,7 @@ class LocationTileItemContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    // locationData: state.locations.locationData
+    locationItem: state.locations.locationItemById
 });
 
 export default connect(mapStateToProps, { getLocationById })(LocationTileItemContainer);
