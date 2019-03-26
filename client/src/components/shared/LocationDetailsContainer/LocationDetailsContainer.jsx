@@ -15,10 +15,17 @@ class LocationDetailsContainer extends Component {
 
     render() {
         return (
-            <LocationDetails
-                locationDetails = {this.props.locationDetails}
-                triggeredBody = {this.props.triggeredBody}
-            />
+            <div>
+                {this.props.locationDetails ?
+                    <LocationDetails
+                        locationDetails = {this.props.locationDetails}
+                        triggeredBody = {this.props.triggeredBody}
+                    />
+                :
+                    null   
+                }
+             </div>
+            
 
         );
     }

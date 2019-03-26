@@ -18,15 +18,15 @@ class LocationTileItem extends Component {
         return (
             
             <GridTile className="location-tile"
-                key={this.props.locationData ? this.props.locationData._id : "dsa"}
-                title={this.props.locationData ? this.props.locationData.name :  "Dsada"}
+                key={this.props.locationData._id}
+                title={this.props.locationData.name}
                 subtitle={
                     <ReactStars
                         count={5}
                         size={14}
                         color2={'white'}
                         edit={false}
-                        value={parseFloat(this.props.locationData ? this.props.locationData.tripAdvisorRating : 5)}
+                        value={parseFloat(this.props.locationData.tripAdvisorRating)}
                     />}
                 onClick={this.props.onLocationClick}
                 onMouseEnter = {this.props.triggerMouseHoverMapItem}
@@ -48,7 +48,7 @@ class LocationTileItem extends Component {
                     </IconButton>
                 }
             >
-                <img className="location-tile__image" src={this.props.locationData ? this.props.locationData.images[0] : ""} alt="" />
+                <img className="location-tile__image" src={this.props.locationData.images[0]} alt="" />
             </GridTile>
         );
     }

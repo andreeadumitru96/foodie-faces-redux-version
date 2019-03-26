@@ -18,24 +18,25 @@ class LocationTileItemContainer extends Component {
         };
         // this._setDefaultImage = this._setDefaultImage.bind(this);
         this._onLocationClick = this._onLocationClick.bind(this);
-        this._saveLocationWishList = this._saveLocationWishList.bind(this);
-        this._isLocationBookmarked = this._isLocationBookmarked.bind(this);
-        this._removeLocationWishList = this._removeLocationWishList.bind(this);
+        // this._saveLocationWishList = this._saveLocationWishList.bind(this);
+        // this._isLocationBookmarked = this._isLocationBookmarked.bind(this);
+        // this._removeLocationWishList = this._removeLocationWishList.bind(this);
         this._triggerMouseHoverMapItem = this._triggerMouseHoverMapItem.bind(this);
         this._triggerMouseUnhoverMapItem = this._triggerMouseUnhoverMapItem.bind(this);
     }
 
     render() {
         return (
+            this.state.locationItem ? (
             <LocationTileItem
                 locationData = {this.state.locationItem}
                 onLocationClick = {this._onLocationClick}
-                saveLocationWishList = {this._saveLocationWishList}
-                isLocationBookmarked = {this.state.isLocationBookmarked}
-                removeLocationWishList = {this._removeLocationWishList}
+                // saveLocationWishList = {this._saveLocationWishList}
+                // isLocationBookmarked = {this.state.isLocationBookmarked}
+                // removeLocationWishList = {this._removeLocationWishList}
                 triggerMouseHoverMapItem = {this._triggerMouseHoverMapItem}
                 triggerMouseUnhoverMapItem = {this._triggerMouseUnhoverMapItem}
-            />
+            />) : null
         );
     }
 
@@ -57,12 +58,12 @@ class LocationTileItemContainer extends Component {
     //     }
     // }
 
-    componentWillMount() {
-       this.setState({
-            isLocationBookmarked: this._isLocationBookmarked()
-        });
+    // componentWillMount() {
+    //    this.setState({
+    //         isLocationBookmarked: this._isLocationBookmarked()
+    //     });
         
-    }
+    // }
 
 
 
@@ -79,90 +80,90 @@ class LocationTileItemContainer extends Component {
 
     }
 
-    _saveLocationWishList(event) {
-        event.preventDefault();
-        event.stopPropagation();
+    // _saveLocationWishList(event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
         
-        let data = {
-            userId: cookies.get('user')._id,
-            locationId: this.state.locationItem._id
-        };
+    //     let data = {
+    //         userId: cookies.get('user')._id,
+    //         locationId: this.state.locationItem._id
+    //     };
 
-        fetch('http://localhost:3001/api/saveLocationWishList', {
-			headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-			method: 'post',
-            body: JSON.stringify(data),
-		}).then((response) => {
-			if(response.status === 200) {
-				response.json().then((user) => {
-					successNotification('The location has been added to wish list.');
-                    cookies.set('user', user);
+    //     fetch('http://localhost:3001/api/saveLocationWishList', {
+	// 		headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+	// 		method: 'post',
+    //         body: JSON.stringify(data),
+	// 	}).then((response) => {
+	// 		if(response.status === 200) {
+	// 			response.json().then((user) => {
+	// 				successNotification('The location has been added to wish list.');
+    //                 cookies.set('user', user);
                     
-					this.setState({
-                        isLocationBookmarked: true
-                    });
-				})
-			} else {
-				response.json().then((err) => {
-					notificationError(err);
-				})
-			}
-		});
-    }
+	// 				this.setState({
+    //                     isLocationBookmarked: true
+    //                 });
+	// 			})
+	// 		} else {
+	// 			response.json().then((err) => {
+	// 				notificationError(err);
+	// 			})
+	// 		}
+	// 	});
+    // }
 
-    _isLocationBookmarked() {
-		let bookmarksList = cookies.get('user').wishList;
-        let isBookmarked = false;
+    // _isLocationBookmarked() {
+	// 	let bookmarksList = cookies.get('user').wishList;
+    //     let isBookmarked = false;
         
-        for(let bookmarkId of bookmarksList) {
-            if(bookmarkId === this.state.locationItem._id) {
-				isBookmarked = true;
-			}
-        }
+    //     for(let bookmarkId of bookmarksList) {
+    //         if(bookmarkId === this.state.locationItem._id) {
+	// 			isBookmarked = true;
+	// 		}
+    //     }
 
-		return isBookmarked;
-    }
+	// 	return isBookmarked;
+    // }
      
-    _removeLocationWishList(event) {
-        event.preventDefault();
-        event.stopPropagation();
+    // _removeLocationWishList(event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
 
-        let data = {
-			userId: cookies.get('user')._id,
-			locationId: this.state.locationItem._id
-        }
+    //     let data = {
+	// 		userId: cookies.get('user')._id,
+	// 		locationId: this.state.locationItem._id
+    //     }
         
-        fetch('http://localhost:3001/api/removeLocationWishList', {
-			headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-			method: 'post',
-			body: JSON.stringify(data)
-		}).then((response) => {
-			if(response.status === 200) {
-				response.json().then((user) => {
-					successNotification("The locations has been removed from wish list");
-                    cookies.set('user', user);
-                    this.setState({
-                        isLocationBookmarked: false
-                    });
-                    this.props.updateWishListAfterRemoving(this.state.locationItem._id);                
-				})
-			} else {
-				response.json().then((err) => {
-					notificationError(err);
-				});
-			}
-		});
-    }
+    //     fetch('http://localhost:3001/api/removeLocationWishList', {
+	// 		headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+	// 		method: 'post',
+	// 		body: JSON.stringify(data)
+	// 	}).then((response) => {
+	// 		if(response.status === 200) {
+	// 			response.json().then((user) => {
+	// 				successNotification("The locations has been removed from wish list");
+    //                 cookies.set('user', user);
+    //                 this.setState({
+    //                     isLocationBookmarked: false
+    //                 });
+    //                 this.props.updateWishListAfterRemoving(this.state.locationItem._id);                
+	// 			})
+	// 		} else {
+	// 			response.json().then((err) => {
+	// 				notificationError(err);
+	// 			});
+	// 		}
+	// 	});
+    // }
 
-    _getLocationRemovedId() {
-        return this.state.locationRemovedId;
-    }
+    // _getLocationRemovedId() {
+    //     return this.state.locationRemovedId;
+    // }
 
     _triggerMouseHoverMapItem() {
         if(this.props.isSiblingRendered) {
@@ -178,7 +179,7 @@ class LocationTileItemContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    locationItem: state.locations.locationItemById
+    
 });
 
 export default connect(mapStateToProps, { getLocationById })(LocationTileItemContainer);
