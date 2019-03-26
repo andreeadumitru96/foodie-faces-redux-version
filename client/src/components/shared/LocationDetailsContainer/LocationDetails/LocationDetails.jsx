@@ -27,7 +27,7 @@ class LocationDetails extends Component {
 	render() {
 		return (
 			<div className="location-details">
-                <LocationDetailsHeader
+                {/* <LocationDetailsHeader
                     locationDetails = {this.state.locationDetails}
                 />
                 <LocationDetailsGrid
@@ -56,7 +56,7 @@ class LocationDetails extends Component {
                 <LocationDetailsSimilarLocations
                     locationDetails = {this.state.locationDetails}
                     triggeredBody = {this.props.triggeredBody}
-                />
+                /> */}
 
 			</div>
 		);

@@ -17,7 +17,7 @@ class LocationTileItemContainer extends Component {
             isLocationBookmarked: false
         };
         // this._setDefaultImage = this._setDefaultImage.bind(this);
-        // this._onLocationClick = this._onLocationClick.bind(this);
+        this._onLocationClick = this._onLocationClick.bind(this);
         this._saveLocationWishList = this._saveLocationWishList.bind(this);
         this._isLocationBookmarked = this._isLocationBookmarked.bind(this);
         this._removeLocationWishList = this._removeLocationWishList.bind(this);
@@ -27,7 +27,6 @@ class LocationTileItemContainer extends Component {
 
     render() {
         return (
-            // <div></div>
             <LocationTileItem
                 locationData = {this.state.locationItem}
                 onLocationClick = {this._onLocationClick}
@@ -47,6 +46,8 @@ class LocationTileItemContainer extends Component {
         this.setState({
             locationItem: locationItem
         });
+        console.log(this.state.locationItem);
+        // this._setDefaultImage();
         
     }
 
@@ -56,12 +57,12 @@ class LocationTileItemContainer extends Component {
     //     }
     // }
 
-    // componentWillMount() {
-    //    this.setState({
-    //         isLocationBookmarked: this._isLocationBookmarked()
-    //     });
-    //     this._setDefaultImage();
-    // }
+    componentWillMount() {
+       this.setState({
+            isLocationBookmarked: this._isLocationBookmarked()
+        });
+        
+    }
 
 
 
@@ -69,14 +70,14 @@ class LocationTileItemContainer extends Component {
     //     this.state.locationData._id
     // }
 
-    // _onLocationClick = () => {
+    _onLocationClick = () => {
 
-    //     // this.props.fetchLocationById(this.props.locationId);
-    //     let mountComponent = 'LocationDetailsComponent';
-    //     this.props.triggeredBody(mountComponent);
+        // this.props.fetchLocationById(this.props.locationId);
+        let mountComponent = 'LocationDetailsComponent';
+        this.props.triggeredBody(mountComponent, this.props.locationId);
         
 
-    // }
+    }
 
     _saveLocationWishList(event) {
         event.preventDefault();

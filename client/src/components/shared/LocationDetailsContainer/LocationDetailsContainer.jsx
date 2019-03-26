@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 
 import LocationDetails from './LocationDetails/LocationDetails';
-import { fetchLocationById }  from '../../../reducers/locationReducer/index'; 
+import { fetchLocationById }  from '../../../reducers/locationReducer/index';
 
 
 class LocationDetailsContainer extends Component {
@@ -15,7 +15,6 @@ class LocationDetailsContainer extends Component {
 
     render() {
         return (
-            // <div>dsasa</div>
             <LocationDetails
                 locationDetails = {this.props.locationItem}
                 triggeredBody = {this.props.triggeredBody}
@@ -25,6 +24,7 @@ class LocationDetailsContainer extends Component {
     }
 
     componentDidMount() {
+        this.props.fetchLocationById(this.props.locationId);
         window.scrollTo(0,0);
     }
 

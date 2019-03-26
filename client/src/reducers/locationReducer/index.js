@@ -11,7 +11,7 @@ const initialState = {
 //   locationsListByCity: [],
   selectedCity: null,
 //   mostRatedLocationsList: {},
-  locationData: null,
+  locationDetails: null,
 };
 
 
@@ -41,7 +41,7 @@ export const locationReducer = (state = initialState, action) => {
         case FETCH_LOCATION_BY_ID:
           return {
               ...state,
-              locationData: action.payload
+              locationDetails: action.payload
           }
         default:
           return state;
