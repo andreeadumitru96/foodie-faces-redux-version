@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { GridList } from 'material-ui';
+import { connect } from 'react-redux';
+
+import { fetchSimilarLocations } from '../../../../reducers/locationReducer/index.js';
 
 import { notificationError } from '../../constants';
 import LocationTileItemContainer from '../../LocationTileItemContainer/LocationTileItemContainer';
@@ -24,7 +27,7 @@ class LocationDetailsSimilarLocations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           similarLocations: [] 
+        //    similarLocations: [] 
         };
         this._getSimilarLocations = this._getSimilarLocations.bind(this);
     }
@@ -42,9 +45,9 @@ class LocationDetailsSimilarLocations extends Component {
                         cols={3}
                         className="grid-items"
                     >
-                        {this.state.similarLocations.map((location, index) => {
+                        {this.props.similarLocations.map((location, index) => {
                             return(<LocationTileItemContainer
-                                locationData={location}
+                                locationId={location._id}
                                 key={location._id}
                                 triggeredBody = {this.props.triggeredBody}
                             />)
@@ -65,42 +68,23 @@ class LocationDetailsSimilarLocations extends Component {
             },
             cityLocation: this.props.locationDetails.city
         }
+        this.props.fetchSimilarLocations(locationInfo);
 
-        fetch(`http://localhost:3001/api/location/getSimilarLocations`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-
-            method: 'post',
-            body: JSON.stringify(locationInfo),
-        }).then(function (response) {
-            if (response.status === 200) {
-                response.json().then((locations) => {
-                    locations.forEach((location, index) => {
-                        if(location._id === this.props.locationDetails._id) {
-                            locations.splice(index, 1);
-                        }
-                    });
-                    this.setState({
-                        similarLocations: locations
-                    });
-                })
-            } else {
-                response.json().then((error) => {
-                    notificationError(error.message);
-                })
-            }
-        }.bind(this));
+        
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._getSimilarLocations();    
     }
 
-    componentWillReceiveProps(newProps) {
-        this._getSimilarLocations();
-    }
+    // componentWillReceiveProps(newProps) {
+    //     this._getSimilarLocations();
+    // }
 }
 
-export default LocationDetailsSimilarLocations;
+const mapStateToProps = (state) => ({
+    similarLocations: state.locations.similarLocations,
+
+});
+
+export default connect(mapStateToProps, { fetchSimilarLocations })(LocationDetailsSimilarLocations);
