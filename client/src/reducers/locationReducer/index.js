@@ -1,3 +1,5 @@
+import * as defaultImage from '../../assets/location-default-image.jpg';
+
 //Actions
 const FETCH_CITIES = 'FETCH_CITIES';
 const FETCH_LOCATIONS = 'FETCH_LOCATIONS';
@@ -90,7 +92,7 @@ export const fetchLocationsByCity = function() {
                 if(response.status === 200) {
                     response.json().then((locations) => {
                         let locationsListByCity = [];
-                        locationsListByCity = setDefaultCoordinates(locations);
+                        locationsListByCity = setDefaultProperties(locations);
                         dispatch({
                             type: FETCH_LOCATIONS,
                             payload: locationsListByCity
@@ -128,11 +130,14 @@ export const setSelectedCity = (cityData) => {
     }
 }
 
-const setDefaultCoordinates = (locationsListByCity) => {
+const setDefaultProperties = (locationsListByCity) => {
     let formattedLocationsList = []
     formattedLocationsList = locationsListByCity.map((location) => {
         location.coordinates.latitude = 0;
         location.coordinates.longitude = 0;
+        if(!location.images[0]) {
+            location.images[0] = defaultImage
+        }
         return location;
     });      
     return formattedLocationsList;
@@ -149,9 +154,11 @@ export const fetchMostRatedLocations = () => {
         }).then(function(response){
             if(response.status === 200) {
                 response.json().then((mostRatedLocationsList) => {
+                    let mostRatedLocationsListFormatted = [];
+                    mostRatedLocationsListFormatted = setDefaultProperties(mostRatedLocationsList);
                   dispatch({
                     type: FETCH_MOST_RATED_LOCATIONS,
-                    payload: mostRatedLocationsList
+                    payload: mostRatedLocationsListFormatted
                   });
                 });
             }

@@ -16,7 +16,6 @@ class LocationTileItemContainer extends Component {
             locationItem: null,
             isLocationBookmarked: false
         };
-        // this._setDefaultImage = this._setDefaultImage.bind(this);
         this._onLocationClick = this._onLocationClick.bind(this);
         // this._saveLocationWishList = this._saveLocationWishList.bind(this);
         // this._isLocationBookmarked = this._isLocationBookmarked.bind(this);
@@ -43,20 +42,21 @@ class LocationTileItemContainer extends Component {
     componentDidMount() {
         
         let locationItem = this.props.getLocationById(this.props.locationId);
-        console.log(locationItem);
         this.setState({
             locationItem: locationItem
         });
-        console.log(this.state.locationItem);
         // this._setDefaultImage();
         
     }
 
-    // _setDefaultImage() {
-    //     if (this.state.locationItem.images.length === 0) {
-    //         this.state.locationItem.images[0] = defaultImage;
-    //     }
-    // }
+    _setDefaultImage() {
+        if(this.state.locationItem.images.length === 0) {
+           
+            this.state.locationItem.images[0] = defaultImage;
+            
+        }
+        
+    }
 
     // componentWillMount() {
     //    this.setState({
