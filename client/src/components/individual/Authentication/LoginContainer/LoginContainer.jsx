@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Login from './Login/Login'
+import { userLogin }  from '../../../../reducers/userReducer/index';
 import { notificationError } from '../../../shared/constants';
 
 class LoginContainer extends Component {
@@ -34,31 +36,16 @@ class LoginContainer extends Component {
     }
 
     _sendUserCredentials(userCredentials) {
-        fetch('http://localhost:3001/api/login', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'post',
-            body: JSON.stringify(userCredentials)
-        }).then(function (response) {
-            if(response.status === 200) {
-				response.json().then((data) => {
-                    this._toHomePage(data);
-				})
-			} else {
-				response.json().then((data) => {
-					notificationError(data.message);
-				});
-            }
-        }.bind(this));
+        this.props.userLogin(userCredentials);
+        console.log(this.props.userDetails);
+        this._toHomePage(this.props.userDetails);
 
     }
 
     _onEnterPressed(ev) {
         if (ev.key === 'Enter') {
             this._onLogin();
-          }
+        }
     }
 
     render() {
@@ -73,4 +60,8 @@ class LoginContainer extends Component {
     }
 }
 
-export default LoginContainer;
+const mapStateToProps = (state) => ({
+    userDetails: state.users.userDetails
+});
+
+export default connect(mapStateToProps, { userLogin })(LoginContainer);

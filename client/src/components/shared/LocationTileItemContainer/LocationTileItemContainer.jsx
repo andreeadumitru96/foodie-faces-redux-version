@@ -70,8 +70,6 @@ class LocationTileItemContainer extends Component {
             locationId: this.props.locationId
         };
 
-        
-
         this.props.saveLocationWishList(data);
 
         this.setState({
