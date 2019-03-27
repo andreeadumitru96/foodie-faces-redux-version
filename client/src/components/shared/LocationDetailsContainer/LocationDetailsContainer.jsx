@@ -32,7 +32,6 @@ class LocationDetailsContainer extends Component {
 
     componentDidMount() {
         this.props.fetchLocationById(this.props.locationId);
-        console.log(this.props.locationDetails);
         window.scrollTo(0,0);
     }
 

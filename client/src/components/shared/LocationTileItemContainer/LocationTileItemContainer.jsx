@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import { fetchLocationById } from '../../../reducers/locationReducer/index.js';
+import { saveLocationWishList } from '../../../reducers/locationReducer/index.js';
 import { getLocationById } from '../../../reducers/locationReducer/index.js';
 
 import LocationTileItem from './LocationTileItem/LocationTileItem';
 import { notificationError, successNotification } from '../constants';
-import * as defaultImage from '../../../assets/location-default-image.jpg';
 import { cookies } from '../constants';
 
 class LocationTileItemContainer extends Component {
@@ -30,7 +29,7 @@ class LocationTileItemContainer extends Component {
             <LocationTileItem
                 locationData = {this.state.locationItem}
                 onLocationClick = {this._onLocationClick}
-                // saveLocationWishList = {this._saveLocationWishList}
+                saveLocationWishList = {this._saveLocationWishList}
                 // isLocationBookmarked = {this.state.isLocationBookmarked}
                 // removeLocationWishList = {this._removeLocationWishList}
                 triggerMouseHoverMapItem = {this._triggerMouseHoverMapItem}
@@ -45,87 +44,56 @@ class LocationTileItemContainer extends Component {
         this.setState({
             locationItem: locationItem
         });
-        // this._setDefaultImage();
         
     }
 
-    _setDefaultImage() {
-        if(this.state.locationItem.images.length === 0) {
-           
-            this.state.locationItem.images[0] = defaultImage;
-            
-        }
+    componentWillMount() {
+       this.setState({
+            isLocationBookmarked: this._isLocationBookmarked()
+        });
         
     }
-
-    // componentWillMount() {
-    //    this.setState({
-    //         isLocationBookmarked: this._isLocationBookmarked()
-    //     });
-        
-    // }
-
-
-
-    // _getLocationDetails = async() => {
-    //     this.state.locationData._id
-    // }
 
     _onLocationClick = () => {
 
-        // this.props.fetchLocationById(this.props.locationId);
         let mountComponent = 'LocationDetailsComponent';
         this.props.triggeredBody(mountComponent, this.props.locationId);
         
-
     }
 
-    // _saveLocationWishList(event) {
-    //     event.preventDefault();
-    //     event.stopPropagation();
+    _saveLocationWishList(event) {
+        event.preventDefault();
+        event.stopPropagation();
         
-    //     let data = {
-    //         userId: cookies.get('user')._id,
-    //         locationId: this.state.locationItem._id
-    //     };
+        let data = {
+            userId: cookies.get('user')._id,
+            locationId: this.props.locationId
+        };
 
-    //     fetch('http://localhost:3001/api/saveLocationWishList', {
-	// 		headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-	// 		method: 'post',
-    //         body: JSON.stringify(data),
-	// 	}).then((response) => {
-	// 		if(response.status === 200) {
-	// 			response.json().then((user) => {
-	// 				successNotification('The location has been added to wish list.');
-    //                 cookies.set('user', user);
-                    
-	// 				this.setState({
-    //                     isLocationBookmarked: true
-    //                 });
-	// 			})
-	// 		} else {
-	// 			response.json().then((err) => {
-	// 				notificationError(err);
-	// 			})
-	// 		}
-	// 	});
-    // }
-
-    // _isLocationBookmarked() {
-	// 	let bookmarksList = cookies.get('user').wishList;
-    //     let isBookmarked = false;
         
-    //     for(let bookmarkId of bookmarksList) {
-    //         if(bookmarkId === this.state.locationItem._id) {
-	// 			isBookmarked = true;
-	// 		}
-    //     }
 
-	// 	return isBookmarked;
-    // }
+        this.props.saveLocationWishList(data);
+
+        this.setState({
+            isLocationBookmarked: true
+        });
+        
+        cookies.set('user', this.props.userDetails);
+        
+    }
+
+    _isLocationBookmarked() {
+		let bookmarksList = cookies.get('user').wishList;
+        let isBookmarked = false;
+        
+        for(let bookmarkId of bookmarksList) {
+            if(bookmarkId === this.state.locationItem._id) {
+				isBookmarked = true;
+			}
+        }
+
+		return isBookmarked;
+    }
      
     // _removeLocationWishList(event) {
     //     event.preventDefault();
@@ -179,7 +147,7 @@ class LocationTileItemContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    
+    userDetails: state.locations.userDetails
 });
 
-export default connect(mapStateToProps, { getLocationById })(LocationTileItemContainer);
+export default connect(mapStateToProps, { getLocationById, saveLocationWishList })(LocationTileItemContainer);

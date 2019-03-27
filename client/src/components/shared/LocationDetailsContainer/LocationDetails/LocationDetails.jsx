@@ -54,7 +54,6 @@ class LocationDetails extends Component {
                     />
                 </div>
                 <LocationDetailsSimilarLocations
-                    locationDetails = {this.state.locationDetails}
                     triggeredBody = {this.props.triggeredBody}
                 />
 

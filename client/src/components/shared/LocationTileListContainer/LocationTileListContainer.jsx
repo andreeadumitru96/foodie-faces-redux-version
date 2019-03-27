@@ -27,10 +27,10 @@ class LocationTileListContainer extends Component {
 
                 passedLocations = {this.state.passedLocations}
                 triggeredBody = {this.props.triggeredBody}
-                onScrollEnd={this._onScrollEnd}
-                hasMore={this.state.isDataLeftToRender}
-                handleHoverTriggered={this.props.handleHoverTriggered}
-                isSiblingRendered={this.props.isSiblingRendered}
+                onScrollEnd = {this._onScrollEnd}
+                hasMore = {this.state.isDataLeftToRender}
+                handleHoverTriggered = {this.props.handleHoverTriggered}
+                isSiblingRendered = {this.props.isSiblingRendered}
             />
         );
 
