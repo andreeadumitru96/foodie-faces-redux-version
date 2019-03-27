@@ -27,7 +27,7 @@ class LocationDetailsSimilarLocations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        //    similarLocations: [] 
+
         };
         this._getSimilarLocations = this._getSimilarLocations.bind(this);
     }
@@ -76,10 +76,6 @@ class LocationDetailsSimilarLocations extends Component {
     componentDidMount() {
         this._getSimilarLocations();    
     }
-
-    // componentWillReceiveProps(newProps) {
-    //     this._getSimilarLocations();
-    // }
 }
 
 const mapStateToProps = (state) => ({
