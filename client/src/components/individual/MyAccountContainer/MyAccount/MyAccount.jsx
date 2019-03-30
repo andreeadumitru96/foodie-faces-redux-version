@@ -36,7 +36,7 @@ class MyAccount extends Component {
                             <h1>Your wish list</h1>
                         </div>
                         <WishList
-                            wishList={this.props.wishList}
+                            wishListLocations = {this.props.wishListLocations}
                         />
                     </div>
                 }

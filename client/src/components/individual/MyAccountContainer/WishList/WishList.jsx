@@ -8,7 +8,6 @@ class WishList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            wishList: props.wishList
         };
         this._updateWishListAfterRemoving = this._updateWishListAfterRemoving.bind(this);
     }
@@ -20,7 +19,7 @@ class WishList extends Component {
                     cols={3}
                     className="wish-list-grid__items"
                 >
-                    {this.state.wishList.map((location) => {
+                    {this.props.wishListLocations.map((location) => {
                         return(
                             <LocationTileItemContainer
                                 locationData = {location}

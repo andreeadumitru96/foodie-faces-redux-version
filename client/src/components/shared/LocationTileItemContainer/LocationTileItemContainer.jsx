@@ -70,7 +70,11 @@ class LocationTileItemContainer extends Component {
             locationId: this.props.locationId
         };
 
-        this.props.saveLocationWishList(data);
+        this.props.saveLocationWishList(data).then(() => {
+            successNotification('The location has been added to wish list.');
+        }).catch((error) => {
+            notificationError(error);
+        });
 
         this.setState({
             isLocationBookmarked: true

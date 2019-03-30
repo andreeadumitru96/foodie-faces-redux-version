@@ -8,6 +8,7 @@ const FETCH_MOST_RATED_LOCATIONS = 'FETCH_MOST_RATED_LOCATIONS';
 const FETCH_LOCATION_BY_ID = 'FETCH_LOCATION_BY_ID';
 const SAVE_LOCATION_WISH_LIST = 'SAVE_LOCATION_WISH_LIST';
 const FETCH_SIMILAR_LOCATIONS = 'FETCH_SIMILAR_LOCATIONS';
+const FETCH_WISHLIST_LOCATIONS = 'FETCH_WISHLIST_LOCATIONS';
 
 const initialState = {
   citiesList: [],
@@ -15,7 +16,8 @@ const initialState = {
   selectedCity: null,
   locationDetails: null,
   userDetails: null,
-  similarLocations: []
+  similarLocations: [],
+  wishListLocations: []
 };
 
 
@@ -56,6 +58,11 @@ export const locationReducer = (state = initialState, action) => {
           return {
               ...state,
               similarLocations: action.payload
+          }
+        case FETCH_WISHLIST_LOCATIONS: 
+          return {
+              ...state,
+              wishListLocations: action.payload
           }
         default:
           return state;
@@ -192,26 +199,27 @@ export const getLocationById = (locationId) => {
 
 export const saveLocationWishList = (data) => {
     return(dispatch) => {
-        fetch('http://localhost:3001/api/saveLocationWishList', {
-			headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-			method: 'post',
-            body: JSON.stringify(data),
-		}).then((response) => {
-			if(response.status === 200) {
-				response.json().then((userDetails) => {
-					// successNotification('The location has been added to wish list.');
-                    
-                    dispatch({
-                        type: SAVE_LOCATION_WISH_LIST,
-                        payload: userDetails
-                      });
-                    
-				});
-			}
-		});
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost:3001/api/saveLocationWishList', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'post',
+                body: JSON.stringify(data)
+            }).then((response) => {
+                if(response.status === 200) {
+                    console.log(response);
+                    response.json().then((userDetails) => {
+                        dispatch({
+                            type: SAVE_LOCATION_WISH_LIST,
+                            payload: userDetails
+                        });
+                        resolve();
+                    });
+                }
+            });
+        });
     }
 }
 
@@ -239,6 +247,32 @@ export const fetchSimilarLocations = (locationInfo, locationId) => {
                     });
                 });
             }
-        }.bind(this));
+        });
+    }
+}
+
+export const fetchWishListLocations = (userId) => {
+    return (dispatch) => {
+        fetch(`http://localhost:3001/api/getLocationsWishList/${userId}`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'get'
+        }).then(function (response) {
+            if(response.status === 200) {
+                response.json().then((wishListLocations) => {
+                   dispatch({
+                    type: 'FETCH_WISHLIST_LOCATIONS',
+                    payload: wishListLocations
+                   });
+                    
+                })
+            } else {
+                response.json().then((data) => {
+
+                });
+            }
+        });   
     }
 }

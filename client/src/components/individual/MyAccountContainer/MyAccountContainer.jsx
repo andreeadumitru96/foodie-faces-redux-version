@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { fetchWishListLocations } from '../../../reducers/locationReducer/index';
 import MyAccount from './MyAccount/MyAccount';
 import { cookies, notificationError } from '../../shared/constants';
 
@@ -6,7 +9,6 @@ class MyAccountContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            wishList: [],
             wishListFormattedByName: [],
             isLocationDetailsMount: false
         };
@@ -17,45 +19,28 @@ class MyAccountContainer extends Component {
     render() {
         return (
             <MyAccount
-                wishList = {this.state.wishList}
+                wishListLocations = {this.props.wishListLocations}
                 wishListFormattedByName = {this.state.wishListFormattedByName}
                 isLocationDetailsMount = {this.state.isLocationDetailsMount}
             />
         );
     }
+
+    componentDidMount() {
+        this._getLocationsWishList();
+    }
     
     _getLocationsWishList() {
         let userId = cookies.get('user')._id;
-       
-        fetch(`http://localhost:3001/api/getLocationsWishList/${userId}`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'get'
-        }).then(function (response) {
-            if(response.status === 200) {
-                response.json().then((locations) => {
-                    this.setState({
-                        wishList: locations
-                    });
-                    this._formatWishListByName();
-                })
-            } else {
-                response.json().then((data) => {
-                    notificationError(data.message);
-                });
-            }
-        }.bind(this));          
-    }
 
-    componentWillMount() {
-        this._getLocationsWishList();
+        this.props.fetchWishListLocations(userId);
+       
+        this._formatWishListByName();       
     }
 
     _formatWishListByName() {
 
-        let formattedWishList = this.state.wishList.map(location => location.name);
+        let formattedWishList = this.props.wishListLocations.map(location => location.name);
 
         this.setState({
             wishListFormattedByName: formattedWishList
@@ -63,4 +48,8 @@ class MyAccountContainer extends Component {
     }
 }
 
-export default MyAccountContainer;
+const mapStateToProps = (state) => ({
+    wishListLocations: state.locations.wishListLocations
+});
+
+export default connect(mapStateToProps, { fetchWishListLocations })(MyAccountContainer);
