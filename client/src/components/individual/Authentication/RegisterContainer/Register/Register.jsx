@@ -23,6 +23,7 @@ class Register extends Component {
                             inputStyle={{color: 'white'}}
                             floatingLabelStyle={{color: 'white'}}
                             floatingLabelText="First Name"
+                            autoComplete = "new-password"
                             ref={(inputValue) => {this.firstName = inputValue}}
                         />  
                     </div>
@@ -32,6 +33,7 @@ class Register extends Component {
                             inputStyle={{color: 'white'}}
                             floatingLabelStyle={{color: 'white'}}
                             floatingLabelText="Last Name"
+                            autoComplete = "new-password"
                             ref={(inputValue) => {this.lastName = inputValue}}
                         />
                     </div>
@@ -41,6 +43,7 @@ class Register extends Component {
                             inputStyle={{color: 'white'}}
                             floatingLabelStyle={{color: 'white'}}
                             floatingLabelText="Email"
+                            autoComplete = "new-password"
                             ref={(inputValue) => {this.email = inputValue}}
                         />
                     </div>
@@ -48,8 +51,10 @@ class Register extends Component {
                     <div className="register__form-password">
                         <TextField
                             inputStyle={{color: 'white'}}
+                            type="password"
                             floatingLabelStyle={{color: 'white'}}
                             floatingLabelText="Password"
+                            autoComplete = "new-password"
                             ref={(inputValue) => {this.password = inputValue}}
                         />
                     </div>
@@ -58,7 +63,9 @@ class Register extends Component {
                         <TextField
                             inputStyle={{color: 'white'}}
                             floatingLabelStyle={{color: 'white'}}
+                            type="password"
                             floatingLabelText="Repeat Password"
+                            autoComplete = "new-password"
                             ref={(inputValue) => {this.repeatPassword = inputValue}}
                         />
                     </div>

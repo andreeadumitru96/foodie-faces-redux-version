@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Login from './Login/Login'
-import { userLogin }  from '../../../../reducers/userReducer/index';
+import { loginUser }  from '../../../../reducers/userReducer/index';
 import { notificationError } from '../../../shared/constants';
 
 class LoginContainer extends Component {
@@ -36,9 +36,13 @@ class LoginContainer extends Component {
     }
 
     _sendUserCredentials(userCredentials) {
-        this.props.userLogin(userCredentials);
-        console.log(this.props.userDetails);
-        this._toHomePage(this.props.userDetails);
+        this.props.loginUser(userCredentials).then(() => {
+
+            this._toHomePage(this.props.userDetails);
+
+        }).catch((error) => {
+            notificationError(error);
+        });
 
     }
 
@@ -64,4 +68,4 @@ const mapStateToProps = (state) => ({
     userDetails: state.users.userDetails
 });
 
-export default connect(mapStateToProps, { userLogin })(LoginContainer);
+export default connect(mapStateToProps, { loginUser })(LoginContainer);

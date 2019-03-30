@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
+import { registerUser } from '../../../../reducers/userReducer/index';
 import Register from './Register/Register';
-import {notificationError} from '../../../shared/constants';
+import { notificationError, successNotification } from '../../../shared/constants';
 
 class RegisterContainer extends Component {
     constructor(props) {
@@ -44,23 +46,11 @@ class RegisterContainer extends Component {
     }
 
     _sendUserInformation(data) {
-        fetch('http://localhost:3001/api/register', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'post',
-            body: JSON.stringify(data)
-        }).then(function (response) {
-            if(response.status === 200) {
-				response.json().then((data) => {
-                    console.log("success");
-				})
-			} else {
-				response.json().then((data) => {
-					notificationError(data.message);
-				});
-            }
+        this.props.registerUser(data).then(() => {
+            successNotification('You have been successfully registered');
+            this._toLogin();
+        }).catch((error) => {
+            notificationError(error);
         });
     }
 
@@ -79,4 +69,8 @@ class RegisterContainer extends Component {
 
 }
 
-export default RegisterContainer;
+const mapStateToProps = (state) => ({
+    
+});
+
+export default connect(mapStateToProps, { registerUser })(RegisterContainer);

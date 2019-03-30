@@ -16,8 +16,8 @@ class LocationTileItemContainer extends Component {
             isLocationBookmarked: false
         };
         this._onLocationClick = this._onLocationClick.bind(this);
-        // this._saveLocationWishList = this._saveLocationWishList.bind(this);
-        // this._isLocationBookmarked = this._isLocationBookmarked.bind(this);
+        this._saveLocationWishList = this._saveLocationWishList.bind(this);
+        this._isLocationBookmarked = this._isLocationBookmarked.bind(this);
         // this._removeLocationWishList = this._removeLocationWishList.bind(this);
         this._triggerMouseHoverMapItem = this._triggerMouseHoverMapItem.bind(this);
         this._triggerMouseUnhoverMapItem = this._triggerMouseUnhoverMapItem.bind(this);
@@ -30,8 +30,8 @@ class LocationTileItemContainer extends Component {
                 locationData = {this.state.locationItem}
                 onLocationClick = {this._onLocationClick}
                 saveLocationWishList = {this._saveLocationWishList}
-                // isLocationBookmarked = {this.state.isLocationBookmarked}
-                // removeLocationWishList = {this._removeLocationWishList}
+                isLocationBookmarked = {this.state.isLocationBookmarked}
+                // removeLocationWishList = {this._removeLocationWishList}  
                 triggerMouseHoverMapItem = {this._triggerMouseHoverMapItem}
                 triggerMouseUnhoverMapItem = {this._triggerMouseUnhoverMapItem}
             />) : null
@@ -49,7 +49,7 @@ class LocationTileItemContainer extends Component {
 
     componentWillMount() {
        this.setState({
-            isLocationBookmarked: this._isLocationBookmarked()
+            // isLocationBookmarked: this._isLocationBookmarked()
         });
         
     }
@@ -93,39 +93,39 @@ class LocationTileItemContainer extends Component {
 		return isBookmarked;
     }
      
-    // _removeLocationWishList(event) {
-    //     event.preventDefault();
-    //     event.stopPropagation();
+    _removeLocationWishList(event) {
+        event.preventDefault();
+        event.stopPropagation();
 
-    //     let data = {
-	// 		userId: cookies.get('user')._id,
-	// 		locationId: this.state.locationItem._id
-    //     }
+        let data = {
+			userId: cookies.get('user')._id,
+			locationId: this.state.locationItem._id
+        }
         
-    //     fetch('http://localhost:3001/api/removeLocationWishList', {
-	// 		headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-	// 		method: 'post',
-	// 		body: JSON.stringify(data)
-	// 	}).then((response) => {
-	// 		if(response.status === 200) {
-	// 			response.json().then((user) => {
-	// 				successNotification("The locations has been removed from wish list");
-    //                 cookies.set('user', user);
-    //                 this.setState({
-    //                     isLocationBookmarked: false
-    //                 });
-    //                 this.props.updateWishListAfterRemoving(this.state.locationItem._id);                
-	// 			})
-	// 		} else {
-	// 			response.json().then((err) => {
-	// 				notificationError(err);
-	// 			});
-	// 		}
-	// 	});
-    // }
+        fetch('http://localhost:3001/api/removeLocationWishList', {
+			headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+			method: 'post',
+			body: JSON.stringify(data)
+		}).then((response) => {
+			if(response.status === 200) {
+				response.json().then((user) => {
+					successNotification("The locations has been removed from wish list");
+                    cookies.set('user', user);
+                    this.setState({
+                        isLocationBookmarked: false
+                    });
+                    this.props.updateWishListAfterRemoving(this.state.locationItem._id);                
+				})
+			} else {
+				response.json().then((err) => {
+					notificationError(err);
+				});
+			}
+		});
+    }
 
     // _getLocationRemovedId() {
     //     return this.state.locationRemovedId;
