@@ -68,7 +68,7 @@ class LocationDetailsSimilarLocations extends Component {
             },
             cityLocation: this.props.locationDetails.city
         }
-        this.props.fetchSimilarLocations(locationInfo);
+        this.props.fetchSimilarLocations(locationInfo, this.props.locationDetails._id);
 
         
     }

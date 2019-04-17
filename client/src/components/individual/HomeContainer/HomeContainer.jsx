@@ -27,7 +27,7 @@ class HomeContainer extends Component {
                     urlLocationData = {this.state.urlLocationData}
                 />
                
-				{/* <Home userData={this.state.userData} /> */}
+				<Home userData={this.state.userData} />
                 
 			</div>
 		);

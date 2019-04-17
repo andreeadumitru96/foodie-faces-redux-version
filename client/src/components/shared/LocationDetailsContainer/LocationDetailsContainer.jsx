@@ -31,6 +31,17 @@ class LocationDetailsContainer extends Component {
     }
 
     componentDidMount() {
+
+
+        // let locationInfo = {
+        //     filters: {
+        //         meals: this.props.locationDetails.categories.meals.slice(),
+        //         goodFor: this.props.locationDetails.categories.goodFor.slice(),
+        //         cuisine: this.props.locationDetails.categories.cuisine.slice()
+        //     },
+        //     cityLocation: this.props.locationDetails.city
+        // }
+
         this.props.fetchLocationById(this.props.locationId);
         window.scrollTo(0,0);
     }

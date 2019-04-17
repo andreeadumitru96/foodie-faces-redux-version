@@ -224,6 +224,7 @@ export const saveLocationWishList = (data) => {
 }
 
 export const fetchSimilarLocations = (locationInfo, locationId) => {
+
     return (dispatch) => {
         fetch(`http://localhost:3001/api/location/getSimilarLocations`, {
             headers: {
@@ -236,11 +237,11 @@ export const fetchSimilarLocations = (locationInfo, locationId) => {
         }).then(function (response) {
             if (response.status === 200) {
                 response.json().then((similarLocations) => {
-                    // locations.forEach((location, index) => {
-                    //     if(location._id === locationId) {
-                    //         locations.splice(index, 1);
-                    //     }
-                    // });
+                    similarLocations.forEach((location, index) => {
+                        if(location._id === locationId) {
+                            similarLocations.splice(index, 1);
+                        }
+                    });
                     dispatch({
                         type: FETCH_SIMILAR_LOCATIONS,
                         payload: similarLocations
