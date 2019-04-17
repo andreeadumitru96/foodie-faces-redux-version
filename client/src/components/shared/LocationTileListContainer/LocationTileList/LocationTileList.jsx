@@ -33,6 +33,7 @@ class LocationTileList extends Component {
                     >
                     {this.props.passedLocations.map(location => (
                         <LocationTileItemContainer 
+                            locationItem = {location}
                             key = {location._id}
                             locationId = {location._id}
                             triggeredBody = {this.props.triggeredBody}

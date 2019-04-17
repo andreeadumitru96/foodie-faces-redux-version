@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { saveLocationWishList } from '../../../reducers/locationReducer/index.js';
-import { getLocationById } from '../../../reducers/locationReducer/index.js';
+import { fetchLocationById } from '../../../reducers/locationReducer/index.js';
 
 import LocationTileItem from './LocationTileItem/LocationTileItem';
 import { notificationError, successNotification } from '../constants';
@@ -25,9 +25,9 @@ class LocationTileItemContainer extends Component {
 
     render() {
         return (
-            this.state.locationItem ? (
+            this.props.locationById ? (
             <LocationTileItem
-                locationData = {this.state.locationItem}
+                locationData = {this.props.locationById}
                 onLocationClick = {this._onLocationClick}
                 saveLocationWishList = {this._saveLocationWishList}
                 isLocationBookmarked = {this.state.isLocationBookmarked}
@@ -40,19 +40,24 @@ class LocationTileItemContainer extends Component {
 
     componentDidMount() {
         
-        let locationItem = this.props.getLocationById(this.props.locationId);
-        this.setState({
-            locationItem: locationItem
+        let locationItem = this.props.fetchLocationById(this.props.locationId).then(() => {
+            // console.log(locationItem);
+            this.setState({
+                isLocationBookmarked: this._isLocationBookmarked()
+            });
+        }).catch((err) => {
+            notificationError(err);
         });
+       
         
     }
 
-    componentWillMount() {
-       this.setState({
-            // isLocationBookmarked: this._isLocationBookmarked()
-        });
+    // componentWillMount() {
+    //    this.setState({
+            
+    //     });
         
-    }
+    // }
 
     _onLocationClick = () => {
 
@@ -87,9 +92,9 @@ class LocationTileItemContainer extends Component {
     _isLocationBookmarked() {
 		let bookmarksList = cookies.get('user').wishList;
         let isBookmarked = false;
-        
         for(let bookmarkId of bookmarksList) {
-            if(bookmarkId === this.state.locationItem._id) {
+            
+            if(bookmarkId === this.props.locationById._id) {
 				isBookmarked = true;
 			}
         }
@@ -103,7 +108,7 @@ class LocationTileItemContainer extends Component {
 
         let data = {
 			userId: cookies.get('user')._id,
-			locationId: this.state.locationItem._id
+			locationId: this.props.locationById._id
         }
         
         fetch('http://localhost:3001/api/removeLocationWishList', {
@@ -121,7 +126,7 @@ class LocationTileItemContainer extends Component {
                     this.setState({
                         isLocationBookmarked: false
                     });
-                    this.props.updateWishListAfterRemoving(this.state.locationItem._id);                
+                    this.props.updateWishListAfterRemoving(this.props.locationById._id);                
 				})
 			} else {
 				response.json().then((err) => {
@@ -137,7 +142,7 @@ class LocationTileItemContainer extends Component {
 
     _triggerMouseHoverMapItem() {
         if(this.props.isSiblingRendered) {
-            this.props.handleHoverTriggered(true, this.state.locationItem._id);
+            this.props.handleHoverTriggered(true, this.props.locationById._id);
         }
     }
 
@@ -149,7 +154,8 @@ class LocationTileItemContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    userDetails: state.locations.userDetails
+    userDetails: state.locations.userDetails,
+    locationById: state.locations.locationDetails
 });
 
-export default connect(mapStateToProps, { getLocationById, saveLocationWishList })(LocationTileItemContainer);
+export default connect(mapStateToProps, { fetchLocationById, saveLocationWishList })(LocationTileItemContainer);

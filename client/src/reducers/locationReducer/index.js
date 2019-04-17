@@ -168,22 +168,25 @@ export const fetchMostRatedLocations = () => {
 }
 
 export const fetchLocationById = (id) => {
+   
     return(dispatch) => {
-        fetch(`http://localhost:3001/api/location/getSingleLocation/${id}`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'get',
-        }).then(function(response){
-            if(response.status === 200) {
-                response.json().then((location) => {
-                  dispatch({
-                    type: FETCH_LOCATION_BY_ID,
-                    payload: location
-                  });
-                });
-            }
+        return new Promise((resolve, reject) => {
+            fetch(`http://localhost:3001/api/location/getSingleLocation/${id}`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'get',
+            }).then(function(response){
+                if(response.status === 200) {
+                    response.json().then((location) => {
+                        dispatch({
+                            type: FETCH_LOCATION_BY_ID,
+                            payload: location
+                        });
+                    });
+                }
+            });
         });
     }
 }
@@ -192,7 +195,9 @@ export const fetchLocationById = (id) => {
 export const getLocationById = (locationId) => {
     return(dispatch, getState) => {
         const locationsList = getState().locations.locationsList;
-        let locationItemById = locationsList.find(location => location._id == locationId);
+        console.log(locationsList, locationId);
+        let locationItemById = locationsList.find(location => location._id === locationId);
+        console.log(locationItemById);
         return locationItemById;
     }
 }
