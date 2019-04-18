@@ -24,7 +24,7 @@ class LocationTileListContainer extends Component {
     render() {
         return (
             <LocationTileList 
-
+                locationsTypeFlag = {this.props.locationsTypeFlag}
                 passedLocations = {this.state.passedLocations}
                 triggeredBody = {this.props.triggeredBody}
                 onScrollEnd = {this._onScrollEnd}

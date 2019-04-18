@@ -47,6 +47,7 @@ class LocationDetailsSimilarLocations extends Component {
                     >
                         {this.props.similarLocations.map((location, index) => {
                             return(<LocationTileItemContainer
+                                locationsTypeFlag = 'SimilarLocationsComponent'
                                 locationId={location._id}
                                 key={location._id}
                                 triggeredBody = {this.props.triggeredBody}

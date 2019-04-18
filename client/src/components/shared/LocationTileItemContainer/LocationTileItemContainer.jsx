@@ -17,7 +17,7 @@ class LocationTileItemContainer extends Component {
         };
         this._onLocationClick = this._onLocationClick.bind(this);
         this._saveLocationWishList = this._saveLocationWishList.bind(this);
-        this._isLocationBookmarked = this._isLocationBookmarked.bind(this);
+        this._updateLocationBookmark = this._updateLocationBookmark.bind(this);
         // this._removeLocationWishList = this._removeLocationWishList.bind(this);
         this._triggerMouseHoverMapItem = this._triggerMouseHoverMapItem.bind(this);
         this._triggerMouseUnhoverMapItem = this._triggerMouseUnhoverMapItem.bind(this);
@@ -34,17 +34,21 @@ class LocationTileItemContainer extends Component {
                 // removeLocationWishList = {this._removeLocationWishList}  
                 triggerMouseHoverMapItem = {this._triggerMouseHoverMapItem}
                 triggerMouseUnhoverMapItem = {this._triggerMouseUnhoverMapItem}
+                
             />) : null
         );
     }
 
     componentDidMount() {
         
-        let locationItem = this.props.getLocationById(this.props.locationId);
+        let locationItem = this.props.getLocationById(this.props.locationId, this.props.locationsTypeFlag);
+        // console.log(locationItem);
         this.setState({
-            locationItem: locationItem,
-            isLocationBookmarked: this._isLocationBookmarked(locationItem)
+            locationItem: locationItem
         });
+
+        this._updateLocationBookmark(locationItem);
+
         
     }
 
@@ -85,17 +89,19 @@ class LocationTileItemContainer extends Component {
         
     }
 
-    _isLocationBookmarked() {
+    _updateLocationBookmark(locationItem) {
 		let bookmarksList = cookies.get('user').wishList;
         let isBookmarked = false;
         
         for(let bookmarkId of bookmarksList) {
-            if(bookmarkId === this.state.locationItem._id) {
+            if(bookmarkId === locationItem._id) {
 				isBookmarked = true;
 			}
         }
 
-		return isBookmarked;
+		this.setState({
+            isLocationBookmarked: isBookmarked
+        });
     }
      
     _removeLocationWishList(event) {

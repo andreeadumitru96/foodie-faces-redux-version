@@ -192,12 +192,17 @@ export const fetchLocationById = (id) => {
 }
 
 
-export const getLocationById = (locationId) => {
+export const getLocationById = (locationId, locationsType) => {
     return(dispatch, getState) => {
-        const locationsList = getState().locations.locationsList;
-        console.log(locationsList, locationId);
+
+        let locationsList;
+        if(locationsType === "SimilarLocationsComponent") {
+            locationsList = getState().locations.similarLocations;
+        } else {
+            locationsList = getState().locations.locationsList;
+        }
+
         let locationItemById = locationsList.find(location => location._id === locationId);
-        console.log(locationItemById);
         return locationItemById;
     }
 }

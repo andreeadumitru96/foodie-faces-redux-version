@@ -32,7 +32,8 @@ class LocationTileList extends Component {
                     style={styles.gridList}
                     >
                     {this.props.passedLocations.map(location => (
-                        <LocationTileItemContainer 
+                        <LocationTileItemContainer
+                            locationsTypeFlag = {this.props.locationsTypeFlag}
                             locationItem = {location}
                             key = {location._id}
                             locationId = {location._id}
