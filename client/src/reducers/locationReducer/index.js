@@ -2,7 +2,7 @@ import * as defaultImage from '../../assets/location-default-image.jpg';
 
 //Actions
 const FETCH_CITIES = 'FETCH_CITIES';
-const FETCH_LOCATIONS = 'FETCH_LOCATIONS';
+const FETCH_LOCATIONS_BY_CITY = 'FETCH_LOCATIONS_BY_CITY';
 const SET_SELECTED_CITY = 'SET_SELECTED_CITY';
 const FETCH_MOST_RATED_LOCATIONS = 'FETCH_MOST_RATED_LOCATIONS';
 const FETCH_LOCATION_BY_ID = 'FETCH_LOCATION_BY_ID';
@@ -30,7 +30,7 @@ export const locationReducer = (state = initialState, action) => {
               ...state,
               citiesList: action.payload
           };
-        case FETCH_LOCATIONS:
+        case FETCH_LOCATIONS_BY_CITY:
           return {
               ...state,
               locationsList: action.payload
@@ -119,7 +119,7 @@ export const fetchLocationsByCity = function() {
                         let locationsListByCity = [];
                         locationsListByCity = setDefaultProperties(locations);
                         dispatch({
-                            type: FETCH_LOCATIONS,
+                            type: FETCH_LOCATIONS_BY_CITY,
                             payload: locationsListByCity
                         });
                     })
@@ -256,13 +256,8 @@ export const removeLocationFromWishList = (locationToRemove) => {
                             type: REMOVE_LOCATION_WISH_LIST,
                             payload: userDetails
                         });
-
-                        // successNotification("The locations has been removed from wish list");
-                        // cookies.set('user', user);
-                        // this.setState({
-                        //     isLocationBookmarked: false
-                        // });
-                        // this.props.updateWishListAfterRemoving(this.state.locationItem._id);                
+                        
+                                      
                     });
                     resolve();
                 } else {

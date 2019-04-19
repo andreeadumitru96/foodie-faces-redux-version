@@ -10,30 +10,24 @@ class GoogleMapContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            // locationsListByCity: [],
             hoveredPinPoint: null
             
         };
-        // store.subscribe(() => {
-        //     this.setState({
-        //       locationsListByCity: store.getState().locations.locationsListByCity
-        //     });
-        // });
-        // this._getCenterCoordinates = this._getCenterCoordinates.bind(this);
-        // this._getCenterZoom = this._getCenterZoom.bind(this);
-        // this._triggeredPinPointHovering = this._triggeredPinPointHovering.bind(this);
+       
+        this._getCenterCoordinates = this._getCenterCoordinates.bind(this);
+        this._getCenterZoom = this._getCenterZoom.bind(this);
+        this._triggeredPinPointHovering = this._triggeredPinPointHovering.bind(this);
         
     }
 
 	render() {
 		return (
-            <div></div>
-            // <GoogleMap 
-            //     locationsList = {this.props.locationsList}
-            //     getCenterCoordinates = {this._getCenterCoordinates}
-            //     getCenterZoom = {this._getCenterZoom}
-            //     hoveredPinPoint = {this.state.hoveredPinPoint}
-            // /> 
+            <GoogleMap 
+                locationsList = {this.props.locationsList}
+                getCenterCoordinates = {this._getCenterCoordinates}
+                getCenterZoom = {this._getCenterZoom}
+                hoveredPinPoint = {this.state.hoveredPinPoint}
+            /> 
 		);
     }
     
@@ -65,7 +59,7 @@ class GoogleMapContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    locationsListByCity: state.locations.locationsListByCity,
+    locationsList: state.locations.locationsList,
 });
   
 export default connect(mapStateToProps, { fetchLocationsByCity })(GoogleMapContainer);
