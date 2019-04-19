@@ -43,7 +43,6 @@ class LocationTileItemContainer extends Component {
     componentDidMount() {
         
         let locationItem = this.props.getLocationById(this.props.locationId, this.props.locationsTypeFlag);
-        // console.log(locationItem);
         this.setState({
             locationItem: locationItem
         });
@@ -52,13 +51,6 @@ class LocationTileItemContainer extends Component {
 
         
     }
-
-    // componentWillMount() {
-    //    this.setState({
-            
-    //     });
-        
-    // }
 
     _onLocationClick = () => {
 
@@ -114,7 +106,18 @@ class LocationTileItemContainer extends Component {
 			locationId: this.state.locationItem._id
         }
 
-        this.props.removeLocationFromWishList(locationToRemove);
+        this.props.removeLocationFromWishList(locationToRemove).then(() => {
+            successNotification('The location has been removed from wish list.');
+            
+        }).catch((error) => {
+            notificationError(error);
+        });
+
+        this.setState({
+            isLocationBookmarked: false
+        });
+        
+        cookies.set('user', this.props.userDetails);
         
     }
 
