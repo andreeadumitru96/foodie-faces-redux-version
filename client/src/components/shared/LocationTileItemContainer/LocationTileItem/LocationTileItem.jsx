@@ -36,9 +36,9 @@ class LocationTileItem extends Component {
                         className="location-tile__button"
                         onClick={
                             this.props.isLocationBookmarked ? 
-                                this.props.removeLocationWishList 
+                                this.props.removeLocationFromWishList 
                             : 
-                                this.props.saveLocationWishList}
+                                this.props.saveLocationToWishList}
                     >
                         {this.props.isLocationBookmarked ?
                             <Favorite className="location-tile__button-marked"/>

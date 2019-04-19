@@ -9,6 +9,7 @@ const FETCH_LOCATION_BY_ID = 'FETCH_LOCATION_BY_ID';
 const SAVE_LOCATION_WISH_LIST = 'SAVE_LOCATION_WISH_LIST';
 const FETCH_SIMILAR_LOCATIONS = 'FETCH_SIMILAR_LOCATIONS';
 const FETCH_WISHLIST_LOCATIONS = 'FETCH_WISHLIST_LOCATIONS';
+const REMOVE_LOCATION_WISH_LIST = 'REMOVE_LOCATION_WISH_LIST';
 
 const initialState = {
   citiesList: [],
@@ -64,6 +65,11 @@ export const locationReducer = (state = initialState, action) => {
               ...state,
               wishListLocations: action.payload
           }
+        case REMOVE_LOCATION_WISH_LIST: 
+            return {
+                ...state,
+                userDetails: action.payload
+            }  
         default:
           return state;
     }
@@ -207,7 +213,7 @@ export const getLocationById = (locationId, locationsType) => {
     }
 }
 
-export const saveLocationWishList = (data) => {
+export const saveLocationToWishList = (data) => {
     return(dispatch) => {
         return new Promise((resolve, reject) => {
             fetch('http://localhost:3001/api/saveLocationWishList', {
@@ -232,6 +238,44 @@ export const saveLocationWishList = (data) => {
         });
     }
 }
+
+export const removeLocationFromWishList = (locationToRemove) => {
+    return(dispatch) => {
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost:3001/api/removeLocationWishList', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'post',
+                body: JSON.stringify(locationToRemove)
+            }).then((response) => {
+                if(response.status === 200) {
+                    response.json().then((userDetails) => {
+                        dispatch({
+                            type: REMOVE_LOCATION_WISH_LIST,
+                            payload: userDetails
+                        });
+
+                        // successNotification("The locations has been removed from wish list");
+                        // cookies.set('user', user);
+                        // this.setState({
+                        //     isLocationBookmarked: false
+                        // });
+                        // this.props.updateWishListAfterRemoving(this.state.locationItem._id);                
+                    });
+                    resolve();
+                } else {
+                    response.json().then((err) => {
+                        // notificationError(err);
+                    });
+                    reject();
+                }
+            });
+        });
+    }
+}
+
 
 export const fetchSimilarLocations = (locationInfo, locationId) => {
 
