@@ -35,4 +35,5 @@ export const getTheme = () => {
 
 export const CLOUDINARY_UPLOAD_PRESET = 'nnumnwkm'
 
-export const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dvmrkblwv/upload'
+export const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dvmrkblwv/upload';
+

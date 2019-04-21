@@ -8,6 +8,8 @@ import { getLocationById } from '../../../reducers/locationReducer/index.js';
 import LocationTileItem from './LocationTileItem/LocationTileItem';
 import { notificationError, successNotification } from '../constants';
 import { cookies } from '../constants';
+import { setCookie } from '../constants';
+
 
 class LocationTileItemContainer extends Component {
     constructor(props) {
@@ -135,7 +137,7 @@ class LocationTileItemContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    userDetails: state.locations.userDetails,
+    userDetails: state.users.userDetails,
 });
 
 export default connect(mapStateToProps, { getLocationById, saveLocationToWishList, removeLocationFromWishList })(LocationTileItemContainer);
