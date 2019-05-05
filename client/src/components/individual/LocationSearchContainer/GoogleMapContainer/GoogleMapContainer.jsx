@@ -62,4 +62,4 @@ const mapStateToProps = (state) => ({
     locationsList: state.locations.locationsList,
 });
   
-export default connect(mapStateToProps, { fetchLocationsByCity })(GoogleMapContainer);
+export default connect(mapStateToProps, { fetchLocationsByCity }, null, {withRef: true})(GoogleMapContainer);

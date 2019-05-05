@@ -17,35 +17,41 @@ class GoogleMap extends Component {
         return (
             <div className="google-maps">
                 <GoogleMapReact
-                    center = {this.props.getCenterCoordinates()}
-                    defaultZoom = {this.props.getCenterZoom()}
+                    center={this.props.getCenterCoordinates()}
+                    defaultZoom={this.props.getCenterZoom()}
                     hoverDistance={30 / 2}
                     distanceToMouse={this._distanceToMouse}
-                    
+
                 >
-                    {this.props.locationsList.map(location => (
-                        <PinPoint
-                            isHovered = {this.state.hoveredPinPoint === location._id ? true : false}
-                            lat = {parseFloat(location.coordinates.latitude)}
-                            lng = {parseFloat(location.coordinates.longitude)}
-                            key = {location._id}
-                            
-                            
-                        />                    
-                    ))}
-                   
+                    {this.props.locationsList.map((location) => {
+                        return (
+                            location.coordinates.latitude ?
+
+                                <PinPoint
+                                    isHovered={this.state.hoveredPinPoint === location._id ? true : false}
+                                    lat={parseFloat(location.coordinates.latitude)}
+                                    lng={parseFloat(location.coordinates.longitude)}
+                                    key={location._id}
+
+
+                                />
+                                :
+                                null
+
+                        )
+                    })}
 
                 </GoogleMapReact>
             </div>
         );
     }
-    
+
     componentWillReceiveProps(newProps) {
         this.setState({
             hoveredPinPoint: newProps.hoveredPinPoint
         })
     }
-    
+
 }
 
 export default GoogleMap;

@@ -18,7 +18,7 @@ class LocationSearchContainer extends Component {
         return (
             <div>
                 <LocationSearch
-                    locationsList={this.props.locationsListByCity}
+                    locationsList={this.props.locationsList}
                     city={this.props.cityData}
                     triggeredBody={this.props.triggeredBody}
                     onFilterLocationsReceived={this._onFilterLocationsReceived}
@@ -45,12 +45,13 @@ class LocationSearchContainer extends Component {
 
     componentDidMount() {
         this.props.fetchLocationsByCity();
+        
     }
 
 }
 
 const mapStateToProps = (state) => ({
-    locationsListByCity: state.locations.locationsListByCity,
+    locationsList: state.locations.locationsList,
 });
   
 export default connect(mapStateToProps, { fetchLocationsByCity })(LocationSearchContainer);

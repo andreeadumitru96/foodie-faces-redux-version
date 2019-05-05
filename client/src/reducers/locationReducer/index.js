@@ -140,12 +140,11 @@ export const setSelectedCity = (cityData) => {
 const setDefaultProperties = (locationsListByCity) => {
     let formattedLocationsList = []
     formattedLocationsList = locationsListByCity.map((location) => {
-        location.coordinates.latitude = 0;
-        location.coordinates.longitude = 0;
         if(!location.images[0]) {
             location.images[0] = defaultImage
         }
         return location;
+        
     });      
     return formattedLocationsList;
 }
