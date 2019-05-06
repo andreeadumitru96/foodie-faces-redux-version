@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import GoogleMapReact from 'google-map-react';
 import PinPoint from '../../../individual/LocationSearchContainer/GoogleMapContainer/PinPoint/PinPoint';
+
+import { fetchLocationById } from '../../../../reducers/locationReducer/index';
 
 class LocationDetailsMap extends Component {
     constructor(props) {
@@ -47,4 +50,8 @@ class LocationDetailsMap extends Component {
 
 }
 
-export default LocationDetailsMap;
+const mapStateToProps = (state) => ({
+    locationDetails: state.locations.locationDetails
+});
+
+export default connect(mapStateToProps, { fetchLocationById })(LocationDetailsMap);

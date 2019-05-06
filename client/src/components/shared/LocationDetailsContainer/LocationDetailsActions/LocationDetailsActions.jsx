@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import { connect } from 'react-redux';
 
 import './LocationDetailsActions.css';
 import LocationDetailsRecommendDish from '../LocationDetailsRecommendDish/LocationDetailsRecommendDish';
+import { fetchLocationById } from '../../../../reducers/locationReducer/index';
 
 class LocationDetailsActions extends Component {
     constructor(props) {
@@ -59,4 +61,9 @@ class LocationDetailsActions extends Component {
 
 }
 
-export default LocationDetailsActions;
+const mapStateToProps = (state) => ({
+    locationDetails: state.locations.locationDetails
+
+});
+
+export default connect(mapStateToProps, { fetchLocationById })(LocationDetailsActions);

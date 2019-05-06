@@ -12,6 +12,7 @@ import { CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL } from '../../../consta
 import { notificationError } from '../../../constants';
 import { successNotification } from '../../../constants';
 import { addDishInMenu } from '../../../../../reducers/locationReducer/index';
+import { fetchLocationById } from '../../../../../reducers/locationReducer/index';
 
 
 class LocationDetailsAddDish extends Component {
@@ -23,7 +24,6 @@ class LocationDetailsAddDish extends Component {
             uploadedDishImage: null,
             isAddDishOpen: this.props.isAddDishOpen,
             isDishAdded: false,
-            locationDetails: props.locationDetails
         };
         this._onAddDishImage = this._onAddDishImage.bind(this);
         this._onAddDish = this._onAddDish.bind(this);
@@ -166,7 +166,7 @@ class LocationDetailsAddDish extends Component {
             .then((response) => {
                 response.json().then((image) => {
                     let newDish = {
-                        locationId: this.state.locationDetails._id,
+                        locationId: this.props.locationDetails._id,
                         name: this.dishName,
                         score: this._getDishScore(),
                         category: this.dishCategory,
@@ -210,7 +210,7 @@ class LocationDetailsAddDish extends Component {
     _formatMenuDishes() {
         let formattedMenuDishes = [];
 
-        this.state.locationDetails.menu.forEach(dish => {
+        this.props.locationDetails.menu.forEach(dish => {
             formattedMenuDishes.push(dish.name);
         });
 
@@ -220,7 +220,7 @@ class LocationDetailsAddDish extends Component {
     _formatMenuCategories() {
         let formattedMenuCategories = [];
 
-        this.state.locationDetails.menu.forEach(dish => {
+        this.props.locationDetails.menu.forEach(dish => {
             formattedMenuCategories.push(dish.category);
         });
 
@@ -233,7 +233,8 @@ class LocationDetailsAddDish extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    locationDetails: state.locations.locationDetails,
     data: state.locations.data,
 });
 
-export default connect(mapStateToProps, { addDishInMenu })(LocationDetailsAddDish);
+export default connect(mapStateToProps, { fetchLocationById, addDishInMenu })(LocationDetailsAddDish);

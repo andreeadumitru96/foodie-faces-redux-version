@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { GridList } from 'material-ui/GridList';
 import { GridTile } from 'material-ui/GridList';
 
 import './LocationDetailsGrid.css';
 import FullSizeImage from './FullSizeImage/FullSizeImage';
+import { fetchLocationById } from '../../../../reducers/locationReducer/index';
 
 const styles = {
     root: {
@@ -89,4 +91,10 @@ class LocationDetailsGrid extends Component {
 
 }
 
-export default LocationDetailsGrid;
+
+const mapStateToProps = (state) => ({
+    locationDetails: state.locations.locationDetails
+
+});
+
+export default connect(mapStateToProps, { fetchLocationById })(LocationDetailsGrid);

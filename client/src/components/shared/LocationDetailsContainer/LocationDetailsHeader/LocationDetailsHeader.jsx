@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import ReactStars from 'react-stars'
 import { List, ListItem } from 'material-ui/List';
-
+import { fetchLocationById } from '../../../../reducers/locationReducer/index';
 import './LocationDetailsHeader.css';
 
 class LocationDetailsHeader extends Component {
@@ -143,6 +145,15 @@ class LocationDetailsHeader extends Component {
         );
     }
 
+    componentDidMount() {
+        this.props.fetchLocationById(this.props.locationId);
+    }
+
 }
 
-export default LocationDetailsHeader;
+const mapStateToProps = (state) => ({
+    locationDetails: state.locations.locationDetails
+
+});
+
+export default connect(mapStateToProps, { fetchLocationById })(LocationDetailsHeader);

@@ -28,26 +28,17 @@ class LocationDetails extends Component {
 		return (
 			<div className="location-details">
                 <LocationDetailsHeader
-                    locationDetails = {this.state.locationDetails}
+                    locationId = {this.state.locationDetails._id}
                 />
                 
-
                 <div className="location-details-photos-map-container">
-                    <LocationDetailsGrid
-                        locationDetails = {this.state.locationDetails}
-                    />
-                    <LocationDetailsMap
-                        locationDetails = {this.state.locationDetails} 
-                    />
+                    <LocationDetailsGrid />
+                    <LocationDetailsMap />
                 </div>
                 
-                <LocationDetailsActions
-                    locationDetails = {this.state.locationDetails}
-                />
+                <LocationDetailsActions />
 
-                <LocationDetailsMenu
-                    locationDetails = {this.state.locationDetails}
-                />
+                <LocationDetailsMenu/>
 
                 <LocationDetailsMostRecommendedDishes/>
 
@@ -55,7 +46,6 @@ class LocationDetails extends Component {
                     <LocationDetailsReviews/>
                 </div>
                 <LocationDetailsSimilarLocations
-                    locationDetails = {this.state.locationDetails}
                     triggeredBody = {this.props.triggeredBody}
                 />
 

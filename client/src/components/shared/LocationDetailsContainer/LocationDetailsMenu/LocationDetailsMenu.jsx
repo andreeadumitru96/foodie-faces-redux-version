@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar'
+import { fetchLocationById } from '../../../../reducers/locationReducer/index';
 
 import './LocationDetailsMenu.css';
 
 class LocationDetailsMenu extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
 
         this._sortMenuItemsByCategory = this._sortMenuItemsByCategory.bind(this);
         this._getFormattedMenuByCategory = this._getFormattedMenuByCategory.bind(this);
@@ -89,4 +90,8 @@ class LocationDetailsMenu extends Component {
 
 }
 
-export default LocationDetailsMenu;
+const mapStateToProps = (state) => ({
+    locationDetails: state.locations.locationDetails
+});
+
+export default connect(mapStateToProps, { fetchLocationById })(LocationDetailsMenu);

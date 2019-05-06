@@ -3,6 +3,7 @@ import { GridList } from 'material-ui';
 import { connect } from 'react-redux';
 
 import { fetchSimilarLocations } from '../../../../reducers/locationReducer/index.js';
+import { fetchLocationById } from '../../../../reducers/locationReducer/index.js';
 
 import { notificationError } from '../../constants';
 import LocationTileItemContainer from '../../LocationTileItemContainer/LocationTileItemContainer';
@@ -26,9 +27,6 @@ const styles = {
 class LocationDetailsSimilarLocations extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
         this._getSimilarLocations = this._getSimilarLocations.bind(this);
     }
 
@@ -81,7 +79,8 @@ class LocationDetailsSimilarLocations extends Component {
 
 const mapStateToProps = (state) => ({
     similarLocations: state.locations.similarLocations,
+    locationDetails: state.locations.locationDetails
 
 });
 
-export default connect(mapStateToProps, { fetchSimilarLocations })(LocationDetailsSimilarLocations);
+export default connect(mapStateToProps, { fetchLocationById, fetchSimilarLocations })(LocationDetailsSimilarLocations);

@@ -124,7 +124,6 @@ class LocationDetailsReviews extends Component {
                     <LocationDetailsAddDish
                         triggerWindowClose={this._triggerWindowClose}
                         isAddDishOpen={this.state.isAddDishOpen}
-                        locationDetails={this.props.locationDetails}
                     />
                 </div>
             </div>

@@ -7,6 +7,7 @@ import { RaisedButton } from 'material-ui';
 
 import { notificationError } from '../../constants';
 import './LocationDetailsRecommendDish.css';
+import { fetchLocationById } from '../../../../reducers/locationReducer/index';
 import { recommendLocationDish } from '../../../../reducers/locationReducer/index';
 import { fetchMenuDishes } from '../../../../reducers/locationReducer/index';
 
@@ -168,4 +169,4 @@ const mapStateToProps = (state) => ({
     menuDishes: state.locations.menuDishes
 });
 
-export default connect(mapStateToProps, { fetchMenuDishes, recommendLocationDish })(LocationDetailsRecommendDish);
+export default connect(mapStateToProps, { fetchLocationById, fetchMenuDishes, recommendLocationDish })(LocationDetailsRecommendDish);
