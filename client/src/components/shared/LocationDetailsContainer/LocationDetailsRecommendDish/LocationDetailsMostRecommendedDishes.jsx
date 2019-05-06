@@ -54,35 +54,23 @@ class LocationDetailsMostRecommendedDishes extends Component {
 
         let id = location._id;
 
-        fetch(`http://localhost:3001/api/location/getRecommendedDishes/${id}`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-
-            method: 'get'
-        }).then(function (response) {
-            if (response.status === 200) {
-                response.json().then((dishes) => {
-                    this.setState({
-                        mostRecommendedDishes: dishes
-                    });
-                })
-            } else {
-                response.json().then((error) => {
-                    notificationError(error.message);
-                })
-            }
-        }.bind(this));
+        
     }
 
-    componentWillMount() {
-        this._getMostRecommendedDishes(this.props.locationDetails);
+    componentDidMount() {
+        this.props.(this.props.locationDetails._id);
     }
+
+    // componentWillMount() {
+    //     this._getMostRecommendedDishes(this.props.locationDetails);
+    // }
 
     componentWillReceiveProps(newProps) {
         this._getMostRecommendedDishes(newProps.locationDetails);
     }
 }
+const mapStateToProps = (state) => ({
+    locationDetails: state.locations.locationDetails,
+});
 
-export default LocationDetailsMostRecommendedDishes;
+export default connect(mapStateToProps, { fetchLocationById })(LocationDetailsMostRecommendedDishes);

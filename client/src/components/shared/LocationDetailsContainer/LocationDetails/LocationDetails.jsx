@@ -49,9 +49,7 @@ class LocationDetails extends Component {
                     locationDetails = {this.state.locationDetails}
                 />
 
-                <LocationDetailsMostRecommendedDishes
-                    locationDetails = {this.state.locationDetails}
-                />
+                <LocationDetailsMostRecommendedDishes/>
 
                 <div className="location-details-reviews-map">
                     <LocationDetailsReviews/>

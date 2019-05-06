@@ -12,6 +12,7 @@ const FETCH_WISHLIST_LOCATIONS = 'FETCH_WISHLIST_LOCATIONS';
 const REMOVE_LOCATION_WISH_LIST = 'REMOVE_LOCATION_WISH_LIST';
 const ADD_MENU_DISH = 'ADD_MENU_DISH';
 const ADD_LOCATION_REVIEW = 'ADD_LOCATION_REVIEW';
+const RECOMMEND_LOCATION_DISH = 'RECOMMEND_LOCATION_DISH'
 
 const initialState = {
   citiesList: [],
@@ -42,43 +43,48 @@ export const locationReducer = (state = initialState, action) => {
           return {
               ...state,
               selectedCity: action.payload
-          }
+          };
         case FETCH_MOST_RATED_LOCATIONS: 
           return {
             ...state,
             locationsList: action.payload
-          }
+          };
         case FETCH_LOCATION_BY_ID:
           return {
               ...state,
               locationDetails: action.payload
-          }
+          };
         case SAVE_LOCATION_WISH_LIST: 
           return {
               ...state, 
               userDetails: action.payload
-          }
+          };
         case FETCH_SIMILAR_LOCATIONS: 
           return {
               ...state,
               similarLocations: action.payload
-          }
+          };
         case FETCH_WISHLIST_LOCATIONS: 
           return {
               ...state,
               wishListLocations: action.payload
-          }
+          };
         case REMOVE_LOCATION_WISH_LIST: 
             return {
                 ...state,
                 userDetails: action.payload
-            }  
+            };  
         case ADD_MENU_DISH: 
             return {
                 ...state,
                 
-            } 
+            }; 
         case ADD_LOCATION_REVIEW: 
+            return {
+                ...state,
+                locationDetails: action.payload
+            };
+        case RECOMMEND_LOCATION_DISH: 
             return {
                 ...state,
                 locationDetails: action.payload
@@ -401,5 +407,51 @@ export const addLocationReview = (reviewDetails) => {
         });
     }
 }
+
+export const recommendLocationDish = (menuDish) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            fetch(`http://localhost:3001/api/location/recommendDish`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'post',
+                body: JSON.stringify(menuDish),
+            }).then(function (response) {
+                if (response.status === 200) {
+                    response.json().then((menuDishes) => {
+                        console.log(menuDishes);
+                    })
+                } else {
+                    response.json().then((error) => {
+                        // notificationError(error.message);
+                    })
+                }
+            });
+        });
+    }
+}
+
+// fetch(`http://localhost:3001/api/location/getRecommendedDishes/${id}`, {
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+
+//             method: 'get'
+//         }).then(function (response) {
+//             if (response.status === 200) {
+//                 response.json().then((dishes) => {
+//                     this.setState({
+//                         mostRecommendedDishes: dishes
+//                     });
+//                 })
+//             } else {
+//                 response.json().then((error) => {
+//                     notificationError(error.message);
+//                 })
+//             }
+//         }.bind(this));
 
 

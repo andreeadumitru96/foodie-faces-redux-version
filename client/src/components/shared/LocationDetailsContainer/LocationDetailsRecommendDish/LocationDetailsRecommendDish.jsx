@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -6,6 +7,7 @@ import { RaisedButton } from 'material-ui';
 
 import { notificationError } from '../../constants';
 import './LocationDetailsRecommendDish.css';
+import { recommendLocationDish } from '../../../../reducers/locationReducer/index';
 
 class LocationDetailsRecommendDish extends Component {
     constructor(props) {
@@ -141,25 +143,11 @@ class LocationDetailsRecommendDish extends Component {
             notificationError("Please choose a dish");
         }
         else {
-            fetch(`http://localhost:3001/api/location/recommendDish`, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+            this.props.recommendLocationDish(data).then(() => {
 
-                method: 'post',
-                body: JSON.stringify(data),
-            }).then(function (response) {
-                if (response.status === 200) {
-                    response.json().then((menuDishes) => {
+            }).catch(() => {
 
-                    })
-                } else {
-                    response.json().then((error) => {
-                        notificationError(error.message);
-                    })
-                }
-            }.bind(this));
+            });
 
             this._onPressedRecommend();
         }
@@ -190,5 +178,8 @@ class LocationDetailsRecommendDish extends Component {
 
     
 }
+const mapStateToProps = (state) => ({
+    locationDetails: state.locations.locationDetails,
+});
 
-export default LocationDetailsRecommendDish;
+export default connect(mapStateToProps, { recommendLocationDish })(LocationDetailsRecommendDish);
