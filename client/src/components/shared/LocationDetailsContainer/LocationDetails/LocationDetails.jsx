@@ -54,9 +54,7 @@ class LocationDetails extends Component {
                 />
 
                 <div className="location-details-reviews-map">
-                    <LocationDetailsReviews
-                        locationDetails = {this.state.locationDetails}
-                    />
+                    <LocationDetailsReviews/>
                 </div>
                 <LocationDetailsSimilarLocations
                     locationDetails = {this.state.locationDetails}

@@ -11,6 +11,7 @@ const FETCH_SIMILAR_LOCATIONS = 'FETCH_SIMILAR_LOCATIONS';
 const FETCH_WISHLIST_LOCATIONS = 'FETCH_WISHLIST_LOCATIONS';
 const REMOVE_LOCATION_WISH_LIST = 'REMOVE_LOCATION_WISH_LIST';
 const ADD_MENU_DISH = 'ADD_MENU_DISH';
+const ADD_LOCATION_REVIEW = 'ADD_LOCATION_REVIEW';
 
 const initialState = {
   citiesList: [],
@@ -76,6 +77,11 @@ export const locationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 
+            } 
+        case ADD_LOCATION_REVIEW: 
+            return {
+                ...state,
+                locationDetails: action.payload
             } 
         default:
           return state;
@@ -362,6 +368,38 @@ export const addDishInMenu = (newDish) => {
         });
 
     }
-    
-
 }
+
+export const addLocationReview = (reviewDetails) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost:3001/api/location/addReview', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+
+                method: 'post',
+                body: JSON.stringify(reviewDetails)
+            }).then(function (response) {
+                if (response.status === 200) {
+                    response.json().then((location) => {
+                        dispatch({
+                            type: 'ADD_LOCATION_REVIEW',
+                            payload: location
+                        });
+                    
+                    });
+                    resolve();
+                } else {
+                    response.json().then((error) => {
+
+                    });
+                    reject();
+                }
+            });
+        });
+    }
+}
+
+

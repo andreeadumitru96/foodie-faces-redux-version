@@ -18,6 +18,7 @@ class LocationDetailsContainer extends Component {
             <div>
                 {this.props.locationDetails ?
                     <LocationDetails
+                        locationId = {this.props.locationId}
                         locationDetails = {this.props.locationDetails}
                         triggeredBody = {this.props.triggeredBody}
                     />

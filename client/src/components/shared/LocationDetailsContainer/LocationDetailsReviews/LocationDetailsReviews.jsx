@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-stars';
 import { RaisedButton } from 'material-ui';
+import { connect } from 'react-redux';
 
+import { addLocationReview } from '../../../../reducers/locationReducer/index';
+import { fetchLocationById } from '../../../../reducers/locationReducer/index';
 import { cookies } from '../../../shared/constants';
 import { notificationError } from '../../../shared/constants';
 import './LocationDetailsReviews.css';
@@ -12,13 +15,12 @@ class LocationDetailsReviews extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            locationDetails: this.props.locationDetails,
             initialDisplayedReviews: this.props.locationDetails.receivedReviews.slice(0, 4),
             isAddDishOpen: false,
             isShowMoreDisplayed: true,
         };
 
-        this.reviewScore = this.state.locationDetails.averageScore;
+        this.reviewScore = this.props.locationDetails.averageScore;
         this._getReviewDetails = this._getReviewDetails.bind(this);
         this._onAddReview = this._onAddReview.bind(this);
         this._onRatingChanged = this._onRatingChanged.bind(this);
@@ -32,10 +34,10 @@ class LocationDetailsReviews extends Component {
             <div className="location-details-reviews">
                 <div className="location-details-reviews__list">
                     <p className="location-details-reviews__list-title">
-                        Reviews ({this.state.locationDetails.receivedReviews.length})
+                        Reviews ({this.props.locationDetails.receivedReviews.length})
                     </p>
 
-                    {this.state.locationDetails.receivedReviews.length > 0 ?
+                    {this.props.locationDetails.receivedReviews.length > 0 ?
 
                         <div className="location-details-reviews__list-wrapper">
                             {this.state.initialDisplayedReviews.map((receivedReview) => (
@@ -65,7 +67,7 @@ class LocationDetailsReviews extends Component {
                                 </div>
                             ))}
                             {
-                                (this.state.isShowMoreDisplayed && this.state.locationDetails.receivedReviews.length > 4) ?
+                                (this.state.isShowMoreDisplayed && this.props.locationDetails.receivedReviews.length > 4) ?
                                     <div className="location-details-reviews__show-more" onClick={this._onShowMoreReviews}>
                                         Show more
                                     </div>
@@ -103,7 +105,7 @@ class LocationDetailsReviews extends Component {
                                 size={24}
                                 color2={'black'}
                                 half={false}
-                                value={this.state.locationDetails.averageScore}
+                                value={this.props.locationDetails.averageScore}
                                 onChange={this._onRatingChanged}
                             />
                         </fieldset>
@@ -122,7 +124,7 @@ class LocationDetailsReviews extends Component {
                     <LocationDetailsAddDish
                         triggerWindowClose={this._triggerWindowClose}
                         isAddDishOpen={this.state.isAddDishOpen}
-                        locationDetails={this.state.locationDetails}
+                        locationDetails={this.props.locationDetails}
                     />
                 </div>
             </div>
@@ -142,10 +144,10 @@ class LocationDetailsReviews extends Component {
             title: this.reviewTitle.value,
             content: this.reviewContent.value,
             score: this.reviewScore,
-            averageScore: this.state.locationDetails.averageScore,
+            averageScore: this.props.locationDetails.averageScore,
             userName: user.firstName,
             userId: user._id,
-            locationId: this.state.locationDetails._id
+            locationId: this.props.locationDetails._id
         };
         return reviewDetails;
     }
@@ -154,30 +156,13 @@ class LocationDetailsReviews extends Component {
 
         let reviewDetails = this._getReviewDetails();
 
-        fetch('http://localhost:3001/api/location/addReview', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+        this.props.addLocationReview(reviewDetails).then((location) => {
+            this.reviewTitle.value = '';
+            this.reviewContent.value = '';
 
-            method: 'post',
-            body: JSON.stringify(reviewDetails)
-
-        }).then(function (response) {
-            if (response.status === 200) {
-                response.json().then((location) => {
-                    this.setState({
-                        locationDetails: location
-                    });
-                    this.reviewTitle.value = '';
-                    this.reviewContent.value = '';
-                })
-            } else {
-                response.json().then((error) => {
-                    notificationError(error.message);
-                })
-            }
-        }.bind(this))
+        }).catch((error) => {
+            notificationError(error);
+        });
 
         this.setState({
             isAddDishOpen: true
@@ -216,4 +201,8 @@ class LocationDetailsReviews extends Component {
 
 }
 
-export default LocationDetailsReviews;
+const mapStateToProps = (state) => ({
+    locationDetails: state.locations.locationDetails
+});
+
+export default connect(mapStateToProps, { addLocationReview, fetchLocationById })(LocationDetailsReviews);
