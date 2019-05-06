@@ -10,6 +10,7 @@ const SAVE_LOCATION_WISH_LIST = 'SAVE_LOCATION_WISH_LIST';
 const FETCH_SIMILAR_LOCATIONS = 'FETCH_SIMILAR_LOCATIONS';
 const FETCH_WISHLIST_LOCATIONS = 'FETCH_WISHLIST_LOCATIONS';
 const REMOVE_LOCATION_WISH_LIST = 'REMOVE_LOCATION_WISH_LIST';
+const ADD_MENU_DISH = 'ADD_MENU_DISH';
 
 const initialState = {
   citiesList: [],
@@ -18,7 +19,8 @@ const initialState = {
   locationDetails: null,
   userDetails: null,
   similarLocations: [],
-  wishListLocations: []
+  wishListLocations: [],
+
 };
 
 
@@ -70,6 +72,11 @@ export const locationReducer = (state = initialState, action) => {
                 ...state,
                 userDetails: action.payload
             }  
+        case ADD_MENU_DISH: 
+            return {
+                ...state,
+                
+            } 
         default:
           return state;
     }
@@ -316,12 +323,45 @@ export const fetchWishListLocations = (userId) => {
                     payload: wishListLocations
                    });
                     
-                })
+                });
             } else {
                 response.json().then((data) => {
 
                 });
+                
             }
         });   
     }
+}
+
+
+export const addDishInMenu = (newDish) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost:3001/api/location/addDish', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'post',
+                body: JSON.stringify(newDish),
+            }).then(function (response) {
+                if (response.status === 200) {
+                    response.json().then((data) => {
+                        console.log(data);
+                       
+                    });
+                    resolve();
+                } else {
+                    response.json().then(() => {
+
+                    });
+                    reject();
+                }
+            });
+        });
+
+    }
+    
+
 }

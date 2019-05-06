@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -9,6 +10,8 @@ import AutoComplete from 'material-ui/AutoComplete';
 import './LocationDetailsAddDish.css';
 import { CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL } from '../../../constants';
 import { notificationError } from '../../../constants';
+import { successNotification } from '../../../constants';
+import { addDishInMenu } from '../../../../../reducers/locationReducer/index';
 
 
 class LocationDetailsAddDish extends Component {
@@ -171,24 +174,11 @@ class LocationDetailsAddDish extends Component {
                         image: image.secure_url
                     }
 
-                    fetch('http://localhost:3001/api/location/addDish', {
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        method: 'post',
-                        body: JSON.stringify(newDish),
-                    }).then(function (response) {
-                        if (response.status === 200) {
-                            response.json().then((data) => {
-                                this._onPressAddDish();
-                            })
-                        } else {
-                            response.json().then((data) => {
-                                notificationError(data.message);
-                            });
-                        }
-                    }.bind(this));
+                    this.props.addDishInMenu(newDish).then(() => {
+                        this._onPressAddDish();
+                    }).catch(() => {
+                        notificationError("It may be a problem when adding a menu dish...");
+                    });
                 })
             });
            
@@ -242,4 +232,8 @@ class LocationDetailsAddDish extends Component {
     }
 }
 
-export default LocationDetailsAddDish;
+const mapStateToProps = (state) => ({
+    data: state.locations.data,
+});
+
+export default connect(mapStateToProps, { addDishInMenu })(LocationDetailsAddDish);
