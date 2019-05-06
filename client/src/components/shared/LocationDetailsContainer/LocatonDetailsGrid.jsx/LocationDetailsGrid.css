@@ -1,4 +1,13 @@
+.location-details-grid {
+    margin-top: 30px;
+    margin-bottom: 30px;
+} 
+
 .location-details-grid > div {
     margin: 0 auto !important;
     /* height: 200px !important; */
+}
+
+.image-full-size {
+    display: none;
 }

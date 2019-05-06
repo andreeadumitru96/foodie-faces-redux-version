@@ -1,43 +1,84 @@
-.location-details-header__name {
-    /* background-color: white; */
-    color: black;
-    text-align: center;
+.location-details-header__title-container {
+    color: rgb(46, 125, 50);
     font-size: 34px;
     font-weight: bold;
-    padding: 120px 0px 35px 0px;
-
-}
-
-.main-information {
-    padding: 15px 20px 15px 0px;
+    margin-top: 66px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: white;
+    border-bottom: 5px solid #f6f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .location-details-header__information {
     display: flex;
+    flex-direction: row;
+}
+
+.location-details-header__information .fa {
+    color: rgb(46, 125, 50);
+}
+
+.information__general {
+    display: flex;
+    flex-direction: column;
     padding: 30px;
+    border-right: 5px solid #f6f6f6;
+    border-bottom: 5px solid #f6f6f6;
+    padding-right: 15px;
+    width: 50%;
 }
 
-.information-rating {
-    padding-top: 10px;
-}
-
-.main-information-details {
-    padding-left: 8px;
+.information-item {
+    margin-bottom: 10px;
 }
 
 .information-categories {
+    width: 50%;
+    padding: 30px;
     display: flex;
-
+    justify-content: space-around;
+    border-bottom: 5px solid #f6f6f6;
 }
 
-.information-categories.main_information > div {
-    padding: 0px !important;
+.information-categories__general {
+    margin-right: 20px;
 }
 
-.information-categories__goodFor > div > div, .information-categories__meals > div > div, .information-categories__cuisine > div > div {
-    position: absolute;
-    width: 150px;
-    z-index: 2;
-    background-color: #FFFFFF;
-    border-radius: 3px;
+.information-categories__general .label-container {
+    margin-bottom: 10px;
+}
+
+.information-categories__general .label-text {
+    color: rgb(46, 125, 50);
+    font-weight: bold;
+}
+
+.information-categories__general .items__item:before {
+	font-family: "FontAwesome";
+	content: "\f0c1";
+	font-weight: 500;
+    margin-right: 10px;
+    color: rgb(46, 125, 50);
+}
+
+.information-categories__general .items__item {
+    color: #965063;
+    font-weight: bold;
+}
+
+.information-categories__general ul {
+    max-height: 100px;
+    overflow: auto; 
+}
+
+.infromation-categories__cuisine__no-categories {
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(46, 125, 50);
+    display: flex;
+    align-items: center;
 }

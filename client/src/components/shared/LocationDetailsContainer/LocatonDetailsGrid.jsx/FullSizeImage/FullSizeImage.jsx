@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Dialog } from 'material-ui';
 
+import './FullSizeImage.css'
+
 class FullSizeImage extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +19,7 @@ class FullSizeImage extends Component {
                     open={this.state.isFullSizeImageOpen}
                     onRequestClose={this._handleClose}
                     >
-                    <div>
+                    <div className="full-size-image">
                         <img src={this.props.image} alt=""/>
                     </div>
                    

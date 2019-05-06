@@ -1,33 +1,12 @@
 .list-title {
-    font-size: 34px;
-    padding: 30px 0px 40px 30px;
+    color: rgb(46, 125, 50);
+    font-size: 26px;
+    font-weight: bold;
 }
 
 .list-items {
     display: flex;
     padding-top: 40px;
-}
-
-.list-badge {
-    width: 180px;
-    display: flex;
-    justify-content: center;
-    margin-right: 15px;
-    padding: 0 !important;
-}
-
-.list-badge img {
-    width: 100%;
-    max-height: 120px;
-}
-
-.list-badge-text {
-    margin-top: 80px;
-    margin-left: 50px;
-}
-
-.list-badge > span {
-    width: 140px !important;
 }
 
 .empty-title {
@@ -36,4 +15,37 @@
     padding-left: 50px;
     padding-bottom: 70px;
 
+}
+
+.location-details-most-recommended-dishes {
+    margin-top: 30px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    border-bottom: 5px solid #f6f6f6;
+}
+
+.location-details-most-recommended-dishes .list-items {
+    display: flex;
+}
+
+.location-details-most-recommended-dishes .list-items .item-container {
+    padding-right: 20px;
+}
+
+.location-details-most-recommended-dishes .list-items .item-container img {
+    width: 160px;
+    height: 120px;
+}
+
+.location-details-most-recommended-dishes .list-items .item-container p {
+    color: rgb(46, 125, 50);
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.title-no-dishes {
+    font-size: 22px;
+    padding-top: 20px;
+    font-style: italic;
 }

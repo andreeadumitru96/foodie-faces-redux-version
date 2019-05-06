@@ -30,9 +30,17 @@ class LocationDetails extends Component {
                 <LocationDetailsHeader
                     locationDetails = {this.state.locationDetails}
                 />
-                <LocationDetailsGrid
-                    locationDetails = {this.state.locationDetails}
-                />
+                
+
+                <div className="location-details-photos-map-container">
+                    <LocationDetailsGrid
+                        locationDetails = {this.state.locationDetails}
+                    />
+                    <LocationDetailsMap
+                        locationDetails = {this.state.locationDetails} 
+                    />
+                </div>
+                
                 <LocationDetailsActions
                     locationDetails = {this.state.locationDetails}
                 />
@@ -48,9 +56,6 @@ class LocationDetails extends Component {
                 <div className="location-details-reviews-map">
                     <LocationDetailsReviews
                         locationDetails = {this.state.locationDetails}
-                    />
-                    <LocationDetailsMap
-                        locationDetails = {this.state.locationDetails} 
                     />
                 </div>
                 <LocationDetailsSimilarLocations

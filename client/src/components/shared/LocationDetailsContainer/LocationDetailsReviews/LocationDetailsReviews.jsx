@@ -25,7 +25,6 @@ class LocationDetailsReviews extends Component {
         this._triggerWindowClose = this._triggerWindowClose.bind(this);
         this._onShowMoreReviews = this._onShowMoreReviews.bind(this);
         this._onPressShowMore = this._onPressShowMore.bind(this);
-        // this._parseDate = this._parseDate.bind(this);
     }
 
     render() {
@@ -41,28 +40,28 @@ class LocationDetailsReviews extends Component {
                         <div className="location-details-reviews__list-wrapper">
                             {this.state.initialDisplayedReviews.map((receivedReview) => (
                                 <div className="list--entity" key={receivedReview._id}>
-                                    <div className="list--entity-user">
-                                        <div className="list--entity-user-name">
-                                            {receivedReview.userName}
-                                        </div>
-                                    </div>
-
                                     <div className="list--entity-review">
-                                        <div className="list--entity-review-score">
-                                            {receivedReview.score}
-                                            <span> star(s) </span>
-                                        </div>
                                         <div className="list--entity--review-title">
                                             {receivedReview.title}
                                         </div>
                                         <div className="list--entity-review-content">
                                             {receivedReview.content}
                                         </div>
-                                        <div className="list--entity-review-date">
-                                            {/* {this._parseDate(receivedReview.createdDate)} */}
-                                            {receivedReview.createdDate}
+                                    </div>     
+
+                                    <div className="list--entity-user">
+                                        <div className="list--entity-user-name">
+                                            {receivedReview.userName} 
                                         </div>
-                                    </div>
+                                        <div className="list--entity-user-date">
+                                            {/* {this._parseDate(receivedReview.createdDate)} */}
+                                            on {this._getFormattedDate(receivedReview.createdDate)}
+                                        </div>
+                                        <div className="list--entity-user-score">
+                                            <span>{receivedReview.score}</span>
+                                            <span> star(s) </span>
+                                        </div>                                          
+                                    </div>                             
                                 </div>
                             ))}
                             {
@@ -84,6 +83,20 @@ class LocationDetailsReviews extends Component {
                 <div className="location-details-reviews__add-review">
                     <form className="add-review-form">
                         <label className="add-review-form-label"> Write a review </label>
+
+                        <fieldset className="add-review-form-fieldset">
+                            <input className="add-review-form-fieldset-input" placeholder="Review Title"
+                                ref={(reviewTitle) => { this.reviewTitle = reviewTitle }}
+                            />
+                        </fieldset>
+
+                        <fieldset className="add-review-form-fieldset">
+                            <textarea className="add-review-form-fieldset-textarea" placeholder="Leave a review..."
+                                ref={(reviewContent) => { this.reviewContent = reviewContent }}
+                            />
+
+                        </fieldset>
+
                         <fieldset className="add-review-form-fieldset">
                             <ReactStars
                                 count={5}
@@ -93,21 +106,6 @@ class LocationDetailsReviews extends Component {
                                 value={this.state.locationDetails.averageScore}
                                 onChange={this._onRatingChanged}
                             />
-                        </fieldset>
-
-                        <fieldset className="add-review-form-fieldset">
-                            <label className="add-review-form-fieldset-label"> Review Title </label>
-                            <input className="add-review-form-fieldset-input" placeholder="Title"
-                                ref={(reviewTitle) => { this.reviewTitle = reviewTitle }}
-                            />
-                        </fieldset>
-
-                        <fieldset className="add-review-form-fieldset">
-                            <label className="add-review-form-fieldset-label"> Review Content</label>
-                            <textarea className="add-review-form-fieldset-textarea" placeholder="Leave a review..."
-                                ref={(reviewContent) => { this.reviewContent = reviewContent }}
-                            />
-
                         </fieldset>
 
                         <div className="add-review-form-button">
@@ -212,12 +210,9 @@ class LocationDetailsReviews extends Component {
         })
     }
 
-    // _parseDate(date) {
-    //     // let parsedDate = date.toLocaleDateString();
-    //     var utc = date.toISOString().split('T')[0];
-    //     return utc;
-
-    // }
+    _getFormattedDate(date) {
+        return date.split('T')[0];
+    }
 
 }
 

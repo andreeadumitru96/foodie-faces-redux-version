@@ -5,12 +5,16 @@
     background-color: white;
 }
 
+.location-details-photos-map-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .location-details-reviews-map {
     display: flex;
 };
-
-.google-maps div {
+/* .google-maps div {
     position: absolute;
     width: 300px;
     height: 250px;
@@ -24,4 +28,4 @@
     left: 900px !important;
     margin-top: 80px !important;
     margin-left: 80px !important;
-}
+} */

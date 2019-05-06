@@ -1,0 +1,9 @@
+.full-size-image {
+    display: flex;
+    justify-content: center;
+} 
+
+.full-size-image img {
+    width: 320px;
+    height: auto;
+}

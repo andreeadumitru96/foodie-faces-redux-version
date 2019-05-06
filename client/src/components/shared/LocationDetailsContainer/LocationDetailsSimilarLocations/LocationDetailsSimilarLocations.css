@@ -1,18 +1,27 @@
+
+.location-details-similars__title {
+    color: rgb(46, 125, 50);
+    font-size: 26px;
+    font-weight: bold;
+    margin: 30px;
+}
+
+.location-details-similars__grid {
+    padding-bottom: 30px;
+    padding-left: 30px;
+}
+
 .location-details-similars .slick-slide {
     height: 350px;
 }
 
 .location-details-similars > div, .location-details-similars .location-tile {
-    width: 100%;
+    width: 90%;
     height: 100%;
+    margin: 0 auto;
 }
 
 .location-details-similars .location-tile__image {
     width: 200px;
     height: auto !important;
-}
-
-.location-details-similars__title {
-    font-size: 30px;
-    padding: 30px;
 }

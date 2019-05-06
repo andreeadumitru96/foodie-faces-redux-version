@@ -15,130 +15,126 @@ class LocationDetailsHeader extends Component {
     render() {
         return (
             <div className="location-details-header">
-                <div className="location-details-header__name">
-                    {this.props.locationDetails.name}
-                </div>
-                <div className="location-details-header__information">
-                    {
-                        this.props.locationDetails.address
-                            ?
-                            <div className="information-address main-information">
-                                <i className="fa fa-map-marker">
-                                    <span className="information-address-span main-information-details">
-                                        {this.props.locationDetails.address}
-                                    </span>
-                                </i>
-                            </div>
-                            : null
-                    }
-                    {
-                        this.props.locationDetails.phone[0]
-                            ?
-                            <div className="information-phone main-information">
-                                <i className="fa fa-phone">
-                                    <span className="information-phone-span main-information-details">
-                                        {this.props.locationDetails.phone[0]}
-                                    </span>
-                                </i>
-                            </div>
-                            : null
-                    }
-                    {
-                        this.props.locationDetails.price
-                            ?
-                            <div className="information-average-price main-information">
-                                <i className="fa fa-money">
-                                    <span className="information-average-price-span main-information-details">
-                                        {this.props.locationDetails.price}
-                                    </span>
-                                </i>
-                            </div>
-                            : null
-                    }
-
-                    <div className="information-rating main-information">
+                <div className="location-details-header__title-container">
+                    <div className="title-container__name">
+                        {this.props.locationDetails.name}
+                    </div>
+                    <div className="title-container__rating">
                         <ReactStars
                             count={5}
-                            size={24}
+                            size={18}
                             color2={'black'}
                             half={false}
                             edit={false}
                             value={this.props.locationDetails.tripAdvisorRating}
                         />
                     </div>
+                </div>
 
-                    <div className="information-categories main_information">
-                    {
-                            this.props.locationDetails.categories.goodFor
+                <div className="location-details-header__information">
+                    <div className="information__general">
+                        {
+                            this.props.locationDetails.address
                                 ?
-                                <List>
-                                    <div className="information-categories__goodFor">
-                                        <ListItem
-                                            primaryText={"Good for"}
-                                            initiallyOpen={false}
-                                            primaryTogglesNestedList={true}
-                                            nestedItems={
-                                                this.props.locationDetails.categories.goodFor.map((item) => {
-                                                    return (<ListItem
-                                                        className="goodFor-list main-information-details"
-                                                        key={item}
-                                                        primaryText={item}
-                                                    />)
-                                                })
-                                            }
-                                        >
-                                        </ListItem>
+                                <div className="information-address information-item">
+                                    <i className="fa fa-map-marker"> Address: </i>
+                                    <span className="information-address-span main-information-details">
+                                        {this.props.locationDetails.address}
+                                    </span>
+                                </div>
+                                : null
+                        }
+                        {
+                            this.props.locationDetails.phone[0]
+                                ?
+                                <div className="information-phone information-item">
+                                    <i className="fa fa-phone"> Phone Number: </i>
+                                    <span className="information-phone-span main-information-details">
+                                        {this.props.locationDetails.phone[0]}
+                                    </span>
+                                </div>
+                                : null
+                        }
+                        {
+                            this.props.locationDetails.price
+                                ?
+                                <div className="information-average-price information-item">
+                                    <i className="fa fa-money"> Price Range: </i>
+                                    <span className="information-average-price-span main-information-details">
+                                        {this.props.locationDetails.price}
+                                    </span>
+                                </div>
+                                : null
+                        }
+                    </div>
+
+                    <div className="information-categories">
+                        {
+                            this.props.locationDetails.categories.goodFor.length !== 0
+                                ?
+                                <div className="infromation-categories__good-for information-categories__general">
+                                    <div className="good-for__label label-container">
+                                        <span className="label-text"> Good For: </span>
                                     </div>
-                                </List>
-                            : null
+                                    <ul className="good-for__items">
+                                        {this.props.locationDetails.categories.goodFor.map((item) => {
+                                            return (
+                                                <li className="items__item">
+                                                    {item}
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
+                                : null
                         }
 
                         {
-                            this.props.locationDetails.categories.meals
+                            this.props.locationDetails.categories.meals.length !== 0
                                 ?
-                                <List>
-                                    <div className="information-categories__meals">
-                                        <ListItem
-                                            primaryText={"Meals"}
-                                            initiallyOpen={false}
-                                            primaryTogglesNestedList={true}
-                                            nestedItems={
-                                                this.props.locationDetails.categories.meals.map((item) => {
-                                                    return (<ListItem
-                                                        className="meals-list main-information-details"
-                                                        key={item}
-                                                        primaryText={item}
-                                                    />)
-                                                })
-                                            }
-                                        >
-                                        </ListItem>
+                                <div className="infromation-categories__meals information-categories__general">
+                                    <div className="meals__label label-container">
+                                        <span className="label-text"> Meals: </span>
                                     </div>
-                                </List>
+                                    <ul className="meals__items">
+                                        {this.props.locationDetails.categories.meals.map((item) => {
+                                            return (
+                                                <li className="items__item">
+                                                    {item}
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
+                                : null
+                        }
+                        {
+                            this.props.locationDetails.categories.cuisine.length !== 0
+                                ?
+                                <div className="infromation-categories__cuisine information-categories__general">
+                                <div className="cuisine__label label-container">
+                                    <span className="label-text"> Cuisine: </span>
+                                </div>
+                                <ul className="cuisine__items">
+                                    {this.props.locationDetails.categories.cuisine.map((item) => {
+                                        return (
+                                            <li className="items__item">
+                                                {item}
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
                             : null
                         }
-                         {
-                            this.props.locationDetails.categories.cuisine
-                                ?
-                                <List>
-                                    <div className="information-categories__cuisine">
-                                        <ListItem
-                                            primaryText={"Cuisine"}
-                                            initiallyOpen={false}
-                                            primaryTogglesNestedList={true}
-                                            nestedItems={
-                                                this.props.locationDetails.categories.cuisine.map((item) => {
-                                                    return (<ListItem
-                                                        className="cuisine-list main-information-details"
-                                                        key={item}
-                                                        primaryText={item}
-                                                    />)
-                                                })
-                                            }
-                                        >
-                                        </ListItem>
-                                    </div>
-                                </List>
+                        {
+                            this.props.locationDetails.categories.cuisine.length === 0
+                            && this.props.locationDetails.categories.meals.length === 0
+                            && this.props.locationDetails.categories.goodFor.length === 0
+                            ?
+                                <div className="infromation-categories__cuisine__no-categories information-categories__general">
+                                    <p>There are no categories for this place yet</p>
+                                </div>
                             : null
                         }
                     </div>

@@ -17,26 +17,34 @@ class LocationDetailsMostRecommendedDishes extends Component {
     render() {
         return (
             <div className="location-details-most-recommended-dishes">
+                <div className="list-title">
+                    <p>Most recommended dishes</p>
+                </div>
                 {this.state.mostRecommendedDishes.length > 0 ?
 
                     <div className="location-details-most-recommended-dishes__list">
-                        <div className="list-title">
-                            Most recommended dishes
-                        </div>
                         <div className="list-items">
                             {this.state.mostRecommendedDishes.map(dish => {
-                                return (<Badge
-                                    badgeContent={<img src={dish.image} alt="" />}
-                                    primary={true}
-                                    className="list-badge"
-                                >
-                                    <div className="list-badge-text">{dish.name}</div>
-                                </Badge>)
+                                // return (<Badge
+                                //     badgeContent={<img src={dish.image} alt="" />}
+                                //     primary={true}
+                                //     className="list-badge"
+                                // >
+                                //     <div className="list-badge-text">{dish.name}</div>
+                                // </Badge>)
+                                return (
+                                    <div className="item-container">
+                                        <img src={dish.image}/>
+                                        <p>{dish.name}</p>
+                                    </div>
+                                )
                             })}
                         </div>
                     </div>
                     :
-                    null
+                    <div className="title-no-dishes">
+                        <p>There are no recommended dishes yet</p>
+                    </div>
                 }
             </div>
         );
