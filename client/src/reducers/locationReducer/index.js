@@ -13,6 +13,7 @@ const REMOVE_LOCATION_WISH_LIST = 'REMOVE_LOCATION_WISH_LIST';
 const ADD_MENU_DISH = 'ADD_MENU_DISH';
 const ADD_LOCATION_REVIEW = 'ADD_LOCATION_REVIEW';
 const RECOMMEND_LOCATION_DISH = 'RECOMMEND_LOCATION_DISH'
+const FETCH_MOST_RECOMMENDED_DISHES = 'FETCH_MOST_RECOMMENDED_DISHES'
 
 const initialState = {
   citiesList: [],
@@ -22,6 +23,7 @@ const initialState = {
   userDetails: null,
   similarLocations: [],
   wishListLocations: [],
+  fetchMostRecommendedDishes: []
 
 };
 
@@ -84,6 +86,11 @@ export const locationReducer = (state = initialState, action) => {
                 ...state,
                 locationDetails: action.payload
             };
+        case FETCH_MOST_RECOMMENDED_DISHES:
+            return {
+                ...state,
+                mostRecommendedDishes: action.payload
+            }
         case RECOMMEND_LOCATION_DISH: 
             return {
                 ...state,
@@ -422,36 +429,52 @@ export const recommendLocationDish = (menuDish) => {
                 if (response.status === 200) {
                     response.json().then((menuDishes) => {
                         console.log(menuDishes);
-                    })
+                    });
+                    resolve();
                 } else {
                     response.json().then((error) => {
                         // notificationError(error.message);
-                    })
+                    });
+                    reject();
                 }
             });
         });
     }
 }
 
-// fetch(`http://localhost:3001/api/location/getRecommendedDishes/${id}`, {
-//             headers: {
-//                 'Accept': 'application/json',
-//                 'Content-Type': 'application/json'
-//             },
+export const fetchMostRecommendedDishes = (locationId) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            fetch(`http://localhost:3001/api/location/getRecommendedDishes/${locationId}`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+    
+                method: 'get'
+            }).then(function (response) {
+                if (response.status === 200) {
+                    response.json().then((mostRecommendedDishes) => {
+                        dispatch({
+                            type: 'FETCH_MOST_RECOMMENDED_DISHES',
+                            payload: mostRecommendedDishes
+                        })
+                        // this.setState({
+                        //     mostRecommendedDishes: dishes
+                        // });
+                    });
+                    resolve();
+                } else {
+                    response.json().then((error) => {
+                        // notificationError(error.message);
+                    });
+                    reject();
+                }
+            });
+        });
+    }
+}
 
-//             method: 'get'
-//         }).then(function (response) {
-//             if (response.status === 200) {
-//                 response.json().then((dishes) => {
-//                     this.setState({
-//                         mostRecommendedDishes: dishes
-//                     });
-//                 })
-//             } else {
-//                 response.json().then((error) => {
-//                     notificationError(error.message);
-//                 })
-//             }
-//         }.bind(this));
+
 
 
