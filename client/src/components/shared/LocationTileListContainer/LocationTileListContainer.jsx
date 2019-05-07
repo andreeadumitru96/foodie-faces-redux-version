@@ -11,9 +11,7 @@ const numberOfPassedLocations = 9;
 class LocationTileListContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            // locationsList: [],
-           
+        this.state = { 
             passedLocations: [],
             lastPassedLocationsIndex: 0,
 			isDataLeftToRender: true,
@@ -64,7 +62,6 @@ class LocationTileListContainer extends Component {
 
         if (this.props.locationsList !== newProps.locationsList) {
 			this.setState({
-				// locationsList: newProps.locationsList,
 				passedLocations: [],
 				lastPassedLocationsIndex: 0,
 				isDataLeftToRender: true
@@ -77,7 +74,9 @@ class LocationTileListContainer extends Component {
 }
 const mapStateToProps = (state) => ({
 
-    locationsList: state.locations.locationsList
+    locationsList: state.locations.locationsList,
+    isFilterLocation: state.locations.isFilterLocation
+
 });
 
 export default connect(mapStateToProps, { fetchMostRatedLocations, fetchLocationsByCity })(LocationTileListContainer);

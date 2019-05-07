@@ -29,7 +29,6 @@ const initialState = {
   fetchMostRecommendedDishes: [],
   menuDishes: [],
   filtersList: {},
-//   filteredLocations: []
 
 };
 
@@ -110,8 +109,14 @@ export const locationReducer = (state = initialState, action) => {
         case FETCH_ALL_FILTERS: 
             return {
                 ...state,
-                locationsList: action.payload
+                filtersList: action.payload
             }
+        case FETCH_FILTERED_LOCATIONS: 
+            return {
+                ...state,
+                locationsList: action.payload,
+            }
+
         default:
           return state;
     }
@@ -562,12 +567,15 @@ export const fetchFilteredLocations = (selectedFilters) => {
                 }).then(function(response){
                     if(response.status === 200) {
                         response.json().then((locations) => {
-                            // this.props.onFilterLocationsReceived(data);
-                            console.log(locations);
+                
+                            let filteredLocationsFormatted = [];
+                            filteredLocationsFormatted = setDefaultProperties(locations);
                             dispatch({
                                 type: 'FETCH_FILTERED_LOCATIONS',
                                 payload: locations
                             });
+                            isFilterLocation: true;
+
                         });
                         resolve();
                     } else {

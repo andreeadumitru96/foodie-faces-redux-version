@@ -58,7 +58,6 @@ class LocationFiltersContainer extends Component {
             notificationError("Please choose a filter");
         } else {
             this.props.fetchFilteredLocations(selectedFilters).then((locations) => {
-                // this.props.onFilterLocationsReceived(locations);
             }).catch((errorMessage) => {
                 notificationError('It may be a problem when finding the filtered locations');
             });
@@ -76,7 +75,6 @@ class LocationFiltersContainer extends Component {
 
 const mapStateToProps = (state) => ({
     filtersList: state.locations.filtersList,
-    // filteredLocations: state.locations.filteredLocations,
     selectedCity: state.locations.selectedCity
 });
 
