@@ -10,7 +10,7 @@ class LocationSearchContainer extends Component {
         this.state = {
             // locationsList: this.props.locationsList
         };
-        this._onFilterLocationsReceived = this._onFilterLocationsReceived.bind(this);
+        // this._onFilterLocationsReceived = this._onFilterLocationsReceived.bind(this);
 
     }
 
@@ -37,11 +37,11 @@ class LocationSearchContainer extends Component {
         })
     }
 
-    _onFilterLocationsReceived(filteredLocations) {
-        this.setState({
-            locationsList: filteredLocations
-        })
-    }
+    // _onFilterLocationsReceived(filteredLocations) {
+    //     this.setState({
+    //         locationsList: filteredLocations
+    //     })
+    // }
 
     componentDidMount() {
         this.props.fetchLocationsByCity();

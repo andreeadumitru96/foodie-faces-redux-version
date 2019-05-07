@@ -16,6 +16,7 @@ const RECOMMEND_LOCATION_DISH = 'RECOMMEND_LOCATION_DISH'
 const FETCH_MOST_RECOMMENDED_DISHES = 'FETCH_MOST_RECOMMENDED_DISHES';
 const FETCH_MENU_DISHES = 'FETCH_MENU_DISHES';
 const FETCH_ALL_FILTERS = 'FETCH_ALL_FILTERS';
+const FETCH_FILTERED_LOCATIONS = 'FETCH_FILTERED_LOCATIONS'
 
 const initialState = {
   citiesList: [],
@@ -27,7 +28,8 @@ const initialState = {
   wishListLocations: [],
   fetchMostRecommendedDishes: [],
   menuDishes: [],
-  filtersList: {}
+  filtersList: {},
+//   filteredLocations: []
 
 };
 
@@ -108,7 +110,7 @@ export const locationReducer = (state = initialState, action) => {
         case FETCH_ALL_FILTERS: 
             return {
                 ...state,
-                filtersList: action.payload
+                locationsList: action.payload
             }
         default:
           return state;
@@ -505,11 +507,13 @@ export const fetchMenuDishes = (locationId) => {
                             type: 'FETCH_MENU_DISHES',
                             payload: menuDishes
                         });
-                    })
+                    });
+                    resolve();
                 } else {
                     response.json().then((error) => {
-                        // notificationError(error.message);
-                    })
+                        
+                    });
+                    reject();
                 }
             });
         });
@@ -535,7 +539,7 @@ export const fetchAllFilters = () => {
                             });
                         })
                     } else {
-                        response.json().then((data) => {
+                        response.json().then((errorMessage) => {
                             // notificationError(data.message);
                         });
                     }
@@ -544,6 +548,37 @@ export const fetchAllFilters = () => {
     }
 }
 
-
+export const fetchFilteredLocations = (selectedFilters) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost:3001/api/location/getFilteredLocations', {
+                headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                },
+                method: 'post',
+                body: JSON.stringify(selectedFilters)
+    
+                }).then(function(response){
+                    if(response.status === 200) {
+                        response.json().then((locations) => {
+                            // this.props.onFilterLocationsReceived(data);
+                            console.log(locations);
+                            dispatch({
+                                type: 'FETCH_FILTERED_LOCATIONS',
+                                payload: locations
+                            });
+                        });
+                        resolve();
+                    } else {
+                        response.json().then((errorMessage) => {
+                            // notificationError(data.message);
+                        });
+                        reject();
+                    }
+                });
+        })
+    }
+}
 
 
