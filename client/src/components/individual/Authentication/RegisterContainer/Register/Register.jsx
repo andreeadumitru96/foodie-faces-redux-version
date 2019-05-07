@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 
 import './Register.css';
+
+const styles = {
+    block: {
+      maxWidth: 250,
+    },
+    radioButton: {
+      marginBottom: 16,
+    },
+};
+
 
 class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
+       
         };
     }
+
+   
     render() {
         return (
             <div className="register">
@@ -69,6 +85,26 @@ class Register extends Component {
                             ref={(inputValue) => {this.repeatPassword = inputValue}}
                         />
                     </div>
+                    <div className="register__form-repeat-password">
+                        <RadioButtonGroup 
+                            name="roleRadio" 
+                            defaultSelected="not_light"
+                            onChange={(event, value) => {this.props.handleChange(value)}}
+                        >
+                                <RadioButton
+                                    value="locationAdmin"
+                                    label="Location Administrator"
+                                    style={styles.radioButton}
+                                />
+                                <RadioButton
+                                    value="foodLover"
+                                    label="Food Lover"
+                                    checkedIcon={<ActionFavorite style={{ color: 'white' }} />}
+                                    uncheckedIcon={<ActionFavoriteBorder />}
+                                    style={styles.radioButton}
+                                />
+                        </RadioButtonGroup>
+                    </div>
 
                     <div className="register__form-sign-up-button">
                         <RaisedButton label="SIGN UP" onClick={this.props.onRegisterForm}/>
@@ -82,5 +118,7 @@ class Register extends Component {
         );
     }
 }
+
+
 
 export default Register;

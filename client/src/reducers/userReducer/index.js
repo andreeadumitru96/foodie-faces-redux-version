@@ -45,7 +45,7 @@ export const loginUser = function (userCredentials) {
                             payload: userDetails
                         });
                         resolve();
-                    })
+                    });
                 } else {
                     response.json().then((data) => {
                         reject(data.message);
@@ -73,7 +73,7 @@ export const registerUser = function (userCredentials) {
                 if(response.status === 200) {
                     response.json().then((data) => {
                         resolve();
-                    })
+                    });
                 } else {
                     response.json().then((data) => {
                         reject(data.message);

@@ -236,6 +236,7 @@ export const fetchLocationById = (id) => {
                             type: FETCH_LOCATION_BY_ID,
                             payload: location
                         });
+                        resolve();
                     });
                 }
             });
@@ -302,15 +303,16 @@ export const removeLocationFromWishList = (locationToRemove) => {
                             type: REMOVE_LOCATION_WISH_LIST,
                             payload: userDetails
                         });
-                        
+                        resolve();
                                       
                     });
-                    resolve();
+                    
                 } else {
                     response.json().then((err) => {
                         // notificationError(err);
+                        reject();
                     });
-                    reject();
+                    
                 }
             });
         });
@@ -341,6 +343,7 @@ export const fetchSimilarLocations = (locationInfo, locationId) => {
                         type: FETCH_SIMILAR_LOCATIONS,
                         payload: similarLocations
                     });
+                    
                 });
             }
         });
@@ -358,15 +361,15 @@ export const fetchWishListLocations = (userId) => {
         }).then(function (response) {
             if(response.status === 200) {
                 response.json().then((wishListLocations) => {
-                   dispatch({
-                    type: 'FETCH_WISHLIST_LOCATIONS',
-                    payload: wishListLocations
-                   });
+                    dispatch({
+                        type: 'FETCH_WISHLIST_LOCATIONS',
+                        payload: wishListLocations
+                    });
                     
                 });
             } else {
                 response.json().then((data) => {
-
+                   
                 });
                 
             }
@@ -389,14 +392,14 @@ export const addDishInMenu = (newDish) => {
                 if (response.status === 200) {
                     response.json().then((data) => {
                         console.log(data);
-                       
+                        resolve();
                     });
-                    resolve();
+                    
                 } else {
                     response.json().then(() => {
-
+                        reject();
                     });
-                    reject();
+                    
                 }
             });
         });
@@ -422,14 +425,15 @@ export const addLocationReview = (reviewDetails) => {
                             type: 'ADD_LOCATION_REVIEW',
                             payload: location
                         });
+                        resolve();
                     
                     });
-                    resolve();
+                    
                 } else {
                     response.json().then((error) => {
-
+                        reject();
                     });
-                    reject();
+                    
                 }
             });
         });
@@ -452,14 +456,16 @@ export const recommendLocationDish = (menuDish) => {
                         dispatch({
                             type: 'RECOMMEND_LOCATION_DISH',
                             payload: updatedLocation
-                        })
+                        });
+                        resolve();
                     });
-                    resolve();
+                    
                 } else {
                     response.json().then((error) => {
                         // notificationError(error.message);
+                        reject();
                     });
-                    reject();
+                    
                 }
             });
         });
@@ -482,13 +488,15 @@ export const fetchMostRecommendedDishes = (locationId) => {
                         dispatch({
                             type: 'FETCH_MOST_RECOMMENDED_DISHES',
                             payload: mostRecommendedDishes
-                        })
+                        });
+                        resolve();
                     });
-                    resolve();
+                    
                 } else {
                     response.json().then((error) => {
+                        reject();
                     });
-                    reject();
+                    
                 }
             });
         });
@@ -512,13 +520,14 @@ export const fetchMenuDishes = (locationId) => {
                             type: 'FETCH_MENU_DISHES',
                             payload: menuDishes
                         });
+                        resolve();
                     });
-                    resolve();
+                    
                 } else {
                     response.json().then((error) => {
-                        
+                        reject();
                     });
-                    reject();
+                    
                 }
             });
         });
@@ -542,10 +551,12 @@ export const fetchAllFilters = () => {
                                 type: 'FETCH_ALL_FILTERS',
                                 payload: filtersList
                             });
-                        })
+                            resolve();
+                        });
                     } else {
                         response.json().then((errorMessage) => {
                             // notificationError(data.message);
+                            reject();
                         });
                     }
             });
@@ -572,17 +583,19 @@ export const fetchFilteredLocations = (selectedFilters) => {
                             filteredLocationsFormatted = setDefaultProperties(locations);
                             dispatch({
                                 type: 'FETCH_FILTERED_LOCATIONS',
-                                payload: locations
+                                payload: filteredLocationsFormatted
                             });
-                            isFilterLocation: true;
+                            resolve();
+                            
 
                         });
                         resolve();
                     } else {
                         response.json().then((errorMessage) => {
                             // notificationError(data.message);
+                            reject();
                         });
-                        reject();
+                        
                     }
                 });
         })

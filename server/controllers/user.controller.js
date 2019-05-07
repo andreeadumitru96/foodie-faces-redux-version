@@ -8,8 +8,9 @@ exports.register = function(req, res) {
         return res.status(400).send({message: req.body});
     }
     let processedUser = req.body;
+    console.log(req.body);
     processedUser.password = passwordHash.generate(processedUser.password);
-
+    
     let user = new User(processedUser);
 
     User.findOne({email: req.body.email}, function(err, data){

@@ -16,32 +16,37 @@ class GoogleMap extends Component {
     render() {
         return (
             <div className="google-maps">
-                <GoogleMapReact
-                    center={this.props.getCenterCoordinates()}
-                    defaultZoom={this.props.getCenterZoom()}
-                    hoverDistance={30 / 2}
-                    distanceToMouse={this._distanceToMouse}
+                {this.props.locationsList.length ?
+                    <GoogleMapReact
+                        center={this.props.getCenterCoordinates()}
+                        defaultZoom={this.props.getCenterZoom()}
+                        hoverDistance={30 / 2}
+                        distanceToMouse={this._distanceToMouse}
 
-                >
-                    {this.props.locationsList.map((location) => {
-                        return (
-                            location.coordinates.latitude ?
+                    >
+                        {this.props.locationsList.map((location) => {
+                            return (
+                                location.coordinates.latitude ?
 
-                                <PinPoint
-                                    isHovered={this.state.hoveredPinPoint === location._id ? true : false}
-                                    lat={parseFloat(location.coordinates.latitude)}
-                                    lng={parseFloat(location.coordinates.longitude)}
-                                    key={location._id}
+                                    <PinPoint
+                                        isHovered={this.state.hoveredPinPoint === location._id ? true : false}
+                                        lat={parseFloat(location.coordinates.latitude)}
+                                        lng={parseFloat(location.coordinates.longitude)}
+                                        key={location._id}
 
 
-                                />
-                                :
-                                null
+                                    />
+                                    :
+                                    null
 
-                        )
-                    })}
+                            )
+                        })}
 
-                </GoogleMapReact>
+                    </GoogleMapReact> 
+                :
+                    null
+                }
+                
             </div>
         );
     }

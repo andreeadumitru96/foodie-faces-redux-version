@@ -26,6 +26,9 @@ let UserSchema = new Schema({
     profileImage: {
         type: String,
     },
+    role: {
+        type: String
+    },
     registrationDate: {
         type: Date,
         default: Date.now

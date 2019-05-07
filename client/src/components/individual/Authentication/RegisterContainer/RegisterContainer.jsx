@@ -10,14 +10,13 @@ class RegisterContainer extends Component {
       
         super(props);
         this.state = {
+            userRole: null
         };
         this._toLogin = this._toLogin.bind(this);
         this._onRegisterForm = this._onRegisterForm.bind(this);
         this._sendUserInformation = this._sendUserInformation.bind(this);
         this._validatePasswordForm = this._validatePasswordForm.bind(this);
-    }
-
-    componentWillMount() {
+        this._onHandleRadioGroupChange = this._onHandleRadioGroupChange.bind(this);
     }
 
     _toLogin() {
@@ -31,6 +30,12 @@ class RegisterContainer extends Component {
         }
         return true;
     }
+
+    _onHandleRadioGroupChange(value) {
+        this.setState({
+            userRole: value
+        })
+    }
   
     _onRegisterForm() {
         if(this._validatePasswordForm()) {
@@ -39,8 +44,10 @@ class RegisterContainer extends Component {
                 lastName: this.child.lastName.getValue(),
                 email: this.child.email.getValue(),
                 password: this.child.password.getValue(),
-                fullName: `${this.child.firstName.getValue()} ${this.child.lastName.getValue()}`
+                fullName: `${this.child.firstName.getValue()} ${this.child.lastName.getValue()}`,
+                role: this.state.userRole
             };
+            console.log(userInformation);
             this._sendUserInformation(userInformation);
         }  
     }
@@ -62,6 +69,7 @@ class RegisterContainer extends Component {
                     sendUserInformation={this._sendUserInformation}
                     onRegisterForm={this._onRegisterForm}
                     ref={(childInstance) => { this.child = childInstance; }}
+                    handleChange = {this._onHandleRadioGroupChange}
                 />
             </div>
         );
