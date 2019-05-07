@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import LocationFilters from './LocationFilters/LocationFilters';
 import {notificationError} from '../constants';
+import { fetchAllFilters } from '../../../reducers/locationReducer/index';
 
 class LocationFiltersContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filtersList: {
-                cuisine: [],
-                goodFor: [],
-                meals: [],
-                city: []
-            }
+        
         };
-        this._getFiltersByLocations = this._getFiltersByLocations.bind(this);
         this._getAllSelectedFilters = this._getAllSelectedFilters.bind(this);
         this._onClickFilteredLocations = this._onClickFilteredLocations.bind(this);
 
@@ -23,11 +19,16 @@ class LocationFiltersContainer extends Component {
     render() {
         return (
             <div>
-                <LocationFilters 
-                    filtersList={this.state.filtersList}
-                    ref={(filterDropdown) => this.filterDropdown = filterDropdown}
-                    onClickFilteredLocations={this._onClickFilteredLocations} 
-                />    
+                {Object.entries(this.props.filtersList).length === 0 && this.props.filtersList.constructor === Object ? 
+                   null
+                :
+                    <LocationFilters 
+                        filtersList = {this.props.filtersList}
+                        ref={(filterDropdown) => this.filterDropdown = filterDropdown}
+                        onClickFilteredLocations={this._onClickFilteredLocations} 
+                    /> 
+                }
+                  
             </div>
         );
     }
@@ -46,26 +47,6 @@ class LocationFiltersContainer extends Component {
 
         return selectedFilters;
 
-    }
-
-    _getFiltersByLocations() {
-        fetch('http://localhost:3001/api/location/getFiltersByLocations', {
-           headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-           },
-           method: 'get',
-        }).then(function(response){
-            if(response.status === 200) {
-                response.json().then((data) => {
-                    this.setState({filtersList: data});
-                })
-            } else {
-                response.json().then((data) => {
-                    notificationError(data.message);
-                });
-            }
-        }.bind(this));
     }
 
     _onClickFilteredLocations() {
@@ -97,10 +78,18 @@ class LocationFiltersContainer extends Component {
 
     }
 
-    componentWillMount() {
-        this._getFiltersByLocations();
+    componentDidMount() {
+        this.props.fetchAllFilters().then(() => {
+
+        }).catch(() => {
+
+        });
     }
 
 }
 
-export default LocationFiltersContainer;
+const mapStateToProps = (state) => ({
+    filtersList: state.locations.filtersList
+});
+
+export default connect(mapStateToProps, {fetchAllFilters})(LocationFiltersContainer);

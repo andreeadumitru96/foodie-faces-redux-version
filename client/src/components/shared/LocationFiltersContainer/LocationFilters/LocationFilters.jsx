@@ -50,4 +50,5 @@ class LocationFilters extends Component {
 
 }
 
+
 export default LocationFilters;

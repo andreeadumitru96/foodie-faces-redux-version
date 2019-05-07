@@ -14,7 +14,8 @@ const ADD_MENU_DISH = 'ADD_MENU_DISH';
 const ADD_LOCATION_REVIEW = 'ADD_LOCATION_REVIEW';
 const RECOMMEND_LOCATION_DISH = 'RECOMMEND_LOCATION_DISH'
 const FETCH_MOST_RECOMMENDED_DISHES = 'FETCH_MOST_RECOMMENDED_DISHES';
-const FETCH_MENU_DISHES = 'FETCH_MENU_DISHES'
+const FETCH_MENU_DISHES = 'FETCH_MENU_DISHES';
+const FETCH_ALL_FILTERS = 'FETCH_ALL_FILTERS';
 
 const initialState = {
   citiesList: [],
@@ -25,7 +26,8 @@ const initialState = {
   similarLocations: [],
   wishListLocations: [],
   fetchMostRecommendedDishes: [],
-  menuDishes: []
+  menuDishes: [],
+  filtersList: {}
 
 };
 
@@ -102,6 +104,11 @@ export const locationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 menuDishes: action.payload
+            }
+        case FETCH_ALL_FILTERS: 
+            return {
+                ...state,
+                filtersList: action.payload
             }
         default:
           return state;
@@ -504,6 +511,34 @@ export const fetchMenuDishes = (locationId) => {
                         // notificationError(error.message);
                     })
                 }
+            });
+        });
+    }
+}
+
+
+export const fetchAllFilters = () => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost:3001/api/location/getFiltersByLocations', {
+                headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                },
+                method: 'get',
+                }).then(function(response){
+                    if(response.status === 200) {
+                        response.json().then((filtersList) => {
+                            dispatch({
+                                type: 'FETCH_ALL_FILTERS',
+                                payload: filtersList
+                            });
+                        })
+                    } else {
+                        response.json().then((data) => {
+                            // notificationError(data.message);
+                        });
+                    }
             });
         });
     }
