@@ -402,3 +402,4 @@ exports.getSimilarLocations = function (req, res) {
 		}
 	});
 };
+

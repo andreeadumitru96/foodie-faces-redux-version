@@ -104,6 +104,20 @@ exports.getLocationsWishList = function(req, res) {
     });
 }
 
+
+exports.getOwnerLocations = (req, res) => {
+    if(!req.body) {
+        res.status(400).send({ message: error});
+    }
+    Location.find({ 'ownerId': req.body.ownerId }, function (err, locations) {
+        if (err) {
+            res.status(500).send({ message: err });
+        } else {
+            res.status(200).send(locations);
+        }
+    });
+}
+
 // exports.getLocationWishListByName = function(req, res) {
 //     if(!req.body) {
 //         res.status(400).send({ message: error})0000000000

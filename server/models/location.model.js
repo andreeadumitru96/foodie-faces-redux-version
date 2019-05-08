@@ -10,7 +10,10 @@ let LocationSchema = new Schema({
     address: {
         type: String
     },
-    ownerId: String,
+    ownerId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     city: {
         type: String,
         required: true

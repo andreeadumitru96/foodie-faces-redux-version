@@ -39,7 +39,7 @@ class LocationSearch extends Component {
                         ref={(googleMapChild) => {
                             console.log(googleMapChild);
                             if(googleMapChild) 
-                                this.googleMapRef = googleMapChild; 
+                                this.googleMapRef = googleMapChild.getWrappedInstance(); 
                         }}
                     />
                 </div>
