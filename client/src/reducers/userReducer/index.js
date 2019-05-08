@@ -2,11 +2,13 @@
 
 //Actions
 const LOGIN = 'LOGIN';
-const REGISTER = 'REGISTER'
+const REGISTER = 'REGISTER';
+const FETCH_OWNER_LOCATIONS = 'FETCH_OWNER_LOCATIONS'
 
 
 const initialState = {
     userDetails: {},
+    ownerLocations: []
 };
 
 
@@ -18,6 +20,11 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 userDetails: action.payload
             };
+        case FETCH_OWNER_LOCATIONS: 
+            return {
+                ...state,
+                ownerLocations: action.payload
+            }
         
         default:
             return state;
@@ -82,6 +89,36 @@ export const registerUser = function (userCredentials) {
             });
 
            
+        });
+    }
+}
+
+export const fetchOwnerLocations = (ownerId) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost:3001/api/getOwnerLocations', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'post',
+                body: JSON.stringify(ownerId)
+            }).then(function (response) {
+                if(response.status === 200) {
+                    response.json().then((locations) => {
+                        console.log(locations);
+                        dispatch({
+                            type: 'FETCH_OWNER_LOCATIONS',
+                            payload: locations
+                        })
+                        resolve();
+                    });
+                } else {
+                    response.json().then((err) => {
+                        reject(err.message);
+                    });
+                }
+            });
         });
     }
 }
