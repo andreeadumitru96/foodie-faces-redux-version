@@ -17,6 +17,7 @@ import RegisterContainer from '../Authentication/RegisterContainer/RegisterConta
 import PrivateRoute from '../../shared/PrivateRoute/PrivateRoute';
 import HomeContainer from '../HomeContainer/HomeContainer';
 import MyAccountContainer from '../MyAccountContainer/MyAccountContainer';
+import LocationAdministrator from '../LocationAdministrator/LocationAdministrator';
 // import NotFoundRoute from '../../shared/NotFoundRoute/NotFoundRoute';
 
 import { Provider } from 'react-redux';
@@ -27,16 +28,27 @@ class AppContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            authenticated: cookies.get('user') ? true : false
+            authenticated: cookies.get('user') ? true : false,
+            componentToRender: null
+            
         }
         this._createUserCookie = this._createUserCookie.bind(this);
         this._changeAuthenticationState = this._changeAuthenticationState.bind(this);
         this._onLogin = this._onLogin.bind(this);
+        
     }
 
     _createUserCookie(userData) {
         cookies.set('user', userData);
+        
     }
+
+    _updateComponentToRender = (componentToRender) => {
+        this.setState({
+            componentToRender: componentToRender
+        });
+    }
+
 
     _changeAuthenticationState() {
         this.setState({
@@ -49,6 +61,16 @@ class AppContainer extends Component {
         this._createUserCookie(userData);
     }
 
+    componentWillMount() {
+        let componentToRender;
+        if(this.state.authenticated && cookies.get('user').role === 'locationAdmin') {
+            componentToRender = LocationAdministrator;
+        } else {
+            componentToRender = HomeContainer;
+        }
+        this._updateComponentToRender(componentToRender);
+    }
+
 
     render() {
         return (
@@ -56,11 +78,23 @@ class AppContainer extends Component {
                     <Provider store={store}>
                         <Router>
                             <Switch>
-                                <Route exact path='/login' render={(params) => <LoginContainer onLogin={this._onLogin} history={params.history}/>}/>
+                                <Route exact path='/login' render={(params) => 
+                                    <LoginContainer 
+                                        onLogin={this._onLogin} 
+                                        history={params.history}  
+                                        updateComponentToRender={this._updateComponentToRender}
+                                      
+                                        />}
+                                    />
                                 <Route exact path='/register' render={(params) => <RegisterContainer history={params.history}/>}/>
-                                <PrivateRoute exact path='/' component={HomeContainer} authenticated={this.state.authenticated} />
+                                    
+                                <PrivateRoute exact path='/' component={this.state.componentToRender} authenticated={this.state.authenticated} />
                                 <PrivateRoute exact path='/myaccount' component={MyAccountContainer} authenticated={this.state.authenticated}/>
-                                <Route exact path='/locations/:locationId' render={(params) => <MemoraeLocationById authenticated={this.state.authenticated} {...params}/>}/>
+                                       
+                                    
+                                
+                                
+                                {/* <Route exact path='/locations/:locationId' render={(params) => <MemoraeLocationById authenticated={this.state.authenticated} {...params}/>}/> */}
                                 
                                 {/* { <Route component={NotFoundRoute} /> } */}
                             </Switch>
