@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import ChooseLocationDropdown from './ChooseLocationDropdown';
 
 
-class OwnerDashboard extends Component {
+class OwnerLocationInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +12,7 @@ class OwnerDashboard extends Component {
     render() {
         return (
             <div>
-                <ChooseLocationDropdown/>
+                Location Information
             </div>
         );
     }
@@ -22,4 +21,4 @@ class OwnerDashboard extends Component {
 }
 
   
-export default OwnerDashboard;
+export default OwnerLocationInfo;

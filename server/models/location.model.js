@@ -14,6 +14,7 @@ let LocationSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    availableSeats: Number,
     city: {
         type: String,
         required: true

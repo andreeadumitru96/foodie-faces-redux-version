@@ -88,7 +88,7 @@ class AppContainer extends Component {
                                     />
                                 <Route exact path='/register' render={(params) => <RegisterContainer history={params.history}/>}/>
                                     
-                                <PrivateRoute exact path='/' component={this.state.componentToRender} authenticated={this.state.authenticated} />
+                                <PrivateRoute exact path='/' component={this.state.componentToRender} isOwnerDashboardMount={true} authenticated={this.state.authenticated} />
                                 <PrivateRoute exact path='/myaccount' component={MyAccountContainer} authenticated={this.state.authenticated}/>
                                        
                                     

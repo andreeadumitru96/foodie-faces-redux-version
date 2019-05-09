@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DropDownMenu from 'material-ui/DropDownMenu';
+import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 
-import { cookies } from '../../shared/constants';
-import { fetchOwnerLocations } from '../../../reducers/userReducer/index';
+import { cookies } from '../../../shared/constants';
+import { fetchOwnerLocations } from '../../../../reducers/userReducer/index';
 
 const styles = {
     customWidth: {
@@ -18,6 +19,7 @@ class ChooseLocationDropdown extends Component {
         this.state = {
             value: 1
         };
+        this._goToLocationInfoComponent = this._goToLocationInfoComponent.bind();
     }  
     handleChange = (event, index, value) => this.setState({value});
     
@@ -32,13 +34,17 @@ class ChooseLocationDropdown extends Component {
                 >
                 {
                     this.props.ownerLocations.map((location) => {
-                        <MenuItem value={location._id} primaryText={location.name} />
+                        <MenuItem 
+                            value={location._id} 
+                            primaryText={location.name}
+                        />
                     })
                     
                 }
                 
-                    
                 </DropDownMenu>
+                
+                <RaisedButton label="CHOOSE" onClick={this.props.goToLocationInfoComponent}/>
           </div>
         );
 
