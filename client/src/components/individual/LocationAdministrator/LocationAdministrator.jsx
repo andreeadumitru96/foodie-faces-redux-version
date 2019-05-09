@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { cookies } from '../../../components/shared/constants';
+import OwnerDashboard from './OwnerDashboard';
 import { fetchOwnerLocations } from '../../../reducers/userReducer/index';
 
 
@@ -16,18 +17,11 @@ class LocationAdministrator extends Component {
     render() {
         return (
             <div>
-               yggg
+               <OwnerDashboard/>
             </div>
         );
     }
 
-    componentDidMount() {
-        let ownerInformation = {
-            ownerId: cookies.get('user')._id
-        }
-        
-        this.props.fetchOwnerLocations(ownerInformation);
-    }
 
 }
 
