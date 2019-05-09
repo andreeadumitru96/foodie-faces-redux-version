@@ -47,7 +47,6 @@ class RegisterContainer extends Component {
                 fullName: `${this.child.firstName.getValue()} ${this.child.lastName.getValue()}`,
                 role: this.state.userRole
             };
-            console.log(userInformation);
             this._sendUserInformation(userInformation);
         }  
     }

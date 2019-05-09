@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 
 import { cookies } from '../../../shared/constants';
+import { notificationError } from '../../../shared/constants';
 import { fetchOwnerLocations } from '../../../../reducers/userReducer/index';
 
 const styles = {
@@ -17,37 +18,57 @@ class ChooseLocationDropdown extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 1
+            selectedLocationId: null
         };
-        this._goToLocationInfoComponent = this._goToLocationInfoComponent.bind();
+        this._renderDropDownLocations = this._renderDropDownLocations.bind(this);
+        this._triggerLocationAdministratorComponent = this._triggerLocationAdministratorComponent.bind(this);
+        this._onhandleChangeLocation = this._onhandleChangeLocation.bind(this);
     }  
-    handleChange = (event, index, value) => this.setState({value});
+   
     
     render() {
         return(
             <div>
                 <DropDownMenu
-                    value={this.state.value}
-                    onChange={this.handleChange}
+                    value={this.state.selectedLocationId}
+                    onChange={this._onhandleChangeLocation}
                     style={styles.customWidth}
                     autoWidth={false}
                 >
-                {
-                    this.props.ownerLocations.map((location) => {
-                        <MenuItem 
-                            value={location._id} 
-                            primaryText={location.name}
-                        />
-                    })
-                    
-                }
-                
+                    {this._renderDropDownLocations()}      
                 </DropDownMenu>
-                
-                <RaisedButton label="CHOOSE" onClick={this.props.goToLocationInfoComponent}/>
+                <RaisedButton label="CHOOSE" onClick={this._triggerLocationAdministratorComponent}/>
           </div>
         );
 
+    }
+    _onhandleChangeLocation = (event, index, value) => {
+        this.setState({
+            selectedLocationId: value
+        });
+    }
+
+    _triggerLocationAdministratorComponent() {
+        if(this.state.selectedLocationId) {
+            this.props.goToOwnerLocationInfoComponent(this.state.selectedLocationId)
+        } else {
+            notificationError('You need to choose a location');
+        }
+        
+
+    }
+
+    _renderDropDownLocations() {
+        return this.props.ownerLocations.map((location) => {
+            return (
+                <MenuItem
+                    key={location._id}
+                    value={location._id} 
+                    primaryText={location.name}
+                    
+                />
+            );
+        });
     }
 
     componentDidMount() {

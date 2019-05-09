@@ -11,8 +11,9 @@ class LocationAdministrator extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOwnerDashboardMount: this.props.isOwnerDashboardMount,
-            isOwnerLocationInfoMount: null
+            isOwnerDashboardMount: true,
+            isOwnerLocationInfoMount: null,
+            selectedLocationId: null
         };
         this._goToOwnerLocationInfoComponent = this._goToOwnerLocationInfoComponent.bind(this);
 
@@ -28,8 +29,10 @@ class LocationAdministrator extends Component {
                 :
                     null
                 }
-                {this.state.isLocationInfoMount ? 
-                    <OwnerLocationInfo/>
+                {this.state.isOwnerLocationInfoMount ? 
+                    <OwnerLocationInfo
+                        selectedLocationId={this.state.selectedLocationId}
+                    />
                 :
                     null
                 }
@@ -38,10 +41,11 @@ class LocationAdministrator extends Component {
         );
     }
 
-    _goToOwnerLocationInfoComponent() {
+    _goToOwnerLocationInfoComponent(selectedLocationId) {
         this.setState({
             isOwnerDashboardMount: false,
-            isOwnerLocationInfoMount: true
+            isOwnerLocationInfoMount: true,
+            selectedLocationId: selectedLocationId
         });
     }
 
