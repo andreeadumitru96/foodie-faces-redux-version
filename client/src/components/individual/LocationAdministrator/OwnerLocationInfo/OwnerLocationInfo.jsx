@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
 
+import socketIOClient from "socket.io-client";
+
 import { fetchLocationById } from '../../../../reducers/locationReducer/index';
 
 
@@ -10,10 +12,15 @@ class OwnerLocationInfo extends Component {
         super(props);
         this.state = {
         };
-
+        this.onMockMessageSocketSend = this.onMockMessageSocketSend.bind(this);
     }
 
     render() {
+        const socket = socketIOClient('localhost:3001');
+        socket.on('mock data event from server', (data) => {
+          console.log(data)
+        })
+    
         return (
             <div>
                 {this.props.locationDetails ? 
@@ -31,6 +38,7 @@ class OwnerLocationInfo extends Component {
                             margin="normal"
                             variant="outlined"
                         />
+                        <button type="text" onClick={this.onMockMessageSocketSend}> Socket Test </button>
                     </div>
                 :
                     null
@@ -46,6 +54,11 @@ class OwnerLocationInfo extends Component {
     componentDidMount() {
         this.props.fetchLocationById(this.props.selectedLocationId);
     }
+
+    onMockMessageSocketSend = () => {
+        const socket = socketIOClient('localhost:3001');
+        socket.emit('mock data event from client', 'socket test');
+    }    
 
 
 }
