@@ -403,3 +403,29 @@ exports.getSimilarLocations = function (req, res) {
 	});
 };
 
+
+exports.updateLocationAvailableSeats = (req, res) => {
+
+    if (!req.body) {
+		res.status(500).send({ message: req.body });
+    };
+    
+    let locationId = req.body.locationId;
+    let seatsNumber = req.body.seatsNumber;
+
+    let searchedLocationId = {
+        _id: locationId
+    };
+    
+    Location.findOneAndUpdate(searchedLocationId, { $set: { availableSeats: seatsNumber } }, function (err, location) {
+        if (err) {
+            console.log(err);
+
+            res.status(500).send({ message: err });
+        } else {
+            res.status(200).send(location);
+        }
+    });
+}
+
+

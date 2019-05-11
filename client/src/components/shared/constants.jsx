@@ -6,6 +6,7 @@ import * as Colors from 'material-ui/styles/colors';
 import { fade } from 'material-ui/utils/colorManipulator'
 
 export const cookies = new Cookies();
+export const API_URL = 'localhost:3001';
 
 export const notificationError = (message) => {
 	Alert.error(message, {

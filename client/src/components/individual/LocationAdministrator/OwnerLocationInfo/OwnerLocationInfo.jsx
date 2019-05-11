@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
-
 import socketIOClient from "socket.io-client";
+
+import { API_URL } from '../../../shared/constants';
 
 import { fetchLocationById } from '../../../../reducers/locationReducer/index';
 
@@ -16,7 +17,7 @@ class OwnerLocationInfo extends Component {
     }
 
     render() {
-        const socket = socketIOClient('localhost:3001');
+        const socket = socketIOClient(API_URL);
         socket.on('mock data event from server', (data) => {
           console.log(data)
         })
@@ -56,7 +57,7 @@ class OwnerLocationInfo extends Component {
     }
 
     onMockMessageSocketSend = () => {
-        const socket = socketIOClient('localhost:3001');
+        const socket = socketIOClient(API_URL);
         socket.emit('mock data event from client', 'socket test');
     }    
 
