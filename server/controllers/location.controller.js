@@ -404,28 +404,32 @@ exports.getSimilarLocations = function (req, res) {
 };
 
 
-exports.updateLocationAvailableSeats = (req, res) => {
+// exports.updateLocationAvailableSeats = (locationToUpdate) => {
 
-    if (!req.body) {
-		res.status(500).send({ message: req.body });
-    };
+//     // if (!req.body) {
+// 	// 	res.status(500).send({ message: req.body });
+//     // };
+
+//     // console.log(req.body);
+//     console.log(locationToUpdate);
     
-    let locationId = req.body.locationId;
-    let seatsNumber = req.body.seatsNumber;
+//     let locationId = locationToUpdate.locationId;
+//     let seatsNumber = locationToUpdate.seatsNumber;
 
-    let searchedLocationId = {
-        _id: locationId
-    };
+//     let searchedLocationId = {
+//         _id: locationId
+//     };
     
-    Location.findOneAndUpdate(searchedLocationId, { $set: { availableSeats: seatsNumber } }, function (err, location) {
-        if (err) {
-            console.log(err);
+//     Location.findOneAndUpdate(searchedLocationId, { $set: { availableSeats: seatsNumber } }, function (err, location) {
+//         if (err) {
+//             console.log(err);
 
-            res.status(500).send({ message: err });
-        } else {
-            res.status(200).send(location);
-        }
-    });
-}
+//             // res.status(500).send({ message: err });
+//         } else {
+//             return location
+//             // res.status(200).send(location);
+//         }
+//     });
+// }
 
 

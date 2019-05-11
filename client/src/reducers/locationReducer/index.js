@@ -16,7 +16,7 @@ const RECOMMEND_LOCATION_DISH = 'RECOMMEND_LOCATION_DISH'
 const FETCH_MOST_RECOMMENDED_DISHES = 'FETCH_MOST_RECOMMENDED_DISHES';
 const FETCH_MENU_DISHES = 'FETCH_MENU_DISHES';
 const FETCH_ALL_FILTERS = 'FETCH_ALL_FILTERS';
-const FETCH_FILTERED_LOCATIONS = 'FETCH_FILTERED_LOCATIONS'
+const FETCH_FILTERED_LOCATIONS = 'FETCH_FILTERED_LOCATIONS';
 
 const initialState = {
   citiesList: [],
@@ -28,7 +28,7 @@ const initialState = {
   wishListLocations: [],
   fetchMostRecommendedDishes: [],
   menuDishes: [],
-  filtersList: {},
+  filtersList: {}
 
 };
 
@@ -601,5 +601,4 @@ export const fetchFilteredLocations = (selectedFilters) => {
         })
     }
 }
-
 

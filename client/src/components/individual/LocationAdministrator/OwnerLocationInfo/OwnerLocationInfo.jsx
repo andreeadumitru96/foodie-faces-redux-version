@@ -12,15 +12,25 @@ class OwnerLocationInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            availableSeats: null
         };
-        this.onMockMessageSocketSend = this.onMockMessageSocketSend.bind(this);
+        this.onUpdateSeatsSocketSend = this.onUpdateSeatsSocketSend.bind(this);
+        this.handleOnChange = this.handleOnChange.bind(this);
     }
 
+    handleOnChange = event => {
+        console.log(event.target.value);
+        this.setState({
+            availableSeats: event.target.value
+        });
+    };
+
     render() {
-        const socket = socketIOClient(API_URL);
-        socket.on('mock data event from server', (data) => {
-          console.log(data)
-        })
+        // const socket = socketIOClient(API_URL);
+
+        // socket.on('mock data event from server', (data) => {
+        //   console.log(data)
+        // })
     
         return (
             <div>
@@ -34,12 +44,12 @@ class OwnerLocationInfo extends Component {
                         <TextField
                             id="outlined-number"
                             label="Number"
-                            // value={}
+                            onChange={this.handleOnChange}
                             type="number"
                             margin="normal"
                             variant="outlined"
                         />
-                        <button type="text" onClick={this.onMockMessageSocketSend}> Socket Test </button>
+                        <button type="text" onClick={this.onUpdateSeatsSocketSend}> Update seats </button>
                     </div>
                 :
                     null
@@ -56,16 +66,25 @@ class OwnerLocationInfo extends Component {
         this.props.fetchLocationById(this.props.selectedLocationId);
     }
 
-    onMockMessageSocketSend = () => {
+    onUpdateSeatsSocketSend = () => {
         const socket = socketIOClient(API_URL);
-        socket.emit('mock data event from client', 'socket test');
-    }    
 
+        let locationToUpdate = {
+            locationId: this.props.locationDetails._id,
+            availableSeats: this.state.availableSeats
+        }
+        console.log(this.state.availableSeats);
+
+        socket.emit('onUpdateSeatsEvent', locationToUpdate);
+        socket.once('onSendUpdatedLocation', (updatedLocation) => {
+            console.log(updatedLocation);
+        });    
+    }    
 
 }
 
 const mapStateToProps = (state) => ({
-    locationDetails: state.locations.locationDetails
+    locationDetails: state.locations.locationDetails,
 });
 
   

@@ -15,5 +15,4 @@ module.exports = function(app) {
     app.get('/api/location/getMenuDishes/:id', locationController.getMenuDishes);
     app.get('/api/location/getRecommendedDishes/:id', locationController.getRecommendedDishes);
     app.post('/api/location/getSimilarLocations', locationController.getSimilarLocations);
-    app.post('/api/location/updateLocationAvailableSeats', locationController.updateLocationAvailableSeats);
 };

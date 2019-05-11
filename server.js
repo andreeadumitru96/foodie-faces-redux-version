@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var dbConfig = require('./config/database.config.js');
 var cors = require('cors');
-const socketIO = require('socket.io')
 
 
 const app = express();
@@ -48,23 +47,11 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-let serverInstance = app.listen(app.get("port"), () => {
+const serverInstance = app.listen(app.get("port"), () => {
   console.log(`Server is listening on port ${app.get("port")}`);
 });
 
 
 //instantiate socket io
-const io = socketIO(serverInstance)
+const io = require('./socket').listen(serverInstance);
 
-io.on('connection', function(socket) {
-    console.log('Socket connection established!')
-  
-    socket.on('mock data event from client', (data) => {
-        console.log(data);
-        io.sockets.emit('mock data event from server', 'test from server');
-    }) 
-
-    socket.on('disconnect', () => {
-      console.log('user disconnected')
-    })
-});
