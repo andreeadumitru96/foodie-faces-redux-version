@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import socketIOClient from "socket.io-client";
+
+import { API_URL } from '../constants';
 
 import { saveLocationToWishList } from '../../../reducers/locationReducer/index.js';
 import { removeLocationFromWishList } from '../../../reducers/locationReducer/index.js';
@@ -49,6 +52,17 @@ class LocationTileItemContainer extends Component {
         });
 
         this._updateLocationBookmark(locationItem);
+
+        const socket = socketIOClient(API_URL);
+        socket.once('onSendUpdatedLocation', (updatedLocation) => {
+            // console.log(updatedLocation);
+            if(updatedLocation._id === this.state.locationItem._id) {
+                this.setState({
+                    locationItem: updatedLocation
+                });
+            }
+            
+        });
 
         
     }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+
 import { GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Favorite from 'material-ui/svg-icons/action/favorite';
 import ReactStars from 'react-stars';
+
 
 import './LocationTileItem.css';
 
@@ -21,13 +23,24 @@ class LocationTileItem extends Component {
                 key={this.props.locationData._id}
                 title={this.props.locationData.name}
                 subtitle={
-                    <ReactStars
-                        count={5}
-                        size={14}
-                        color2={'white'}
-                        edit={false}
-                        value={parseFloat(this.props.locationData.tripAdvisorRating)}
-                    />}
+                    <div>
+                        <ReactStars
+                            count={5}
+                            size={14}
+                            color2={'white'}
+                            edit={false}
+                            value={parseFloat(this.props.locationData.tripAdvisorRating)}
+                        />
+                        {this.props.locationData.availableSeats ?
+                            <div className="">
+                                <p>Seats: {this.props.locationData.availableSeats}</p>
+                            </div>
+                        :
+                            null
+                        }
+                        
+                    </div>
+                }
                 onClick={this.props.onLocationClick}
                 onMouseEnter = {this.props.triggerMouseHoverMapItem}
                 onMouseLeave = {this.props.triggerMouseUnhoverMapItem}

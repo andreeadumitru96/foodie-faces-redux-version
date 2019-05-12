@@ -68,6 +68,17 @@ class LocationDetailsHeader extends Component {
                                 </div>
                                 : null
                         }
+                        {
+                            this.props.locationDetails.availableSeats
+                                ?
+                                <div className="information-average-price information-item">
+                                    <i class="fas fa-chair"> Available Seats: </i>
+                                    <span className="information-average-price-span main-information-details">
+                                        {this.props.locationDetails.availableSeats}
+                                    </span>
+                                </div>
+                                : null
+                        }
                     </div>
 
                     <div className="information-categories">

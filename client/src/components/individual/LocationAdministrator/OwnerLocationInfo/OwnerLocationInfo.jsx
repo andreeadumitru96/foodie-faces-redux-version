@@ -73,12 +73,8 @@ class OwnerLocationInfo extends Component {
             locationId: this.props.locationDetails._id,
             availableSeats: this.state.availableSeats
         }
-        console.log(this.state.availableSeats);
 
-        socket.emit('onUpdateSeatsEvent', locationToUpdate);
-        socket.once('onSendUpdatedLocation', (updatedLocation) => {
-            console.log(updatedLocation);
-        });    
+        socket.emit('onUpdateSeatsEvent', locationToUpdate);    
     }    
 
 }
