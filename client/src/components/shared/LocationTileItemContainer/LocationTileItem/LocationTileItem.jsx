@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import * as defaultImage from '../../../../assets/location-default-image.jpg';
+
 import { GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Favorite from 'material-ui/svg-icons/action/favorite';
@@ -13,6 +15,7 @@ class LocationTileItem extends Component {
 
         super(props);
         this.state = {
+            
         };
     }
 
@@ -61,7 +64,7 @@ class LocationTileItem extends Component {
                     </IconButton>
                 }
             >
-                <img className="location-tile__image" src={this.props.locationData.images[0]} alt="" />
+                <img className="location-tile__image" src={this.props.locationData.images[0] ? this.props.locationData.images[0] : defaultImage} alt="" />
             </GridTile>
         );
     }

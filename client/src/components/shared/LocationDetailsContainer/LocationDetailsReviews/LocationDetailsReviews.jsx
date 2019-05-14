@@ -77,7 +77,7 @@ class LocationDetailsReviews extends Component {
                         </div>
                         :
                         <div className="location-details-reviews__list-no-items">
-                            <p> There are no reviews yet </p>
+                            <p className="location-item-no-description"> There are no reviews yet </p>
                         </div>
                     }
                 </div>
