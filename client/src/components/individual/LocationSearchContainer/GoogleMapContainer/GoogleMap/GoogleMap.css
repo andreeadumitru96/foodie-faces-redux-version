@@ -1,12 +1,17 @@
 .google-maps {
     width: 50%;
-    height: 88vh;
+    height: 92vh;
     margin: 80px 10px;
 /* 
     width: 25%;
     height: 300px;
     margin-left: 30px; */
 
+}
+.google-maps-location-details {
+    width: 50%;
+    height: 41vh;
+    margin: 80px 10px;
 }
 
 .google-maps > div > div {

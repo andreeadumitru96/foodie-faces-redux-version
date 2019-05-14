@@ -42,20 +42,7 @@ class LocationDetailsGrid extends Component {
                     style={styles.gridList}
                 >
                     {this.props.locationDetails.images.map((image, index) => (
-                        // <div className="location-details-grid_image" key={image}>
-                        //     <img src={image} alt="" onClick={this._onClickFullSizeImage} />
-                        //     <div className="image-full-size">
-                        //         {this.state.isFullSizeImageOpen ?
-                        //             <FullSizeImage
-                        //                 image={image}
-                        //                 isFullSizeImageOpen={this.state.isFullSizeImageOpen}
-                        //                 triggerWindowClose={this._triggerWindowClose}
-                        //             />
-                        //             :
-                        //             null
-                        //         }
-                        //     </div>
-                        // </div>
+                     
                         <GridTile key={image} cols={index % 3 === 0 ? 2 : 1} rows={index % 3 === 0 ? 2 : 1}>
                             <img src={image} onClick={() => this._onClickFullSizeImage(image)}/>
                         </GridTile>

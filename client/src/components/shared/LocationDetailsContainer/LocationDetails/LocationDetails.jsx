@@ -33,7 +33,7 @@ class LocationDetails extends Component {
                 
                 <div className="location-details-photos-map-container">
                     <LocationDetailsGrid />
-                    <LocationDetailsMap />
+                    <LocationDetailsMap className="google-maps-location-details" />
                 </div>
                 
                 <LocationDetailsActions />
