@@ -1,0 +1,37 @@
+.owner-dashboard-wrapper {
+    height: 100%;
+    background-image: url('../../../../assets/owner-dashboard-wallpaper.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    /* padding-top: 200px; */
+}
+
+.location-administrator-wrapper {
+    height: 100%;
+}
+
+.choose-location-dropdown {
+    padding-top: 40px;
+}
+
+.choose-location-title {
+    font-size: 24px;
+    color: white;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.choose-location-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* padding-top: 180px; */
+    align-items: center;
+}
+
+.choose-location-button {
+    padding-top: 16px
+}

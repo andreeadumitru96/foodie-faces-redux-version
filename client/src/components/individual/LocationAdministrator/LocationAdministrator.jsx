@@ -6,6 +6,8 @@ import OwnerDashboard from './OwnerDashboard/OwnerDashboard';
 import OwnerLocationInfo from './OwnerLocationInfo/OwnerLocationInfo';
 import { fetchOwnerLocations } from '../../../reducers/userReducer/index';
 
+import './OwnerDashboard/OwnerDashboard.css';
+
 
 class LocationAdministrator extends Component {
     constructor(props) {
@@ -21,7 +23,7 @@ class LocationAdministrator extends Component {
 
     render() {
         return (
-            <div>
+            <div className="location-administrator-wrapper">
                 {this.state.isOwnerDashboardMount ? 
                     <OwnerDashboard
                         goToOwnerLocationInfoComponent={this._goToOwnerLocationInfoComponent}

@@ -26,11 +26,6 @@ class OwnerLocationInfo extends Component {
     };
 
     render() {
-        // const socket = socketIOClient(API_URL);
-
-        // socket.on('mock data event from server', (data) => {
-        //   console.log(data)
-        // })
     
         return (
             <div>

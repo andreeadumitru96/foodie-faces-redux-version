@@ -12,7 +12,7 @@ class OwnerDashboard extends Component {
 
     render() {
         return (
-            <div>
+            <div className="owner-dashboard-wrapper">
                 <ChooseLocationDropdown
                     goToOwnerLocationInfoComponent={this.props.goToOwnerLocationInfoComponent}
                 />

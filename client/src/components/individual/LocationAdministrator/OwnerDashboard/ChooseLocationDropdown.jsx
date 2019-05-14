@@ -10,7 +10,7 @@ import { fetchOwnerLocations } from '../../../../reducers/userReducer/index';
 
 const styles = {
     customWidth: {
-      width: 200,
+      width: 360,
     },
 };
 
@@ -27,18 +27,23 @@ class ChooseLocationDropdown extends Component {
    
     
     render() {
-        return(
-            <div>
-                <DropDownMenu
-                    value={this.state.selectedLocationId}
-                    onChange={this._onhandleChangeLocation}
-                    style={styles.customWidth}
-                    autoWidth={false}
-                >
-                    {this._renderDropDownLocations()}      
-                </DropDownMenu>
-                <RaisedButton label="CHOOSE" onClick={this._triggerLocationAdministratorComponent}/>
-          </div>
+        return(  
+            <div className="choose-location-wrapper">
+                <p className="choose-location-title">Choose your location in order to modify something...</p>
+                <div className="choose-location-dropdown">
+                    <DropDownMenu
+                        value={this.state.selectedLocationId}
+                        onChange={this._onhandleChangeLocation}
+                        style={styles.customWidth}
+                        autoWidth={false}
+                    >
+                        {this._renderDropDownLocations()}      
+                    </DropDownMenu>
+                </div>
+                <div className="choose-location-button">
+                    <RaisedButton label="CHOOSE" onClick={this._triggerLocationAdministratorComponent}/>
+                </div>
+            </div>
         );
 
     }

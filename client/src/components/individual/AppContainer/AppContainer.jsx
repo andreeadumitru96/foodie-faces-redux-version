@@ -74,7 +74,7 @@ class AppContainer extends Component {
 
     render() {
         return (
-                <div>
+                <div className="app-container-wrapper">
                     <Provider store={store}>
                         <Router>
                             <Switch>
