@@ -4,7 +4,10 @@ import TextField from 'material-ui/TextField';
 import ReactStars from 'react-stars'
 import { GridList } from 'material-ui/GridList';
 import { GridTile } from 'material-ui/GridList';
+import RaisedButton from 'material-ui/RaisedButton';
 import socketIOClient from "socket.io-client";
+
+
 
 import { API_URL } from '../../../shared/constants';
 
@@ -161,22 +164,24 @@ class OwnerLocationInfo extends Component {
                             }
                         </div> */}
                             
-                        {/* <div className="modify-seats-wrapper">
+                        <div className="modify-seats-wrapper location-item-padding">
                             <div className="modify-seats-input">
-                                <p>Modify seats</p>
+                                <p className="owner-location-info-title">Modify seats</p>
                                 <TextField
                                     id="outlined-number"
                                     label="Number"
                                     onChange={this.handleOnChange}
                                     type="number"
+                                    value={this.props.availableSeats ? this.props.availableSeats : 0}
                                     margin="normal"
                                     variant="outlined"
                                 />
                             </div>
+                    
                             <div className="modify-seats-button">
-                                <button type="text" onClick={this.onUpdateSeatsSocketSend}> Update seats </button>
+                                <RaisedButton label="Update seats" onClick={this.onUpdateSeatsSocketSend}/>
                             </div>
-                        </div> */}
+                        </div>
                        
                     </div>
                 :
