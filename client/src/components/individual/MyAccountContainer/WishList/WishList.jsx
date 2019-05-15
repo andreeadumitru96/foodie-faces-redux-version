@@ -14,6 +14,8 @@ class WishList extends Component {
 
     render() {
         return (
+            this.props.wishListLocations.length > 0 ? 
+
             <div className="wish-list-grid">
                 <GridList 
                     cols={3}
@@ -22,6 +24,8 @@ class WishList extends Component {
                     {this.props.wishListLocations.map((location) => {
                         return(
                             <LocationTileItemContainer
+                                locationId = {location._id}
+                                locationsTypeFlag = {'WishListComponent'}
                                 locationData = {location}
                                 key = {location._id}
                                 triggeredBody = {this.props.triggeredBody}
@@ -30,6 +34,7 @@ class WishList extends Component {
                     })}
                 </GridList>
             </div>
+            : <div></div>
         );
     }
 

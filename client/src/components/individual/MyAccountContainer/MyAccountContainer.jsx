@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchWishListLocations } from '../../../reducers/locationReducer/index';
+import { fetchAllLocations } from '../../../reducers/locationReducer/index';
 import MyAccount from './MyAccount/MyAccount';
 import { cookies, notificationError } from '../../shared/constants';
 
@@ -13,7 +14,7 @@ class MyAccountContainer extends Component {
             isLocationDetailsMount: false
         };
         this._getLocationsWishList = this._getLocationsWishList.bind(this);
-        this._formatWishListByName = this._formatWishListByName.bind(this);
+        // this._formatWishListByName = this._formatWishListByName.bind(this);
     }
 
     render() {
@@ -28,28 +29,34 @@ class MyAccountContainer extends Component {
 
     componentDidMount() {
         this._getLocationsWishList();
+        this.props.fetchAllLocations();
     }
     
     _getLocationsWishList() {
         let userId = cookies.get('user')._id;
 
-        this.props.fetchWishListLocations(userId);
-       
-        this._formatWishListByName();       
-    }
-
-    _formatWishListByName() {
-
-        let formattedWishList = this.props.wishListLocations.map(location => location.name);
-
-        this.setState({
-            wishListFormattedByName: formattedWishList
+        this.props.fetchWishListLocations(userId).then(() => {
+            // this._formatWishListByName();
+        }).catch((errorMessage) => {
+            notificationError(errorMessage);
         });
-    }
+       
+               
+    } 
+
+    // _formatWishListByName() {
+
+    //     let formattedWishList = this.props.wishListLocations.map(location => location.name);
+
+    //     this.setState({
+    //         wishListFormattedByName: formattedWishList
+    //     });
+    // }
 }
 
 const mapStateToProps = (state) => ({
-    wishListLocations: state.locations.wishListLocations
+    wishListLocations: state.locations.wishListLocations,
+    allLocations: state.locations.allLocations
 });
 
-export default connect(mapStateToProps, { fetchWishListLocations })(MyAccountContainer);
+export default connect(mapStateToProps, { fetchWishListLocations, fetchAllLocations })(MyAccountContainer);

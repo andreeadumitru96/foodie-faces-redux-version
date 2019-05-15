@@ -7,6 +7,7 @@ import { API_URL } from '../constants';
 import { saveLocationToWishList } from '../../../reducers/locationReducer/index.js';
 import { removeLocationFromWishList } from '../../../reducers/locationReducer/index.js';
 import { getLocationById } from '../../../reducers/locationReducer/index.js';
+import { fetchLocationById } from '../../../reducers/locationReducer/index.js';
 
 import LocationTileItem from './LocationTileItem/LocationTileItem';
 import { notificationError, successNotification } from '../constants';
@@ -45,24 +46,28 @@ class LocationTileItemContainer extends Component {
     }
 
     componentDidMount() {
+
         
         let locationItem = this.props.getLocationById(this.props.locationId, this.props.locationsTypeFlag);
         this.setState({
             locationItem: locationItem
         });
 
-        this._updateLocationBookmark(locationItem);
+    
+    
+        
+        // this._updateLocationBookmark(locationItem);
 
-        const socket = socketIOClient(API_URL);
-        socket.once('onSendUpdatedLocation', (updatedLocation) => {
-            // console.log(updatedLocation);
-            if(updatedLocation._id === this.state.locationItem._id) {
-                this.setState({
-                    locationItem: updatedLocation
-                });
-            }
+        // const socket = socketIOClient(API_URL);
+        // socket.once('onSendUpdatedLocation', (updatedLocation) => {
+        //     // console.log(updatedLocation);
+        //     if(updatedLocation._id === this.state.locationItem._id) {
+        //         this.setState({
+        //             locationItem: updatedLocation
+        //         });
+        //     }
             
-        });
+        // });
 
         
     }
@@ -151,6 +156,7 @@ class LocationTileItemContainer extends Component {
 
 const mapStateToProps = (state) => ({
     userDetails: state.users.userDetails,
+    locationDetails: state.locations.locationDetails
 });
 
-export default connect(mapStateToProps, { getLocationById, saveLocationToWishList, removeLocationFromWishList })(LocationTileItemContainer);
+export default connect(mapStateToProps, { getLocationById, saveLocationToWishList, removeLocationFromWishList, fetchLocationById })(LocationTileItemContainer);

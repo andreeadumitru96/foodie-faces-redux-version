@@ -17,6 +17,7 @@ const FETCH_MOST_RECOMMENDED_DISHES = 'FETCH_MOST_RECOMMENDED_DISHES';
 const FETCH_MENU_DISHES = 'FETCH_MENU_DISHES';
 const FETCH_ALL_FILTERS = 'FETCH_ALL_FILTERS';
 const FETCH_FILTERED_LOCATIONS = 'FETCH_FILTERED_LOCATIONS';
+const FETCH_ALL_LOCATIONS = 'FETCH_ALL_LOCATIONS';
 
 const initialState = {
   citiesList: [],
@@ -28,7 +29,8 @@ const initialState = {
   wishListLocations: [],
   fetchMostRecommendedDishes: [],
   menuDishes: [],
-  filtersList: {}
+  filtersList: {},
+  allLocations: []
 
 };
 
@@ -150,27 +152,55 @@ export const fetchCities = function() {
     }
 } 
 
-export const fetchLocationsByCity = function() {
-    return (dispatch, getState) => {
-        const selectedCity = getState().locations.selectedCity;
-        fetch('http://localhost:3001/api/location/getLocationsByCity', {
+
+export const fetchAllLocations = () => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost:3001/api/location/getAllLocations', {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                method: 'post',
-                body: JSON.stringify(selectedCity)
+                method: 'get'
             }).then(function(response) {
                 if(response.status === 200) {
                     response.json().then((locations) => {
-                        let locationsListByCity = [];
-                        locationsListByCity = setDefaultProperties(locations);
+                        console.log(locations);
                         dispatch({
-                            type: FETCH_LOCATIONS_BY_CITY,
-                            payload: locationsListByCity
+                            type: FETCH_ALL_LOCATIONS,
+                            payload: locations
                         });
+                        resolve();
+                    }).catch((error) => {
+                        reject(error);
                     })
                 }
+            });
+        });
+    }
+}
+
+export const fetchLocationsByCity = function() {
+    return (dispatch, getState) => {
+        const selectedCity = getState().locations.selectedCity;
+        fetch('http://localhost:3001/api/location/getLocationsByCity', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'post',
+            body: JSON.stringify(selectedCity)
+        }).then(function(response) {
+            if(response.status === 200) {
+                response.json().then((locations) => {
+                    let locationsListByCity = [];
+                    locationsListByCity = setDefaultProperties(locations);
+                    dispatch({
+                        type: FETCH_LOCATIONS_BY_CITY,
+                        payload: locationsListByCity
+                    });
+                })
+            }
         });
     }
 }
@@ -251,6 +281,9 @@ export const getLocationById = (locationId, locationsType) => {
         let locationsList;
         if(locationsType === "SimilarLocationsComponent") {
             locationsList = getState().locations.similarLocations;
+        } else if(locationsType === 'WishListComponent') {
+            console.log(getState().locations.allLocations);
+            locationsList = getState().locations.allLocations;
         } else {
             locationsList = getState().locations.locationsList;
         }
@@ -352,28 +385,30 @@ export const fetchSimilarLocations = (locationInfo, locationId) => {
 
 export const fetchWishListLocations = (userId) => {
     return (dispatch) => {
-        fetch(`http://localhost:3001/api/getLocationsWishList/${userId}`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'get'
-        }).then(function (response) {
-            if(response.status === 200) {
-                response.json().then((wishListLocations) => {
-                    dispatch({
-                        type: 'FETCH_WISHLIST_LOCATIONS',
-                        payload: wishListLocations
+        return new Promise((resolve, reject) => {
+            fetch(`http://localhost:3001/api/getLocationsWishList/${userId}`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'get'
+            }).then(function (response) {
+                if(response.status === 200) {
+                    response.json().then((wishListLocations) => {
+                        dispatch({
+                            type: 'FETCH_WISHLIST_LOCATIONS',
+                            payload: wishListLocations
+                        });
+                        resolve();
+                    });
+                } else {
+                    response.json().then((errorMessage) => {
+                        reject(errorMessage);
                     });
                     
-                });
-            } else {
-                response.json().then((data) => {
-                   
-                });
-                
-            }
-        });   
+                }
+            });   
+        });
     }
 }
 

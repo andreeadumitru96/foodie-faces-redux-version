@@ -5,6 +5,7 @@
 
 .location-details-grid > div {
     margin: 0 auto !important;
+    cursor: pointer;
     /* height: 200px !important; */
 }
 
