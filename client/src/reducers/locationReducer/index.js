@@ -119,6 +119,11 @@ export const locationReducer = (state = initialState, action) => {
                 locationsList: action.payload,
             }
 
+        case FETCH_ALL_LOCATIONS: 
+            return {
+                ...state,
+                allLocations: action.payload
+            }
         default:
           return state;
     }

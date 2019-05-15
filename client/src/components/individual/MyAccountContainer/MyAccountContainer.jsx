@@ -28,8 +28,11 @@ class MyAccountContainer extends Component {
     }
 
     componentDidMount() {
-        this._getLocationsWishList();
-        this.props.fetchAllLocations();
+        this.props.fetchAllLocations().then(() => {
+            console.log(this.props.allLocations)
+            this._getLocationsWishList();
+        });
+        
     }
     
     _getLocationsWishList() {
