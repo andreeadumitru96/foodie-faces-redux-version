@@ -34,31 +34,41 @@ class LocationDetailsGrid extends Component {
 
     render() {
         return (
-            <div style={styles.root} className="location-details-grid">
-                <GridList
-                    cols={2}
-                    cellHeight={200}
-                    padding={1}
-                    style={styles.gridList}
-                >
-                    {this.props.locationDetails.images.map((image, index) => (
-                     
-                        <GridTile key={image} cols={index % 3 === 0 ? 2 : 1} rows={index % 3 === 0 ? 2 : 1}>
-                            <img src={image} onClick={() => this._onClickFullSizeImage(image)}/>
-                        </GridTile>
-                    ))}
-                </GridList>
-                <div className="image-full-size">
-                    {this.state.isFullSizeImageOpen ?
-                        <FullSizeImage
-                            image={this.state.imageToView}
-                            isFullSizeImageOpen={this.state.isFullSizeImageOpen}
-                            triggerWindowClose={this._triggerWindowClose}
-                        />
-                        :
-                        null
-                    }
-                </div>
+           <div>
+            { 
+                this.props.locationDetails.images.length > 0 ? 
+
+                    <div style={styles.root} className="location-details-grid">
+                        <GridList
+                            cols={2}
+                            cellHeight={200}
+                            padding={1}
+                            style={styles.gridList}
+                        >
+                            {this.props.locationDetails.images.map((image, index) => (
+                            
+                                <GridTile key={image} cols={index % 3 === 0 ? 2 : 1} rows={index % 3 === 0 ? 2 : 1}>
+                                    <img src={image} onClick={() => this._onClickFullSizeImage(image)}/>
+                                </GridTile>
+                            ))}
+                        </GridList>
+                        <div className="image-full-size">
+                            {this.state.isFullSizeImageOpen ?
+                                <FullSizeImage
+                                    image={this.state.imageToView}
+                                    isFullSizeImageOpen={this.state.isFullSizeImageOpen}
+                                    triggerWindowClose={this._triggerWindowClose}
+                                />
+                                :
+                                null
+                            }
+                        </div>
+                    </div>
+                :
+                    null
+            
+            }
+                
             </div>
         );
     }

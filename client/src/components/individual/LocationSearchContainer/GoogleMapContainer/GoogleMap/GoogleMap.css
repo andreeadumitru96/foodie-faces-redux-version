@@ -1,13 +1,20 @@
-.google-maps {
-    width: 50%;
-    height: 92vh;
-    margin: 80px 10px;
+.location-details-photos-map-container .google-maps {
+    height: 53vh;
+    width: 37%;
+    margin: 10px;
+    /* margin: 80px ; */
 /* 
     width: 25%;
     height: 300px;
     margin-left: 30px; */
-
 }
+
+.location-search__google-map .google-maps {
+    width: 50%;
+    margin: 80px 10px;
+    height: 91vh;
+}
+
 .google-maps-location-details {
     width: 50%;
     height: 41vh;

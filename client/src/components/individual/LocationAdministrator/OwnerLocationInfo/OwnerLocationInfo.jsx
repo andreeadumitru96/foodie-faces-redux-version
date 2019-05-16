@@ -172,7 +172,7 @@ class OwnerLocationInfo extends Component {
                                     label="Number"
                                     onChange={this.handleOnChange}
                                     type="number"
-                                    value={this.props.availableSeats ? this.props.availableSeats : 0}
+                                    // value={this.props.availableSeats ? this.props.availableSeats : 0}
                                     margin="normal"
                                     variant="outlined"
                                 />

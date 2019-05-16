@@ -64,7 +64,7 @@ class LocationTileItemContainer extends Component {
 
     _onListenSocket = () => {
         const socket = socketIOClient(API_URL);
-        socket.once('onSendUpdatedLocation', (updatedLocation) => {
+        socket.on('onSendUpdatedLocation', (updatedLocation) => {
 
             if(updatedLocation._id === this.state.locationItem._id) {
                 this.setState({
@@ -79,7 +79,8 @@ class LocationTileItemContainer extends Component {
     _onLocationClick = () => {
 
         let mountComponent = 'LocationDetailsComponent';
-        this.props.triggeredBody(mountComponent, this.props.locationId);
+        // console.log(this.state.locationItem._id, this.props.locationId);
+        this.props.triggeredBody(mountComponent, this.state.locationItem._id);
         
     }
 
