@@ -27,6 +27,7 @@ class LocationTileItemContainer extends Component {
         this._removeLocationFromWishList = this._removeLocationFromWishList.bind(this);
         this._triggerMouseHoverMapItem = this._triggerMouseHoverMapItem.bind(this);
         this._triggerMouseUnhoverMapItem = this._triggerMouseUnhoverMapItem.bind(this);
+        this._onListenSocket = this._onListenSocket.bind(this);
     }
 
     render() {
@@ -49,27 +50,30 @@ class LocationTileItemContainer extends Component {
 
         
         let locationItem = this.props.getLocationById(this.props.locationId, this.props.locationsTypeFlag);
-        this.setState({
-            locationItem: locationItem
+
+        if(locationItem) {
+            this.setState({
+                locationItem: locationItem
+            }, () => {
+                this._updateLocationBookmark(locationItem);
+                this._onListenSocket();
+            });
+        }
+        
+    }
+
+    _onListenSocket = () => {
+        const socket = socketIOClient(API_URL);
+        socket.once('onSendUpdatedLocation', (updatedLocation) => {
+
+            if(updatedLocation._id === this.state.locationItem._id) {
+                this.setState({
+                    locationItem: updatedLocation
+                });
+            }
+        
         });
 
-    
-    
-        
-        // this._updateLocationBookmark(locationItem);
-
-        // const socket = socketIOClient(API_URL);
-        // socket.once('onSendUpdatedLocation', (updatedLocation) => {
-        //     // console.log(updatedLocation);
-        //     if(updatedLocation._id === this.state.locationItem._id) {
-        //         this.setState({
-        //             locationItem: updatedLocation
-        //         });
-        //     }
-            
-        // });
-
-        
     }
 
     _onLocationClick = () => {

@@ -12,7 +12,7 @@ class Header extends Component {
         this.state = {
           
         };
-        this._reloadPage = this._reloadPage.bind(this);
+        this._goToHomePage = this._goToHomePage.bind(this);
     }
 
     componentWillMount() {
@@ -52,7 +52,7 @@ class Header extends Component {
                 </div>  
 
                 <div className="header__logo">
-                    <img src={logoImg} alt="" className="logo-img" onClick={this._reloadPage}/>
+                    <img src={logoImg} alt="" className="logo-img" onClick={this._goToHomePage}/>
                 </div>
             </div>
             
@@ -62,8 +62,8 @@ class Header extends Component {
 		this.forceUpdate();
     }
     
-    _reloadPage() {
-        window.location.reload()
+    _goToHomePage() {
+        window.location = '/';
     }
 }
 
