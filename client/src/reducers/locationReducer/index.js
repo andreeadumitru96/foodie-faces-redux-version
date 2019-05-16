@@ -231,6 +231,8 @@ const setDefaultProperties = (locationsListByCity) => {
     return formattedLocationsList;
 }
 
+
+
 export const fetchMostRatedLocations = () => {
     return (dispatch) => {
         fetch('http://localhost:3001/api/location/getMostRatedLocations', {
@@ -312,6 +314,7 @@ export const saveLocationToWishList = (data) => {
                 if(response.status === 200) {
                     console.log(response);
                     response.json().then((userDetails) => {
+                        console.log(userDetails);
                         dispatch({
                             type: SAVE_LOCATION_WISH_LIST,
                             payload: userDetails

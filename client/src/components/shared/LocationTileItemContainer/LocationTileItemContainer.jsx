@@ -94,7 +94,14 @@ class LocationTileItemContainer extends Component {
         };
 
         this.props.saveLocationToWishList(data).then(() => {
-            successNotification('The location has been added to wish list.');
+            console.log(this.props);
+            if(Object.keys(this.props.userDetails).length === 0 && this.props.userDetails.constructor === Object) {
+                notificationError('A problem have been occurred while saving the location... ');
+            } else {
+                successNotification('The location has been added to wish list.');
+                cookies.set('user', this.props.userDetails);
+            }
+            
         }).catch((error) => {
             notificationError(error);
         });
@@ -103,7 +110,7 @@ class LocationTileItemContainer extends Component {
             isLocationBookmarked: true
         });
         
-        cookies.set('user', this.props.userDetails);
+        
         
     }
 
@@ -132,7 +139,12 @@ class LocationTileItemContainer extends Component {
         }
 
         this.props.removeLocationFromWishList(locationToRemove).then(() => {
-            successNotification('The location has been removed from wish list.');
+            if(Object.keys(this.props.userDetails).length === 0 && this.props.userDetails.constructor === Object) {
+                notificationError('A problem have been occurred while deleting the location... ');
+            } else {
+                successNotification('The location has been removed to wish list.');
+                cookies.set('user', this.props.userDetails);
+            }
             
         }).catch((error) => {
             notificationError(error);
@@ -141,8 +153,6 @@ class LocationTileItemContainer extends Component {
         this.setState({
             isLocationBookmarked: false
         });
-        
-        cookies.set('user', this.props.userDetails);
         
     }
 
@@ -160,7 +170,7 @@ class LocationTileItemContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    userDetails: state.users.userDetails,
+    userDetails: state.locations.userDetails,
     locationDetails: state.locations.locationDetails
 });
 
