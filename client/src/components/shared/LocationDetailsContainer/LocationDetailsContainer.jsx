@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
 
 import LocationDetails from './LocationDetails/LocationDetails';
-import { fetchLocationById }  from '../../../reducers/locationReducer/index';
 
 
 class LocationDetailsContainer extends Component {
@@ -16,15 +13,10 @@ class LocationDetailsContainer extends Component {
     render() {
         return (
             <div>
-                {this.props.locationDetails ?
-                    <LocationDetails
-                        locationId = {this.props.locationId}
-                        locationDetails = {this.props.locationDetails}
-                        triggeredBody = {this.props.triggeredBody}
-                    />
-                :
-                    null   
-                }
+                <LocationDetails
+                    locationId = {this.props.locationId}
+                    triggeredBody = {this.props.triggeredBody}
+                />
              </div>
             
 
@@ -32,18 +24,6 @@ class LocationDetailsContainer extends Component {
     }
 
     componentDidMount() {
-
-
-        // let locationInfo = {
-        //     filters: {
-        //         meals: this.props.locationDetails.categories.meals.slice(),
-        //         goodFor: this.props.locationDetails.categories.goodFor.slice(),
-        //         cuisine: this.props.locationDetails.categories.cuisine.slice()
-        //     },
-        //     cityLocation: this.props.locationDetails.city
-        // }
-
-        this.props.fetchLocationById(this.props.locationId);
         window.scrollTo(0,0);
     }
 
@@ -52,9 +32,4 @@ class LocationDetailsContainer extends Component {
     }
     
 }
-
-const mapStateToProps = (state) => ({
-    locationDetails: state.locations.locationDetails,
-});
-
-export default connect(mapStateToProps, { fetchLocationById })(LocationDetailsContainer);
+export default (LocationDetailsContainer);

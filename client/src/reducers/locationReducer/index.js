@@ -23,7 +23,7 @@ const initialState = {
   citiesList: [],
   locationsList: [],
   selectedCity: null,
-  locationDetails: null,
+  locationDetails: {},
   userDetails: null,
   similarLocations: [],
   wishListLocations: [],

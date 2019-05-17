@@ -20,18 +20,24 @@ class LocationDetailsActions extends Component {
     render() {
         return (
             <div className="location-details-actions">
-                <div className="location-details-actions__recommend">
-                    <RaisedButton
-                        label="Recommend a dish"
-                        disabled={this.state.isMenuDishesAvailable ? false : true}
-                        onClick = {this._onRecommendButton}
-                    />
-                    <LocationDetailsRecommendDish
-                        isRecommendDishOpen = {this.state.isRecommendDishOpen}
-                        triggerWindowClose = {this._triggerWindowClose}
-                        locationDetails = {this.props.locationDetails}
-                    />
-                </div>
+                {!(Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object) ?
+                    <div className="location-details-actions__recommend">
+
+                        <RaisedButton
+                            label="Recommend a dish"
+                            disabled={this.state.isMenuDishesAvailable ? false : true}
+                            onClick={this._onRecommendButton}
+                        />
+                        <LocationDetailsRecommendDish
+                            isRecommendDishOpen={this.state.isRecommendDishOpen}
+                            triggerWindowClose={this._triggerWindowClose}
+                            locationDetails={this.props.locationDetails}
+                        />
+                    </div>
+                :
+                    null
+                }
+
             </div>
 
         );
@@ -49,15 +55,24 @@ class LocationDetailsActions extends Component {
         });
     }
 
-    componentWillMount() {
-        if(this.props.locationDetails.menu.length > 0) {
+    componentWillReceiveProps(newProps) {
+        if(newProps.locationDetails && newProps.locationDetails.menu.length > 0) {
             this.setState({
                 isMenuDishesAvailable: !this.state.isMenuDishesAvailable
             });
         }
     }
 
-    
+    componentWillMount() {
+
+        if (!(Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object) && this.props.locationDetails.menu.length > 0) {
+            this.setState({
+                isMenuDishesAvailable: !this.state.isMenuDishesAvailable
+            });
+        }
+    }
+
+
 
 }
 

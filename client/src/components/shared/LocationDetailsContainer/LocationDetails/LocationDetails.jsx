@@ -14,13 +14,13 @@ class LocationDetails extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            locationDetails: props.locationDetails
+         
         };
     }
     
     componentWillReceiveProps(newProps) {
         this.setState({
-            locationDetails: newProps.locationDetails
+            locationId: newProps.locationId
         })
     }
 
@@ -28,7 +28,7 @@ class LocationDetails extends Component {
 		return (
 			<div className="location-details">
                 <LocationDetailsHeader
-                    locationId = {this.state.locationDetails._id}
+                    locationId = {this.props.locationId}
                 />
                 
                 <div className="location-details-photos-map-container">
@@ -41,7 +41,7 @@ class LocationDetails extends Component {
                 <LocationDetailsMenu/>
 
                 <LocationDetailsMostRecommendedDishes/>
-
+ 
                 <div className="location-details-reviews-map">
                     <LocationDetailsReviews/>
                 </div>

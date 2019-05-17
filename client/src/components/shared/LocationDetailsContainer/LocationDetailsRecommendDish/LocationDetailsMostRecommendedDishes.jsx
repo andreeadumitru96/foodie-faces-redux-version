@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Badge from 'material-ui/Badge';
+// import Badge from 'material-ui/Badge';
 
 
 import { notificationError } from '../../constants';
@@ -31,13 +31,6 @@ class LocationDetailsMostRecommendedDishes extends Component {
                                 <div className="location-details-most-recommended-dishes__list">
                                     <div className="list-items">
                                         {this.props.mostRecommendedDishes.map(dish => {
-                                            // return (<Badge
-                                            //     badgeContent={<img src={dish.image} alt="" />}
-                                            //     primary={true}
-                                            //     className="list-badge"
-                                            // >
-                                            //     <div className="list-badge-text">{dish.name}</div>
-                                            // </Badge>)
                                             return (
                                                 <div className="item-container">
                                                     <img src={dish.image}/>
@@ -48,29 +41,33 @@ class LocationDetailsMostRecommendedDishes extends Component {
                                     </div>
                                 </div>
                                 :
-                                <div className="title-no-dishes">
-                                    <p>There are no recommended dishes yet</p>
-                                </div>
+                               null
                             }
                         </div>
                     :
-                        null
+                        <div className="title-no-dishes">
+                            <p>There are no recommended dishes yet</p>
+                        </div>
             }
                 
             </div>
         );
     }
 
-    _getMostRecommendedDishes() {
-        this.props.fetchMostRecommendedDishes(this.props.locationDetails._id).then(() =>{
+    _getMostRecommendedDishes(locationDetails) {
+       
+        this.props.fetchMostRecommendedDishes(locationDetails._id).then(() =>{
 
         }).catch((errorMessage) => {
             notificationError(errorMessage);
         });
     }
 
-    componentDidMount() {
-        this._getMostRecommendedDishes();
+    componentWillReceiveProps(newProps) {
+        if(newProps.locationDetails) {
+            this._getMostRecommendedDishes(newProps.locationDetails);
+        }
+        
     }
 }
 const mapStateToProps = (state) => ({

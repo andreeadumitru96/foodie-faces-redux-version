@@ -79,7 +79,7 @@ class LocationTileItemContainer extends Component {
     _onLocationClick = () => {
 
         let mountComponent = 'LocationDetailsComponent';
-        // console.log(this.state.locationItem._id, this.props.locationId);
+        console.log(this.state.locationItem._id);
         this.props.triggeredBody(mountComponent, this.state.locationItem._id);
         
     }

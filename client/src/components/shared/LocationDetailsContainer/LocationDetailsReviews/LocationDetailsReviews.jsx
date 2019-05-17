@@ -15,7 +15,7 @@ class LocationDetailsReviews extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            initialDisplayedReviews: this.props.locationDetails.receivedReviews.slice(0, 4),
+            initialDisplayedReviews: !(Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object) ? this.props.locationDetails.receivedReviews.slice(0, 4) : [],
             isAddDishOpen: false,
             isShowMoreDisplayed: true,
         };
@@ -32,100 +32,107 @@ class LocationDetailsReviews extends Component {
     render() {
         return (
             <div className="location-details-reviews">
-                <div className="location-details-reviews__list">
-                    <p className="location-details-reviews__list-title">
-                        Reviews ({this.props.locationDetails.receivedReviews.length})
-                    </p>
+            {!(Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object) ?
+                <div>
+            
+                    <div className="location-details-reviews__list">
+                        <p className="location-details-reviews__list-title">
+                            Reviews ({this.props.locationDetails.receivedReviews.length})
+                        </p>
 
-                    {this.props.locationDetails.receivedReviews.length > 0 ?
+                        {this.props.locationDetails.receivedReviews.length > 0 ?
 
-                        <div className="location-details-reviews__list-wrapper">
-                            {this.state.initialDisplayedReviews.map((receivedReview) => (
-                                <div className="list--entity" key={receivedReview._id}>
-                                    <div className="list--entity-review">
-                                        <div className="list--entity--review-title">
-                                            {receivedReview.title}
-                                        </div>
-                                        <div className="list--entity-review-content">
-                                            {receivedReview.content}
-                                        </div>
-                                    </div>     
+                            <div className="location-details-reviews__list-wrapper">
+                                {this.state.initialDisplayedReviews.map((receivedReview) => (
+                                    <div className="list--entity" key={receivedReview._id}>
+                                        <div className="list--entity-review">
+                                            <div className="list--entity--review-title">
+                                                {receivedReview.title}
+                                            </div>
+                                            <div className="list--entity-review-content">
+                                                {receivedReview.content}
+                                            </div>
+                                        </div>     
 
-                                    <div className="list--entity-user">
-                                        <div className="list--entity-user-name">
-                                            {receivedReview.userName} 
-                                        </div>
-                                        <div className="list--entity-user-date">
-                                            {/* {this._parseDate(receivedReview.createdDate)} */}
-                                            on {this._getFormattedDate(receivedReview.createdDate)}
-                                        </div>
-                                        <div className="list--entity-user-score">
-                                            <span>{receivedReview.score}</span>
-                                            <span> star(s) </span>
-                                        </div>                                          
-                                    </div>                             
-                                </div>
-                            ))}
-                            {
-                                (this.state.isShowMoreDisplayed && this.props.locationDetails.receivedReviews.length > 4) ?
-                                    <div className="location-details-reviews__show-more" onClick={this._onShowMoreReviews}>
-                                        Show more
+                                        <div className="list--entity-user">
+                                            <div className="list--entity-user-name">
+                                                {receivedReview.userName} 
+                                            </div>
+                                            <div className="list--entity-user-date">
+                                                {/* {this._parseDate(receivedReview.createdDate)} */}
+                                                on {this._getFormattedDate(receivedReview.createdDate)}
+                                            </div>
+                                            <div className="list--entity-user-score">
+                                                <span>{receivedReview.score}</span>
+                                                <span> star(s) </span>
+                                            </div>                                          
+                                        </div>                             
                                     </div>
-                                :
-                                     null
-                            }
-                        </div>
-                        :
-                        <div className="location-details-reviews__list-no-items">
-                            <p className="location-item-no-description"> There are no reviews yet </p>
-                        </div>
-                    }
+                                ))}
+                                {
+                                    (this.state.isShowMoreDisplayed && this.props.locationDetails.receivedReviews.length > 4) ?
+                                        <div className="location-details-reviews__show-more" onClick={this._onShowMoreReviews}>
+                                            Show more
+                                        </div>
+                                    :
+                                        null
+                                }
+                            </div>
+                            :
+                            <div className="location-details-reviews__list-no-items">
+                                <p className="location-item-no-description"> There are no reviews yet </p>
+                            </div>
+                        }
+                    </div>
+
+                    <div className="location-details-reviews__add-review">
+                        <form className="add-review-form">
+                            <label className="add-review-form-label"> Write a review </label>
+
+                            <fieldset className="add-review-form-fieldset">
+                                <input className="add-review-form-fieldset-input" placeholder="Review Title"
+                                    ref={(reviewTitle) => { this.reviewTitle = reviewTitle }}
+                                />
+                            </fieldset>
+
+                            <fieldset className="add-review-form-fieldset">
+                                <textarea className="add-review-form-fieldset-textarea" placeholder="Leave a review..."
+                                    ref={(reviewContent) => { this.reviewContent = reviewContent }}
+                                />
+
+                            </fieldset>
+
+                            <fieldset className="add-review-form-fieldset">
+                                <ReactStars
+                                    count={5}
+                                    size={24}
+                                    color2={'black'}
+                                    half={false}
+                                    value={this.props.locationDetails.averageScore}
+                                    onChange={this._onRatingChanged}
+                                />
+                            </fieldset>
+
+                            <div className="add-review-form-button">
+                                <RaisedButton
+                                    className="add-review-form-button-add"
+                                    label="Add review"
+                                    onClick={this._onAddReview}
+                                />
+                            </div>
+                        </form>
+                    </div>
+
+                    <div className="location-details-reviews__add-dish">
+                        <LocationDetailsAddDish
+                            triggerWindowClose={this._triggerWindowClose}
+                            isAddDishOpen={this.state.isAddDishOpen}
+                        />
+                    </div>
                 </div>
-
-                <div className="location-details-reviews__add-review">
-                    <form className="add-review-form">
-                        <label className="add-review-form-label"> Write a review </label>
-
-                        <fieldset className="add-review-form-fieldset">
-                            <input className="add-review-form-fieldset-input" placeholder="Review Title"
-                                ref={(reviewTitle) => { this.reviewTitle = reviewTitle }}
-                            />
-                        </fieldset>
-
-                        <fieldset className="add-review-form-fieldset">
-                            <textarea className="add-review-form-fieldset-textarea" placeholder="Leave a review..."
-                                ref={(reviewContent) => { this.reviewContent = reviewContent }}
-                            />
-
-                        </fieldset>
-
-                        <fieldset className="add-review-form-fieldset">
-                            <ReactStars
-                                count={5}
-                                size={24}
-                                color2={'black'}
-                                half={false}
-                                value={this.props.locationDetails.averageScore}
-                                onChange={this._onRatingChanged}
-                            />
-                        </fieldset>
-
-                        <div className="add-review-form-button">
-                            <RaisedButton
-                                className="add-review-form-button-add"
-                                label="Add review"
-                                onClick={this._onAddReview}
-                            />
-                        </div>
-                    </form>
-                </div>
-
-                <div className="location-details-reviews__add-dish">
-                    <LocationDetailsAddDish
-                        triggerWindowClose={this._triggerWindowClose}
-                        isAddDishOpen={this.state.isAddDishOpen}
-                    />
-                </div>
+            :
+                null
+            }
             </div>
 
         );
@@ -153,19 +160,22 @@ class LocationDetailsReviews extends Component {
 
     _onAddReview() {
 
-        let reviewDetails = this._getReviewDetails();
+        if(!(Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object)) {
 
-        this.props.addLocationReview(reviewDetails).then((location) => {
-            this.reviewTitle.value = '';
-            this.reviewContent.value = '';
+            let reviewDetails = this._getReviewDetails();
 
-        }).catch((error) => {
-            notificationError(error);
-        });
+            this.props.addLocationReview(reviewDetails).then(() => {
+                this.reviewTitle.value = '';
+                this.reviewContent.value = '';
 
-        this.setState({
-            isAddDishOpen: true
-        });
+            }).catch((error) => {
+                notificationError(error);
+            });
+
+            this.setState({
+                isAddDishOpen: true
+            });
+        }
     }
 
     _triggerWindowClose() {
@@ -175,10 +185,13 @@ class LocationDetailsReviews extends Component {
     }
 
     _onShowMoreReviews() {
-        this.setState({
-            initialDisplayedReviews: this.props.locationDetails.receivedReviews
-        });
-        this._onPressShowMore();
+        if(!(Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object)) {
+            this.setState({
+                initialDisplayedReviews: this.props.locationDetails.receivedReviews
+            });
+            this._onPressShowMore();
+        }
+       
     }
 
     _onPressShowMore() {
@@ -191,7 +204,8 @@ class LocationDetailsReviews extends Component {
         this.setState({
             locationDetails: newProps.locationDetails,
             initialDisplayedReviews: newProps.locationDetails.receivedReviews.slice(0, 4),
-        })
+        });
+        
     }
 
     _getFormattedDate(date) {

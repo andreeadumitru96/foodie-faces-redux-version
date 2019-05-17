@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { fetchSimilarLocations } from '../../../../reducers/locationReducer/index.js';
 import { fetchLocationById } from '../../../../reducers/locationReducer/index.js';
 
-import { notificationError } from '../../constants';
 import LocationTileItemContainer from '../../LocationTileItemContainer/LocationTileItemContainer';
 import './LocationDetailsSimilarLocations.css';
 
@@ -37,43 +36,48 @@ class LocationDetailsSimilarLocations extends Component {
                     Here are some locations you may also like...
                 </p>
 
-                <div className="location-details-similars__grid" style={styles.root}>
-                    <GridList 
-                        style={styles.gridList} 
-                        cols={3}
-                        className="grid-items"
-                    >
-                        {this.props.similarLocations.map((location, index) => {
-                            return(<LocationTileItemContainer
-                                locationsTypeFlag = 'SimilarLocationsComponent'
-                                locationId={location._id}
-                                key={location._id}
-                                triggeredBody = {this.props.triggeredBody}
-                            />)
-                        })}
-                    </GridList>
-                </div>
+                {this.props.similarLocations.length > 0 ?
+
+                    <div className="location-details-similars__grid" style={styles.root}>
+                        <GridList 
+                            style={styles.gridList} 
+                            cols={3}
+                            className="grid-items"
+                        >
+                            {this.props.similarLocations.map((location, index) => {
+                                return(<LocationTileItemContainer
+                                    locationsTypeFlag = 'SimilarLocationsComponent'
+                                    locationId={location._id}
+                                    key={location._id}
+                                    triggeredBody = {this.props.triggeredBody}
+                                />)
+                            })}
+                        </GridList>
+                    </div>
+                :
+                    null
+                }
             </div>
         );
     }
 
-    _getSimilarLocations() {
-
+    _getSimilarLocations(locationDetails) {
+      
         let locationInfo = {
             filters: {
-                meals: this.props.locationDetails.categories.meals.slice(),
-                goodFor: this.props.locationDetails.categories.goodFor.slice(),
-                cuisine: this.props.locationDetails.categories.cuisine.slice()
+                meals: locationDetails.categories.meals.slice(),
+                goodFor: locationDetails.categories.goodFor.slice(),
+                cuisine: locationDetails.categories.cuisine.slice()
             },
-            cityLocation: this.props.locationDetails.city
+            cityLocation: locationDetails.city
         }
-        this.props.fetchSimilarLocations(locationInfo, this.props.locationDetails._id);
-
-        
+        this.props.fetchSimilarLocations(locationInfo, locationDetails._id);  
     }
-
-    componentDidMount() {
-        this._getSimilarLocations();    
+    componentWillReceiveProps(newProps) {
+        if(newProps.locationDetails) {
+            this._getSimilarLocations(newProps.locationDetails); 
+        }
+        
     }
 }
 

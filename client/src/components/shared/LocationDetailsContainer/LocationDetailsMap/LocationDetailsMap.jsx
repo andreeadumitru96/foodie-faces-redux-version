@@ -17,18 +17,26 @@ class LocationDetailsMap extends Component {
     render() {
         return (
             <div className="google-maps">
-                <GoogleMapReact
-                    defaultCenter={this.props.center}
-                    onChange={this._onChange}
-                    defaultZoom={this._getCenterZoom()}
-                    center = {this._getCenterCoordinates()}
-                >
-                    <PinPoint
-                        text={this.props.locationDetails.name}
-                        lat={parseFloat(this.props.locationDetails.coordinates.latitude)}
-                        lng={parseFloat(this.props.locationDetails.coordinates.longitude)}
-                        key={this.props.locationDetails.name} />
-                </GoogleMapReact>
+                {
+                    Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object ?
+                        null
+                        :
+                        <GoogleMapReact
+                            defaultCenter={this.props.center}
+                            onChange={this._onChange}
+                            defaultZoom={this._getCenterZoom()}
+                            center={this._getCenterCoordinates()}
+                        >
+                            <PinPoint
+                                text={this.props.locationDetails.name}
+                                lat={parseFloat(this.props.locationDetails.coordinates.latitude)}
+                                lng={parseFloat(this.props.locationDetails.coordinates.longitude)}
+                                key={this.props.locationDetails.name} />
+                        </GoogleMapReact>
+                        
+
+                }
+
             </div>
         );
     }

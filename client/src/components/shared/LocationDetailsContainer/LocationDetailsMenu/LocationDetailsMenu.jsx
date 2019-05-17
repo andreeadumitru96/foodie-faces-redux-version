@@ -18,9 +18,14 @@ class LocationDetailsMenu extends Component {
     render() {
         return (
             <div className="location-details-menu">
+            {
+                Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object ?
+                    null
+                :
+            
                 <div className="location-details-menu__title">
                     <p> Menu </p>
-                    {this.props.locationDetails.menu.length > 0 ?
+                    {this.props.locationDetails.menu.length > 1 ?
                         <div className="location-details-menu__dishes-list">
                             <List>
                                 {Object.keys(this._getFormattedMenuByCategory()).map((key, index) => {
@@ -47,25 +52,28 @@ class LocationDetailsMenu extends Component {
                         <p className="title-no-items"> There are no items in the menu</p>
                     }
                 </div>
+            }
             </div>
         );
     }
 
-    _sortMenuItemsByCategory() {
+    _sortMenuItemsByCategory(locationDetails) {
 
-        this.props.locationDetails.menu.sort(function (a, b) {
+
+        locationDetails.menu.sort(function (a, b) {
             var categoryA = a["category"].toLowerCase(), categoryB = b["category"].toLowerCase();
             return categoryA.localeCompare(categoryB);
         });
     }
 
-    _getFormattedMenuByCategory() {
+    _getFormattedMenuByCategory(locationDetails) {
 
-        this._sortMenuItemsByCategory();
+        
+        this._sortMenuItemsByCategory(locationDetails);
 
         let formattedMenu = {};
 
-        this.props.locationDetails.menu.forEach((item, index) => {
+        locationDetails.menu.forEach((item, index) => {
             let formattedItem = {
                 name: item.name,
                 price: item.price,
@@ -77,7 +85,7 @@ class LocationDetailsMenu extends Component {
                 formattedMenu[item.category] = [];
                 formattedMenu[item.category].push(formattedItem)
 
-            } else if (item.category === this.props.locationDetails.menu[index - 1].category) {
+            } else if (item.category === locationDetails.menu[index - 1].category) {
                 formattedMenu[item.category].push(formattedItem);
 
             } else {
@@ -86,6 +94,12 @@ class LocationDetailsMenu extends Component {
             }
         });
         return formattedMenu;
+    }
+
+    componentWillReceiveProps(newProps) {
+        if(newProps.locationDetails && newProps.locationDetails.menu.length > 1) {
+            this._getFormattedMenuByCategory(newProps.locationDetails);
+        }
     }
 
 }
