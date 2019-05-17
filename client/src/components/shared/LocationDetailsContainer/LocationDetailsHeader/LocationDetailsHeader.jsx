@@ -166,7 +166,14 @@ class LocationDetailsHeader extends Component {
     }
 
     componentDidMount() {
+        
         this.props.fetchLocationById(this.props.locationId);
+    }
+
+    componentWillReceiveProps(newProps) {
+        if(newProps.locationDetails) {
+            this.props.fetchLocationById(this.props.locationId);
+        }
     }
 
 }
