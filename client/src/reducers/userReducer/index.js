@@ -151,13 +151,14 @@ export const saveGoogleSearchFood = (data) => {
                             type: 'SAVE_GOOGLE_SEARCH_FOOD',
                             payload: user
                         });
+                        resolve();
                     });
-                    resolve();
+                    
                 } else {
                     response.json().then((err) => {
-                        // notificationError(err);
+                        reject(err);
                     });
-                    reject();
+                    
                 }
             });
         });

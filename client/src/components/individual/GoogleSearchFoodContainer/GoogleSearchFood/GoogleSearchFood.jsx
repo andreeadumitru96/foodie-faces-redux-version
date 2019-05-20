@@ -33,9 +33,9 @@ class GoogleSearchFood extends Component {
 					</div>
 
 								
-					{/* <div className="google-search-food__items-wrapper">
-						{this.props.googleSearchedFood.length > 0 ?
-							<div>
+					<div className="">
+						{this.props.googleSearchedFood ?
+							<div className="google-search-food__items-wrapper">
 								{this.props.googleSearchedFood.slice(this.props.googleSearchedFood.length - 5, this.props.googleSearchedFood.length).map((search) => {
 									return (
 										<div className="google-search-food__list-item" key={search.urlResult}>
@@ -50,7 +50,7 @@ class GoogleSearchFood extends Component {
 						}
 
 
-					</div> */}
+					</div>
 				</div>
 			
 			</div>

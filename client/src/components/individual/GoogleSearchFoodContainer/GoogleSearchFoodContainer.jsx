@@ -25,7 +25,7 @@ class GoogleSearchFoodContainer extends Component {
 			<div>
 				<GoogleSearchFood
 					onImageDrop = {this._onImageDrop}
-					googleSearchedFood = {this.props.googleSearchedFood} 
+					googleSearchedFood = {this.state.googleSearchedFood} 
 					isLoadingActive = {this.state.isLoadingActive}
 				/>
 			</div>
@@ -69,6 +69,7 @@ class GoogleSearchFoodContainer extends Component {
 			userId: cookies.get('user')._id
         }
         
+        
         this.props.saveGoogleSearchFood(googleSearchData).then(() => {
             cookies.set('user', this.props.userDetails);
                         
@@ -76,9 +77,17 @@ class GoogleSearchFoodContainer extends Component {
                 googleSearchedFood: this.props.userDetails.googleSearchedFood,
                 isLoadingActive: false
             });
-            successNotification('Google Search has been saved.');
+            successNotification('Google Search entry has been saved.');
+        }).catch(() => {
+            notificationError('Some error occurred while trying to save the Google Searched entry...');
         });
-	}
+    }
+    
+    // componentWillReceiveProps() {
+    //     if(newProps.userDetails) {
+
+    //     }
+    // }
 }
 
 
