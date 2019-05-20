@@ -7,5 +7,6 @@ module.exports = function(app) {
     app.post('/api/removeLocationWIshLIst', userController.removeLocationWishList);
     app.get('/api/getLocationsWishList/:userId', userController.getLocationsWishList);
     app.post('/api/getOwnerLocations', userController.getOwnerLocations);
+    app.post('/api/saveGoogleSearchFood', userController.saveGoogleSearchFood);
     // app.post('/api/user/:userId/getLocationWishListByName', userController.getLocationWishListByName);
 };

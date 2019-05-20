@@ -72,7 +72,15 @@ let UserSchema = new Schema({
     groups: [{
         type: Schema.Types.ObjectId, 
         ref:"Group"
-    }]
+    }],
+    googleSearchedFood: [{
+        date: {
+			type: Date,
+			default: Date.now
+		},
+        uploadedImgUrl: String,
+        urlResult: String,
+    }],
 });
 
 module.exports = mongoose.model('User', UserSchema);

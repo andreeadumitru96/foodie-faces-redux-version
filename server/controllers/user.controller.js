@@ -118,6 +118,31 @@ exports.getOwnerLocations = (req, res) => {
     });
 }
 
+exports.saveGoogleSearchFood = (req, res) => {
+    if(!req.body) {
+        return res.status(400).send({message: req.body});
+	}
+
+	let dataLoadedImage = {
+		uploadedImgUrl: req.body.uploadedImgUrl,
+        urlResult: req.body.urlResult,
+	}
+
+	let searchQuery = {
+		_id: req.body.userId
+	}
+
+	User.findOneAndUpdate(searchQuery, { $push: { googleSearchedFood: dataLoadedImage } }, {new: true}, function(err, user){
+        if(err) {
+            console.log(err);
+            res.status(500).send({message: "There was an error trying to save Google searched food"});
+        } else {
+            console.log(user);
+			res.status(200).send(user);
+		}
+	});
+}
+
 // exports.getLocationWishListByName = function(req, res) {
 //     if(!req.body) {
 //         res.status(400).send({ message: error})0000000000
