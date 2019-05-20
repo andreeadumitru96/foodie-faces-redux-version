@@ -168,11 +168,13 @@ class LocationDetailsHeader extends Component {
     componentDidMount() {
         
         this.props.fetchLocationById(this.props.locationId);
+
     }
 
     componentWillReceiveProps(newProps) {
-        if(newProps.locationDetails) {
+        if(newProps.locationDetails._id !== newProps.locationId) {
             this.props.fetchLocationById(this.props.locationId);
+            
         }
     }
 

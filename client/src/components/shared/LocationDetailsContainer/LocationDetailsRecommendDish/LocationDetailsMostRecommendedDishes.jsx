@@ -41,13 +41,15 @@ class LocationDetailsMostRecommendedDishes extends Component {
                                     </div>
                                 </div>
                                 :
-                               null
+                                <div className="title-no-dishes">
+                                    <p>There are no recommended dishes yet</p>
+                                </div>
                             }
                         </div>
                     :
-                        <div className="title-no-dishes">
-                            <p>There are no recommended dishes yet</p>
-                        </div>
+                        null
+                    
+                       
             }
                 
             </div>
