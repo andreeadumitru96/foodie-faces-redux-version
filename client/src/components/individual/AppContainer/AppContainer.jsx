@@ -3,7 +3,7 @@ import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 
-import MemoraeLocationById from '../MemoraeLocationById/MemoraeLocationById'; 
+// import MemoraeLocationById from '../MemoraeLocationById/MemoraeLocationById'; 
 import {cookies} from '../../shared/constants';
 
 import {
@@ -18,6 +18,7 @@ import PrivateRoute from '../../shared/PrivateRoute/PrivateRoute';
 import HomeContainer from '../HomeContainer/HomeContainer';
 import MyAccountContainer from '../MyAccountContainer/MyAccountContainer';
 import LocationAdministrator from '../LocationAdministrator/LocationAdministrator';
+import GoogleSearchFoodContainer from '../GoogleSearchFoodContainer/GoogleSearchFoodContainer';
 // import NotFoundRoute from '../../shared/NotFoundRoute/NotFoundRoute';
 
 import { Provider } from 'react-redux';
@@ -90,7 +91,7 @@ class AppContainer extends Component {
                                     
                                 <PrivateRoute exact path='/' component={this.state.componentToRender} authenticated={this.state.authenticated} />
                                 <PrivateRoute exact path='/myaccount' component={MyAccountContainer} authenticated={this.state.authenticated}/>
-                                       
+                                <PrivateRoute exact path='/search-food' component={GoogleSearchFoodContainer} authenticated={this.state.authenticated}/>      
                                     
                                 
                                 

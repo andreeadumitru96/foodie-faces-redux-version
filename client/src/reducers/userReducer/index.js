@@ -3,7 +3,8 @@
 //Actions
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
-const FETCH_OWNER_LOCATIONS = 'FETCH_OWNER_LOCATIONS'
+const FETCH_OWNER_LOCATIONS = 'FETCH_OWNER_LOCATIONS';
+const SAVE_GOOGLE_SEARCH_FOOD = 'SAVE_GOOGLE_SEARCH_FOOD';
 
 
 const initialState = {
@@ -24,6 +25,12 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ownerLocations: action.payload
+            }
+
+        case SAVE_GOOGLE_SEARCH_FOOD: 
+            return {
+                ...state,
+                userDetails: action.payload
             }
         
         default:
@@ -117,6 +124,40 @@ export const fetchOwnerLocations = (ownerId) => {
                     response.json().then((err) => {
                         reject(err.message);
                     });
+                }
+            });
+        });
+    }
+}
+
+
+export const saveGoogleSearchFood = (data) => {
+    return(dispatch) => {
+        return new Promise((resolve, reject) => {
+
+            fetch('http://localhost:3001/api/saveGoogleSearchFood', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'post',
+                body: JSON.stringify(data)
+            }).then((response) => {
+                if(response.status === 200) {
+                    response.json().then((user) => {
+
+                        console.log(user);
+                        dispatch({
+                            type: 'SAVE_GOOGLE_SEARCH_FOOD',
+                            payload: user
+                        });
+                    });
+                    resolve();
+                } else {
+                    response.json().then((err) => {
+                        // notificationError(err);
+                    });
+                    reject();
                 }
             });
         });

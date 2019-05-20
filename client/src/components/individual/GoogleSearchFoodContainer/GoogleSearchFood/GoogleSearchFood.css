@@ -1,0 +1,36 @@
+.google-search-food__wrapper {
+	margin-top: 100px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.google-search-food__dropzone {
+	display: flex;
+	justify-content: center;
+}
+
+.google-search-food__list-container {
+	margin-top: 20px;
+
+}
+
+.google-search-food__list-container h1 {
+	font-size: 24px;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.google-search-food__list-item img{
+	max-width: 180px;
+	height: auto;
+	max-height: 150px;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+.google-search-food__items-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
