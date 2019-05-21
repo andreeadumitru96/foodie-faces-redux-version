@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchLocationsByCity } from '../../../reducers/locationReducer/index';
-import { fetchFilteredLocations } from '../../../reducers/locationReducer/index';
 import LocationSearch from './LocationSearch/LocationSearch';
 
 class LocationSearchContainer extends Component {

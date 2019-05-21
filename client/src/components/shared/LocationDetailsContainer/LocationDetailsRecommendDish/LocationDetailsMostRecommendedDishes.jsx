@@ -33,7 +33,7 @@ class LocationDetailsMostRecommendedDishes extends Component {
                                         {this.props.mostRecommendedDishes.map(dish => {
                                             return (
                                                 <div className="item-container">
-                                                    <img src={dish.image}/>
+                                                    <img src={dish.image} alt=""/>
                                                     <p>{dish.name}</p>
                                                 </div>
                                             )

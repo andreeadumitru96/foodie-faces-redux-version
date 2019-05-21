@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import GoogleMap from './GoogleMap/GoogleMap';
 
 import { connect } from 'react-redux';
-
-import store from '../../../../store';
 import { fetchLocationsByCity } from '../../../../reducers/locationReducer/index';
 
 class GoogleMapContainer extends Component {

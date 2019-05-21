@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { cookies } from '../../../components/shared/constants';
 import OwnerDashboard from './OwnerDashboard/OwnerDashboard';
 import OwnerLocationInfo from './OwnerLocationInfo/OwnerLocationInfo';
 import { fetchOwnerLocations } from '../../../reducers/userReducer/index';

@@ -23,7 +23,7 @@ class GoogleSearchFood extends Component {
 						multiple={false}
 						accept="image/*"
 						onDrop={this.props.onImageDrop}>
-						<p>Drop an image or click to select a file to upload.</p>
+						<p className="drop-image-text">Drop an image or click to select a file to upload.</p>
 					</Dropzone>
 				</div>
 

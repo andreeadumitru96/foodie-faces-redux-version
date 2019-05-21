@@ -10,7 +10,6 @@ import AutoComplete from 'material-ui/AutoComplete';
 import './LocationDetailsAddDish.css';
 import { CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL } from '../../../constants';
 import { notificationError } from '../../../constants';
-import { successNotification } from '../../../constants';
 import { addDishInMenu } from '../../../../../reducers/locationReducer/index';
 import { fetchLocationById } from '../../../../../reducers/locationReducer/index';
 

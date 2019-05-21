@@ -131,7 +131,7 @@ class OwnerLocationInfo extends Component {
                                             {this.props.locationDetails.images.map((image, index) => (
 
                                                 <GridTile key={image} cols={index % 3 === 0 ? 2 : 1} rows={index % 3 === 0 ? 2 : 1}>
-                                                    <img src={image} />
+                                                    <img src={image} alt=""/>
                                                 </GridTile>
                                             ))}
                                         </GridList>
