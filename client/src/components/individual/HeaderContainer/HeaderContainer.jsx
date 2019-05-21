@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import Header from './Header/Header';
 // import {notificationError} from '../../shared/constants';
@@ -12,7 +11,10 @@ class HeaderContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            wishList: props.wishList
+            wishList: props.wishList,
+            isGoogleSearchMount: props.isGoogleSearchMount,
+            isMyAccountMount: props.isMyAccountMount,
+            isLocationSearchMount: props.isLocationSearchMount
         };
         // this.fetchedLocationsData = [];
         this._onSelectCity = this._onSelectCity.bind(this);
@@ -26,7 +28,9 @@ class HeaderContainer extends Component {
                 citiesList = {this.props.citiesList}
                 onSelectCity = {this._onSelectCity}
                 onSelectLocation = {this._onSelectLocation}
-                isMyAccountMount = {this.props.isMyAccountMount}
+                isMyAccountMount = {this.state.isMyAccountMount}
+                isGoogleSearchMount = {this.state.isGoogleSearchMount}
+                isLocationSearchMount = {this.state.isLocationSearchMount}
                 wishListFormattedByName = {this.props.wishListFormattedByName}
             />
             
@@ -36,11 +40,11 @@ class HeaderContainer extends Component {
 
     componentDidMount() {
         this.props.fetchCities();
-        
-        
     }
 
-
+    componentWillReceiveProps(newProps) {
+       console.log(newProps);
+    }
 
     
 

@@ -41,7 +41,6 @@ class AppContainer extends Component {
 
     _createUserCookie(userData) {
         cookies.set('user', userData);
-        
     }
 
     _updateComponentToRender = (componentToRender) => {

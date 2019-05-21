@@ -21,6 +21,7 @@ class HomeContainer extends Component {
 			<div>
                 <HeaderContainer 
                     manageBodyComponents = {this._manageBodyComponents}
+                    isLocationSearchMount = {true}
                 />
                 <BodyContainer 
                     componentToMount = {this.state.componentMountInBody} 

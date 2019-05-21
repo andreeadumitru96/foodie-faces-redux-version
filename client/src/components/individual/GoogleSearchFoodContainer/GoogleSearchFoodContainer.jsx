@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GoogleSearchFood from './GoogleSearchFood/GoogleSearchFood';
+// import { HeaderContainer } from '../HeaderContainer/HeaderContainer'
 import {CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL, cookies, successNotification, notificationError} from '../../shared/constants';
 import { saveGoogleSearchFood } from '../../../reducers/userReducer/index';
+import HeaderContainer from '../HeaderContainer/HeaderContainer';
 
 
 class GoogleSearchFoodContainer extends Component {
@@ -23,6 +25,9 @@ class GoogleSearchFoodContainer extends Component {
 	render() {
 		return (
 			<div>
+				<HeaderContainer
+					isGoogleSearchMount={true}
+				/>
 				<GoogleSearchFood
 					onImageDrop = {this._onImageDrop}
 					googleSearchedFood = {this.state.googleSearchedFood} 

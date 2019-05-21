@@ -36,6 +36,9 @@ class Header extends Component {
                             }             
                         />
                     :
+                        null
+                    }
+                    {this.props.isLocationSearchMount ?         
                         <AppBar
                             iconElementRight={<AvatarMenuContainer/>}
                             iconElementLeft={
@@ -48,6 +51,24 @@ class Header extends Component {
                                 />
                             }          
                         />
+                    :
+                        null
+                    }
+                    {this.props.isGoogleSeachMount ?         
+                        <AppBar
+                            iconElementRight={<AvatarMenuContainer/>}
+                            iconElementLeft={
+                                <AutoComplete
+                                    hintText="Choose a city..."
+                                    dataSource={this.props.citiesList}
+                                    filter={AutoComplete.caseInsensitiveFilter}
+                                    onNewRequest = {this.props.onSelectCity}                               
+                                    className="appbar-autocomplete-cities"          
+                                />
+                            }          
+                        />
+                    :
+                        null
                     }
                 </div>  
 
