@@ -54,17 +54,11 @@ class Header extends Component {
                     :
                         null
                     }
-                    {this.props.isGoogleSeachMount ?         
+                    {this.props.isGoogleSearchMount ?         
                         <AppBar
                             iconElementRight={<AvatarMenuContainer/>}
                             iconElementLeft={
-                                <AutoComplete
-                                    hintText="Choose a city..."
-                                    dataSource={this.props.citiesList}
-                                    filter={AutoComplete.caseInsensitiveFilter}
-                                    onNewRequest = {this.props.onSelectCity}                               
-                                    className="appbar-autocomplete-cities"          
-                                />
+                                <div> </div>
                             }          
                         />
                     :

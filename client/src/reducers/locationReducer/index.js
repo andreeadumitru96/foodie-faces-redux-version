@@ -170,7 +170,7 @@ export const fetchAllLocations = () => {
             }).then(function(response) {
                 if(response.status === 200) {
                     response.json().then((locations) => {
-                        console.log(locations);
+                        console.log("toate loc:", locations);
                         dispatch({
                             type: FETCH_ALL_LOCATIONS,
                             payload: locations
@@ -289,7 +289,7 @@ export const getLocationById = (locationId, locationsType) => {
         if(locationsType === "SimilarLocationsComponent") {
             locationsList = getState().locations.similarLocations;
         } else if(locationsType === 'WishListComponent') {
-            console.log(getState().locations.allLocations);
+            // console.log(getState().locations.allLocations);
             locationsList = getState().locations.allLocations;
         } else {
             locationsList = getState().locations.locationsList;

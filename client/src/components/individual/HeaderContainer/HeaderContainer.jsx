@@ -41,13 +41,7 @@ class HeaderContainer extends Component {
     componentDidMount() {
         this.props.fetchCities();
     }
-
-    componentWillReceiveProps(newProps) {
-       console.log(newProps);
-    }
-
     
-
     _onSelectCity = function(cityName, index) {
         const cityData = {
             cityName: cityName

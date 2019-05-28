@@ -82,7 +82,7 @@ class OwnerLocationInfo extends Component {
                                     : null
                             }
                             {
-                                this.props.locationDetails.phone[0]
+                                this.props.locationDetails.phone
                                     ?
                                     <div className="information-phone information-item">
                                         <i className="fa fa-phone"> Phone Number: </i>
@@ -117,27 +117,34 @@ class OwnerLocationInfo extends Component {
                             
                         </div>
                         <div className="owner-location-images location-item-padding">
-                            <p class="owner-location-info-title">Images</p>
-                            {
-                                this.props.locationDetails.images.length > 0
-                                    ?
-                                    <div style={styles.root} className="location-details-grid">
-                                        <GridList
-                                            cols={2}
-                                            cellHeight={200}
-                                            padding={1}
-                                            style={styles.gridList}
-                                        >
-                                            {this.props.locationDetails.images.map((image, index) => (
+                        {this.props.locationDetails.images ? 
+                            <div>
+                        
+                                <p class="owner-location-info-title">Images</p>
+                                {
+                                    this.props.locationDetails.images.length > 0
+                                        ?
+                                        <div style={styles.root} className="location-details-grid">
+                                            <GridList
+                                                cols={2}
+                                                cellHeight={200}
+                                                padding={1}
+                                                style={styles.gridList}
+                                            >
+                                                {this.props.locationDetails.images.map((image, index) => (
 
-                                                <GridTile key={image} cols={index % 3 === 0 ? 2 : 1} rows={index % 3 === 0 ? 2 : 1}>
-                                                    <img src={image} alt=""/>
-                                                </GridTile>
-                                            ))}
-                                        </GridList>
-                                    </div>
-                                    : <p class="location-item-no-description">There are no images yet</p>
-                            }
+                                                    <GridTile key={image} cols={index % 3 === 0 ? 2 : 1} rows={index % 3 === 0 ? 2 : 1}>
+                                                        <img src={image} alt=""/>
+                                                    </GridTile>
+                                                ))}
+                                            </GridList>
+                                        </div>
+                                        : <p class="location-item-no-description">There are no images yet</p>
+                                }
+                            </div>
+                            : 
+                            null
+                        }
                         </div>
                         
                         {/* <div className="owner-location-reviews location-item-padding">
