@@ -1,7 +1,7 @@
 var Location = require('../models/location.model.js');
 
 exports.getAllLocations = function (req, res) {
-    Location.find({}).limit(10).exec(function (err, locations) {
+    Location.find({}).exec(function (err, locations) {
         if (err) {
             res.status(500).send({ message: "Some error occurred while searching for the Locations." })
         } else if (locations && locations != null) {
