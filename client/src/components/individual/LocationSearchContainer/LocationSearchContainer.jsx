@@ -26,18 +26,24 @@ class LocationSearchContainer extends Component {
     }
 
     componentWillMount() {
-        this.forceUpdate();
+        // this.forceUpdate();
     }
 
     componentDidMount() {
         this.props.fetchLocationsByCity();
-        
+    }
+
+    componentWillReceiveProps(newProps) {
+        if(newProps.selectedCity && this.props.selectedCity.cityName !== newProps.selectedCity.cityName) {
+            this.props.fetchLocationsByCity();
+        }
     }
 
 }
 
 const mapStateToProps = (state) => ({
-    locationsList: state.locations.locationsList
+    locationsList: state.locations.locationsList,
+    selectedCity: state.locations.selectedCity
 });
   
 export default connect(mapStateToProps, { fetchLocationsByCity })(LocationSearchContainer);

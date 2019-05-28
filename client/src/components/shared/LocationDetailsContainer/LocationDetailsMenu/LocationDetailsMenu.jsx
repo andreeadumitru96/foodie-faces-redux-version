@@ -57,23 +57,23 @@ class LocationDetailsMenu extends Component {
         );
     }
 
-    _sortMenuItemsByCategory(locationDetails) {
+    _sortMenuItemsByCategory() {
 
 
-        locationDetails.menu.sort(function (a, b) {
+        this.props.locationDetails.menu.sort(function (a, b) {
             var categoryA = a["category"].toLowerCase(), categoryB = b["category"].toLowerCase();
             return categoryA.localeCompare(categoryB);
         });
     }
 
-    _getFormattedMenuByCategory(locationDetails) {
+    _getFormattedMenuByCategory() {
 
         
-        this._sortMenuItemsByCategory(locationDetails);
+        this._sortMenuItemsByCategory();
 
         let formattedMenu = {};
 
-        locationDetails.menu.forEach((item, index) => {
+        this.props.locationDetails.menu.forEach((item, index) => {
             let formattedItem = {
                 name: item.name,
                 price: item.price,
@@ -85,7 +85,7 @@ class LocationDetailsMenu extends Component {
                 formattedMenu[item.category] = [];
                 formattedMenu[item.category].push(formattedItem)
 
-            } else if (item.category === locationDetails.menu[index - 1].category) {
+            } else if (item.category === this.props.locationDetails.menu[index - 1].category) {
                 formattedMenu[item.category].push(formattedItem);
 
             } else {
@@ -97,9 +97,10 @@ class LocationDetailsMenu extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if(newProps.locationDetails && newProps.locationDetails.menu.length > 1) {
-            this._getFormattedMenuByCategory(newProps.locationDetails);
-        }
+        // if(newProps.locationDetails && newProps.locationDetails.menu.length > 1) {
+        //     debugger
+        //     this._getFormattedMenuByCategory();
+        // }
     }
 
 }

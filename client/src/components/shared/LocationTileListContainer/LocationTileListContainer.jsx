@@ -71,6 +71,13 @@ class LocationTileListContainer extends Component {
 		}
     }
     
+    componentWillUnmount() {
+        this.setState({
+            passedLocations: [],
+            lastPassedLocationsIndex: 0,
+            isDataLeftToRender: true
+        })
+    }
 }
 const mapStateToProps = (state) => ({
 

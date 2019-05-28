@@ -170,7 +170,6 @@ export const fetchAllLocations = () => {
             }).then(function(response) {
                 if(response.status === 200) {
                     response.json().then((locations) => {
-                        console.log("toate loc:", locations);
                         dispatch({
                             type: FETCH_ALL_LOCATIONS,
                             payload: locations

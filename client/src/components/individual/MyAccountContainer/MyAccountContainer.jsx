@@ -29,7 +29,6 @@ class MyAccountContainer extends Component {
 
     componentDidMount() {
         this.props.fetchAllLocations().then(() => {
-            console.log("all locations:", this.props.allLocations)
             this._getLocationsWishList();
         });
         
@@ -39,7 +38,6 @@ class MyAccountContainer extends Component {
         let userId = cookies.get('user')._id;
 
         this.props.fetchWishListLocations(userId).then(() => {
-            console.log("wish list locations", this.props.wishListLocations);
         }).catch((errorMessage) => {
             notificationError(errorMessage);
         });

@@ -66,7 +66,7 @@ class LocationDetailsMostRecommendedDishes extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if(newProps.locationDetails) {
+        if(newProps.locationDetails && this.props.locationDetails !== newProps.locationDetails) {
             this._getMostRecommendedDishes(newProps.locationDetails);
         }
         

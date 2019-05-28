@@ -74,7 +74,7 @@ class LocationDetailsSimilarLocations extends Component {
         this.props.fetchSimilarLocations(locationInfo, locationDetails._id);  
     }
     componentWillReceiveProps(newProps) {
-        if(newProps.locationDetails) {
+        if(newProps.locationDetails && this.props.locationDetails !== newProps.locationDetails) {
             this._getSimilarLocations(newProps.locationDetails); 
         }
         
