@@ -9,6 +9,7 @@ import LocationDetailsMap from '../LocationDetailsMap/LocationDetailsMap';
 import LocationDetailsMenu from '../LocationDetailsMenu/LocationDetailsMenu';
 import LocationDetailsMostRecommendedDishes from '../LocationDetailsRecommendDish/LocationDetailsMostRecommendedDishes';
 import LocationDetailsSimilarLocations from '../LocationDetailsSimilarLocations/LocationDetailsSimilarLocations';
+import LocationDetailsCategories from '../LocationDetailsCategories/LocationDetailsCategories';
 
 class LocationDetails extends Component {
 	constructor(props) {
@@ -37,6 +38,8 @@ class LocationDetails extends Component {
                 </div>
                 
                 <LocationDetailsActions />
+                
+                <LocationDetailsCategories/>
 
                 <LocationDetailsMenu/>
 

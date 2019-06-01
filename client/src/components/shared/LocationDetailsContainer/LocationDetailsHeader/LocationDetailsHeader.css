@@ -3,8 +3,8 @@
     font-size: 34px;
     font-weight: bold;
     margin-top: 66px;
-    padding-top: 26px;
-    padding-bottom: 20px;
+    padding-top: 36px;
+    padding-bottom: 30px;
     background-color: white;
     border-bottom: 5px solid #f6f4f4;
     display: flex;
@@ -13,10 +13,10 @@
     align-items: center;
 }
 
-.location-details-header__information {
+/* .location-details-header__information {
     display: flex;
     flex-direction: row;
-}
+} */
 
 .location-details-header__information .fa {
     color: rgb(46, 125, 50);
@@ -25,11 +25,16 @@
 .information__general {
     display: flex;
     flex-direction: column;
-    padding: 30px;
-    border-right: 5px solid #f6f6f6;
-    border-bottom: 5px solid #f6f6f6;
+    padding: 28px;
+    /* border-right: 5px solid #f6f6f6; */
+    /* border-bottom: 5px solid #f6f6f6; */
     padding-right: 15px;
-    width: 50%;
+    align-items: center;
+    /* width: 50%; */
+}
+
+.categories-wrapper {
+    display: flex;
 }
 
 .information-item {
@@ -37,15 +42,20 @@
 }
 
 .information-categories {
-    width: 50%;
+    /* width: 50%; */
     padding: 30px;
+    padding-left: 44px;
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     border-bottom: 5px solid #f6f6f6;
 }
 
+.main-information-details {
+    padding-left: 6px;
+}
+
 .information-categories__general {
-    margin-right: 20px;
+    margin-right: 90px;
 }
 
 .information-categories__general .label-container {
@@ -70,10 +80,10 @@
     font-weight: bold;
 }
 
-.information-categories__general ul {
+/* .information-categories__general ul {
     max-height: 100px;
     overflow: auto; 
-}
+} */
 
 .infromation-categories__cuisine__no-categories {
     font-size: 16px;
