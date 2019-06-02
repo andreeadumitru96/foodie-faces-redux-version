@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import socketIOClient from "socket.io-client";
 
 import { API_URL } from '../constants';
+import { API_PORT_URL, HOST_URL } from '../constants'
+
 
 import { saveLocationToWishList } from '../../../reducers/locationReducer/index.js';
 import { removeLocationFromWishList } from '../../../reducers/locationReducer/index.js';
@@ -63,7 +65,7 @@ class LocationTileItemContainer extends Component {
     }
 
     _onListenSocket = () => {
-        const socket = socketIOClient(API_URL);
+        const socket = socketIOClient(`http://${HOST_URL}:${API_PORT_URL}`);
         socket.on('onSendUpdatedLocation', (updatedLocation) => {
 
             if(updatedLocation._id === this.state.locationItem._id) {

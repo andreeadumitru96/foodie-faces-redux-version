@@ -8,6 +8,9 @@ import { fade } from 'material-ui/utils/colorManipulator'
 export const cookies = new Cookies();
 export const API_URL = 'localhost:3001';
 
+export const HOST_URL = window.location.hostname ? window.location.hostname : 'localhost';  
+export const API_PORT_URL = '3001';
+
 export const notificationError = (message) => {
 	Alert.error(message, {
 		position: 'bottom-right',
@@ -28,7 +31,7 @@ export const getTheme = () => {
   let overwrites = {
     "palette": {
         "primary1Color": Colors.green800,
-        "accent1Color": fade(Colors.lightWhite, 0.54)
+        "accent1Color": fade(Colors.green900, 0.9)
     }
 };
   return getMuiTheme(baseTheme, overwrites);

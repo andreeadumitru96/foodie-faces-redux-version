@@ -10,6 +10,7 @@ import socketIOClient from "socket.io-client";
 
 
 import { API_URL } from '../../../shared/constants';
+import { API_PORT_URL, HOST_URL } from '../../../shared/constants'
 
 import { fetchLocationById } from '../../../../reducers/locationReducer/index';
 import '../OwnerLocationInfo/OwnerLocationInfo.css';
@@ -207,7 +208,7 @@ class OwnerLocationInfo extends Component {
     }
 
     onUpdateSeatsSocketSend = () => {
-        const socket = socketIOClient(API_URL);
+        const socket = socketIOClient(`http://${HOST_URL}:${API_PORT_URL}`);
 
         let locationToUpdate = {
             locationId: this.props.locationDetails._id,

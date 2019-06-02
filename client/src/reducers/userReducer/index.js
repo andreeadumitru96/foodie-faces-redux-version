@@ -1,9 +1,14 @@
-
+import { 
+    HOST_URL,
+    API_PORT_URL
+ } from '../../components/shared/constants'
 
 //Actions
 const LOGIN = 'LOGIN';
 const FETCH_OWNER_LOCATIONS = 'FETCH_OWNER_LOCATIONS';
 const SAVE_GOOGLE_SEARCH_FOOD = 'SAVE_GOOGLE_SEARCH_FOOD';
+
+
 
 
 const initialState = {
@@ -43,7 +48,7 @@ export const userReducer = (state = initialState, action) => {
 export const loginUser = function (userCredentials) {
     return function (dispatch) {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:3001/api/login', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/login`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -75,7 +80,7 @@ export const loginUser = function (userCredentials) {
 export const registerUser = function (userCredentials) {
     return function (dispatch) {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:3001/api/register', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/register`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -102,7 +107,7 @@ export const registerUser = function (userCredentials) {
 export const fetchOwnerLocations = (ownerId) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:3001/api/getOwnerLocations', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/getOwnerLocations`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -134,7 +139,7 @@ export const saveGoogleSearchFood = (data) => {
     return(dispatch) => {
         return new Promise((resolve, reject) => {
 
-            fetch('http://localhost:3001/api/saveGoogleSearchFood', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/saveGoogleSearchFood`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'

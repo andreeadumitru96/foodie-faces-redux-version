@@ -1,4 +1,8 @@
 import * as defaultImage from '../../assets/location-default-image.jpg';
+import { 
+    HOST_URL,
+    API_PORT_URL
+ } from '../../components/shared/constants'
 
 //Actions
 const FETCH_CITIES = 'FETCH_CITIES';
@@ -134,7 +138,7 @@ export const locationReducer = (state = initialState, action) => {
 
 export const fetchCities = function() {
     return function(dispatch) { 
-        fetch('http://localhost:3001/api/location/getLocationsCities', {
+        fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/getLocationsCities`, {
             headers: {
                  'Accept': 'application/json',
                  'Content-Type': 'application/json'
@@ -161,7 +165,7 @@ export const fetchCities = function() {
 export const fetchAllLocations = () => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:3001/api/location/getAllLocations', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/getAllLocations`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -187,7 +191,7 @@ export const fetchAllLocations = () => {
 export const fetchLocationsByCity = function() {
     return (dispatch, getState) => {
         const selectedCity = getState().locations.selectedCity;
-        fetch('http://localhost:3001/api/location/getLocationsByCity', {
+        fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/getLocationsByCity`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -234,7 +238,7 @@ const setDefaultProperties = (locationsListByCity) => {
 
 export const fetchMostRatedLocations = () => {
     return (dispatch) => {
-        fetch('http://localhost:3001/api/location/getMostRatedLocations', {
+        fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/getMostRatedLocations`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -259,7 +263,7 @@ export const fetchLocationById = (id) => {
    
     return(dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch(`http://localhost:3001/api/location/getSingleLocation/${id}`, {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/getSingleLocation/${id}`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -302,7 +306,7 @@ export const getLocationById = (locationId, locationsType) => {
 export const saveLocationToWishList = (data) => {
     return(dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:3001/api/saveLocationWishList', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/saveLocationWishList`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -329,7 +333,7 @@ export const saveLocationToWishList = (data) => {
 export const removeLocationFromWishList = (locationToRemove) => {
     return(dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:3001/api/removeLocationWishList', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/removeLocationWishList`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -363,7 +367,7 @@ export const removeLocationFromWishList = (locationToRemove) => {
 export const fetchSimilarLocations = (locationInfo, locationId) => {
 
     return (dispatch) => {
-        fetch(`http://localhost:3001/api/location/getSimilarLocations`, {
+        fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/getSimilarLocations`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -393,7 +397,7 @@ export const fetchSimilarLocations = (locationInfo, locationId) => {
 export const fetchWishListLocations = (userId) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch(`http://localhost:3001/api/getLocationsWishList/${userId}`, {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/getLocationsWishList/${userId}`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -423,7 +427,7 @@ export const fetchWishListLocations = (userId) => {
 export const addDishInMenu = (newDish) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:3001/api/location/addDish', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/addDish`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -452,7 +456,7 @@ export const addDishInMenu = (newDish) => {
 export const addLocationReview = (reviewDetails) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:3001/api/location/addReview', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/addReview`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -485,7 +489,7 @@ export const addLocationReview = (reviewDetails) => {
 export const recommendLocationDish = (menuDish) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch(`http://localhost:3001/api/location/recommendDish`, {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/recommendDish`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -517,7 +521,7 @@ export const recommendLocationDish = (menuDish) => {
 export const fetchMostRecommendedDishes = (locationId) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch(`http://localhost:3001/api/location/getRecommendedDishes/${locationId}`, {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/getRecommendedDishes/${locationId}`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -548,7 +552,7 @@ export const fetchMostRecommendedDishes = (locationId) => {
 export const fetchMenuDishes = (locationId) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch(`http://localhost:3001/api/location/getMenuDishes/${locationId}`, {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/getMenuDishes/${locationId}`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -580,7 +584,7 @@ export const fetchMenuDishes = (locationId) => {
 export const fetchAllFilters = () => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:3001/api/location/getFiltersByLocations', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/getFiltersByLocations`, {
                 headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
@@ -609,7 +613,7 @@ export const fetchAllFilters = () => {
 export const fetchFilteredLocations = (selectedFilters) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:3001/api/location/getFilteredLocations', {
+            fetch(`http://${HOST_URL}:${API_PORT_URL}/api/location/getFilteredLocations`, {
                 headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
