@@ -10,6 +10,9 @@
 	justify-content: center;
 }
 
+.google-search-food__dropzone:first-child {
+    cursor: pointer;
+}
 .google-search-food__list-container {
 	margin-top: 20px;
 

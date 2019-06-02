@@ -47,10 +47,6 @@ class Login extends Component {
                             onClick={this.props.onLogin}
                         />
                     </div>
-
-                    <div className="login__form-forgot-password">
-                        <a className="login__form-forgot-password-anchor"> Forgot your password? </a>
-                    </div>  
                     <div className="login__redirect-register">
                         <p className="login__redirect-register-text"onClick={this.props.toRegister}> Don't you have an account? Register here </p>     
                     </div>       

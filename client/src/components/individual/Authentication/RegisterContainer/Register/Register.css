@@ -1,7 +1,7 @@
 .register {
     height: 100vh;
     width: auto;
-    background-image: url("../../../../../assets/login-background.jpg");
+    background-image: url("../../../../../assets/register-background.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -15,9 +15,22 @@
     flex-direction: column;
     height: 100%;
     color: white;
-    font-size: 18px;
-    font-weight: bold; 
+    font-size: 16px;
+    /* font-weight: bold;  */
     /* margin-top: 25px; */ 
+}
+
+.register__form h1 {
+    font-size: 24px;
+}
+
+.register-form-wrapper {
+    background-color: rgba(87, 111, 56, 0.8);
+    padding: 20px;
+}
+
+.register__form label {
+    font-size: 14px;
 }
 
 .register__form-sign-up-button {
@@ -37,4 +50,39 @@
     margin-top: 2%;
     color: white;
     cursor: pointer;
+}
+
+.register__form-choose-role label {
+    color: white !important;
+}
+
+.register__form-choose-role {
+    width: 256px;
+} 
+
+.register__form-choose-role > div {
+    display: flex;
+    margin-top: 20px;
+}
+
+.register__form-choose-role > div > div > div {
+    align-items: center;
+}
+
+.register__form-choose-role > div > div > div > div {
+    margin-right: 7px !important;
+}
+
+.register__form-choose-role > div > div:nth-child(2) {
+    margin-left: 50px;
+}
+
+
+.register__form-choose-role svg :nth-child(2n+1) {
+    color: rgb(255, 255, 255);
+    fill: rgb(255, 255, 255);
+}
+
+.register__form-choose-role label {
+    font-size: 14px;
 }

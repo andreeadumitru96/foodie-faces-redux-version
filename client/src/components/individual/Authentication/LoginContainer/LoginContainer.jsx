@@ -41,8 +41,7 @@ class LoginContainer extends Component {
             email: this.child.email.getValue(),
             password: this.child.password.getValue()
         }
-        this._sendUserCredentials(userCredentials);
-        
+        this._sendUserCredentials(userCredentials);        
     }
 
     _sendUserCredentials(userCredentials) {

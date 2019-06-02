@@ -16,6 +16,10 @@
     padding-top: 14px;
 }
 
+.choose-location-dropdown > div > div div:nth-child(2) {
+    color: white !important;
+}
+
 .choose-location-title {
     font-size: 24px;
     color: white;
