@@ -54,4 +54,5 @@ const serverInstance = app.listen(app.get("port"), () => {
 
 //instantiate socket io
 const io = require('./socket').listen(serverInstance);
+io.set('origins', '*:*');
 
