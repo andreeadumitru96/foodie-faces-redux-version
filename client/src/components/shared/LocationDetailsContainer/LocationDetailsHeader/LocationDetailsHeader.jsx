@@ -52,7 +52,7 @@ class LocationDetailsHeader extends Component {
                                         : null
                                 }
                                 {
-                                    this.props.locationDetails.phone[0]
+                                    this.props.locationDetails.phone
                                         ?
                                         <div className="information-phone information-item">
                                             <i className="fa fa-phone"> Phone Number: </i>

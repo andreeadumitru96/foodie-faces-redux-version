@@ -25,7 +25,7 @@ class LocationDetailsMenu extends Component {
             
                 <div className="location-details-menu__title">
                     <p> Menu </p>
-                    {this.props.locationDetails.menu.length > 1 ?
+                    {this.props.locationDetails.menu.length > 0 ?
                         <div className="location-details-menu__dishes-list">
                             <List>
                                 {Object.keys(this._getFormattedMenuByCategory()).map((key, index) => {
