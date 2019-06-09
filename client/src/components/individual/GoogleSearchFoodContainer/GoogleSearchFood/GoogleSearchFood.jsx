@@ -13,8 +13,9 @@ class GoogleSearchFood extends Component {
 	}
 
 	render() {
+        const googleSearchFood = this.props.googleSearchedFood ? [...this.props.googleSearchedFood] : [];
+        console.log(googleSearchFood);
 		return (
-			
 			<div className="google-search-food__wrapper">
 				{/* <LoadingIndicator isActive = {this.props.isLoadingActive}/> */}
 
@@ -36,7 +37,7 @@ class GoogleSearchFood extends Component {
 					<div className="">
 						{this.props.googleSearchedFood ?
 							<div className="google-search-food__items-wrapper">
-								{this.props.googleSearchedFood.slice(this.props.googleSearchedFood.length - 5, this.props.googleSearchedFood.length).map((search) => {
+								{googleSearchFood.slice(Math.max(googleSearchFood.length - 5, 0)).map((search) => {
 									return (
 										<div className="google-search-food__list-item" key={search.urlResult}>
 											<a href={search.urlResult} target="_blank"><img src={search.uploadedImgUrl} alt="" /></a>

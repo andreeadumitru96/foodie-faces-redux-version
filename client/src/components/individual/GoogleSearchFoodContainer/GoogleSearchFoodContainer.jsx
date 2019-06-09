@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import GoogleSearchFood from './GoogleSearchFood/GoogleSearchFood';
 // import { HeaderContainer } from '../HeaderContainer/HeaderContainer'
 import {CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL, cookies, successNotification, notificationError} from '../../shared/constants';
-import { saveGoogleSearchFood } from '../../../reducers/userReducer/index';
+import { saveGoogleSearchFood, setUSerDetailsFromCookies } from '../../../reducers/userReducer/index';
 import HeaderContainer from '../HeaderContainer/HeaderContainer';
 
 
@@ -14,7 +14,7 @@ class GoogleSearchFoodContainer extends Component {
 		this.state = {
 			uploadedFileCloudinaryUrl: '',
 			uploadedFile: '',
-			googleSearchedFood: cookies.get('user').googleSearchedFood,
+			// googleSearchedFood: cookies.get('user').googleSearchedFood,
 			isLoadingActive: false		
 		}
 		this._onImageDrop = this._onImageDrop.bind(this);
@@ -23,6 +23,7 @@ class GoogleSearchFoodContainer extends Component {
 	}
 
 	render() {
+        console.log(this.props.userDetails);
 		return (
 			<div>
 				<HeaderContainer
@@ -30,7 +31,7 @@ class GoogleSearchFoodContainer extends Component {
 				/>
 				<GoogleSearchFood
 					onImageDrop = {this._onImageDrop}
-					googleSearchedFood = {this.state.googleSearchedFood} 
+					googleSearchedFood = {this.props.userDetails.googleSearchedFood} 
 					isLoadingActive = {this.state.isLoadingActive}
 				/>
 			</div>
@@ -76,16 +77,26 @@ class GoogleSearchFoodContainer extends Component {
         
         
         this.props.saveGoogleSearchFood(googleSearchData).then(() => {
-            cookies.set('user', this.props.userDetails);
-                        
+            cookies.set('user', this.props.userDetails);                        
             this.setState({
-                googleSearchedFood: this.props.userDetails.googleSearchedFood,
+                // googleSearchedFood: this.props.userDetails.googleSearchedFood,
                 isLoadingActive: false
             });
             successNotification('Google Search entry has been saved.');
         }).catch(() => {
             notificationError('Some error occurred while trying to save the Google Searched entry...');
         });
+    }
+
+    // componentWillReceiveProps(newProps) {
+    //     console.log(newProps);
+    // }
+
+    componentDidMount() { 
+        if(Object.keys(this.props.userDetails).length === 0) {
+            const userDetails = cookies.get('user');
+            this.props.setUSerDetailsFromCookies(userDetails)
+        }
     }
     
     // componentWillReceiveProps() {
@@ -98,7 +109,6 @@ class GoogleSearchFoodContainer extends Component {
 
 const mapStateToProps = (state) => ({
     userDetails: state.users.userDetails
-
 });
 
-export default connect(mapStateToProps, { saveGoogleSearchFood })(GoogleSearchFoodContainer);
+export default connect(mapStateToProps, { saveGoogleSearchFood, setUSerDetailsFromCookies })(GoogleSearchFoodContainer);

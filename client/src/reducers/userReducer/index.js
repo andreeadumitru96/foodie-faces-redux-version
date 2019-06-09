@@ -7,6 +7,7 @@ import {
 const LOGIN = 'LOGIN';
 const FETCH_OWNER_LOCATIONS = 'FETCH_OWNER_LOCATIONS';
 const SAVE_GOOGLE_SEARCH_FOOD = 'SAVE_GOOGLE_SEARCH_FOOD';
+const SET_USER_DETAILS_FROM_COOKIES = 'SET_USER_DETAILS_FROM_COOKIES'
 
 
 
@@ -36,6 +37,12 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 userDetails: action.payload
             }
+
+        case SET_USER_DETAILS_FROM_COOKIES:
+            return {
+                ...state,
+                userDetails: action.payload
+            }
         
         default:
             return state;
@@ -58,6 +65,7 @@ export const loginUser = function (userCredentials) {
             }).then(function (response) {
                 if (response.status === 200) {
                     response.json().then((userDetails) => {
+                        console.log("++", userDetails);
                         dispatch({
                             type: 'LOGIN',
                             payload: userDetails
@@ -165,6 +173,16 @@ export const saveGoogleSearchFood = (data) => {
                     
                 }
             });
+        });
+    }
+}
+
+export const setUSerDetailsFromCookies = function (userDetails) {
+    return function (dispatch) {
+        console.log(userDetails);
+        dispatch({
+            type: 'SET_USER_DETAILS_FROM_COOKIES',
+            payload: userDetails
         });
     }
 }
