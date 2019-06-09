@@ -30,7 +30,7 @@ class Register extends Component {
         return (
             <div className="register">
                 <form className="register__form">
-                    <div class="register-form-wrapper">
+                    <div className="register-form-wrapper">
                         <div className="register__form-p">
                             <h1>Discover your tastes</h1>
                         </div>

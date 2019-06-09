@@ -39,7 +39,7 @@ class GoogleMapContainer extends Component {
 
     }
     _getCenterZoom() {
-        let centerZoom = 12;
+        let centerZoom = 13;
         return centerZoom;
     }
 

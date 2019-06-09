@@ -60,7 +60,7 @@
 }
 
 .list--entity {
-    width: 90%;
+    width: 75%;
     margin: 0 auto;
     background-color: #f6f4f4;
     border: 1px solid #f6f4f4;
@@ -124,7 +124,7 @@
 }
 
 .location-details-reviews__show-more {
-    width: 90%;
+    width: 75%;
     margin: 0 auto;
     font-size: 14px;
     font-weight: bold;

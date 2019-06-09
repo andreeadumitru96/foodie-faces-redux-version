@@ -2,11 +2,13 @@
     height: 53vh;
     width: 37%;
     margin: 10px;
-    /* margin: 80px ; */
-/* 
-    width: 25%;
-    height: 300px;
-    margin-left: 30px; */
+ 
+}
+
+.location-details .google-maps {
+    height: 400px;
+    padding: 70px 180px;
+    border-bottom: 5px solid #f6f6f6;
 }
 
 .location-search__google-map .google-maps {

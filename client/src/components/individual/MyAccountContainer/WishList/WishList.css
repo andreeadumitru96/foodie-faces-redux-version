@@ -1,4 +1,8 @@
 .wish-list-grid__items {
-    padding: 30px 50px;
-    /* display: inline-flex; */
+    /* padding: 30px 220px; */
+}
+
+.wish-list-grid { 
+    width: 60%;
+    margin: 0 auto;
 }

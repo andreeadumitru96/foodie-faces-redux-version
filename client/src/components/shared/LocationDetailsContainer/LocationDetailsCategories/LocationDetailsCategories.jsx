@@ -18,7 +18,7 @@ class LocationDetailsActions extends Component {
                 {Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object ?
                     null
                 :
-                    <div class="categories-wrapper">
+                    <div className="categories-wrapper">
                         {
                             this.props.locationDetails.categories.goodFor.length !== 0
                                 ?

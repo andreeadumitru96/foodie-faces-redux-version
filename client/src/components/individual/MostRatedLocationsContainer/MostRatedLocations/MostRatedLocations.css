@@ -1,7 +1,8 @@
 .header-p {
     font-size: 30px;
     text-align: center;
-    padding: 50px 50px 80px 50px; 
+    padding: 50px 50px 80px 50px;
+    color: #006600; 
 }
 
 .most-rated-locations {

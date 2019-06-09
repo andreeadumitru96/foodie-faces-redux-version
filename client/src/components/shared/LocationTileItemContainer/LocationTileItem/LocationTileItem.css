@@ -2,6 +2,11 @@
     cursor: pointer;
 }
 
+.location-tile > div p {
+    color: #006600 !important;
+    font-weight: bold;
+}
+
 .location-tile__button-marked {
     color: #006600 !important;
 }

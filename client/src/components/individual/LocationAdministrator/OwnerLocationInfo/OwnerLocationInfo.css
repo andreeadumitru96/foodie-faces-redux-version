@@ -4,8 +4,12 @@
     flex-direction: column;
     align-items: center;
     /* border-bottom: 5px solid #f6f4f4; */
-    width: 100%;
+}
 
+.location-details-administrator-content {
+    width: 80%;
+    margin: 0 auto;
+    background-color: white;
 }
 
 .modify-seats-wrapper {

@@ -18,6 +18,8 @@
 
 .location-details-add-dish__score {
     justify-content: center;
+    display: flex;
+    padding-top: 10px;
 }
 
 .photos-add-photo {
@@ -27,6 +29,7 @@
 .fa-plus { 
     font-size: 22px;
     color: green;
+    padding-bottom: 10px;
 }
 
 .location-details-add-dish__image-preview {

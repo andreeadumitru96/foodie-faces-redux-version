@@ -4,6 +4,6 @@
 } 
 
 .full-size-image img {
-    width: 400px;
-    height: auto;
+    max-width: auto;
+    max-height: 500px;
 }

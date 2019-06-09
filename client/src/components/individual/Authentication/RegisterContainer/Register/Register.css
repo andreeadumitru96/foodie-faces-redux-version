@@ -27,6 +27,7 @@
 .register-form-wrapper {
     background-color: rgba(87, 111, 56, 0.8);
     padding: 20px;
+    border-radius: 24px;
 }
 
 .register__form label {
