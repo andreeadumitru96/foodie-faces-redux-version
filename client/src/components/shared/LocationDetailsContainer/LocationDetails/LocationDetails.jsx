@@ -34,7 +34,6 @@ class LocationDetails extends Component {
                 
                 <div className="location-details-photos-map-container">
                     <LocationDetailsGrid />
-                    <LocationDetailsMap className="google-maps-location-details" />
                 </div>
                 
                 <LocationDetailsActions />
@@ -44,6 +43,8 @@ class LocationDetails extends Component {
                 <LocationDetailsMenu/>
 
                 <LocationDetailsMostRecommendedDishes/>
+
+                <LocationDetailsMap className="google-maps-location-details" />
  
                 <div className="location-details-reviews-map">
                     <LocationDetailsReviews/>

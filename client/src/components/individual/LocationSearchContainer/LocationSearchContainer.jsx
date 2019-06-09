@@ -34,7 +34,8 @@ class LocationSearchContainer extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if(newProps.selectedCity && this.props.selectedCity.cityName !== newProps.selectedCity.cityName) {
+        console.log(this.props.selectedCity);
+        if(this.props.selectedCity && newProps.selectedCity && this.props.selectedCity.cityName !== newProps.selectedCity.cityName) {
             this.props.fetchLocationsByCity();
         }
     }

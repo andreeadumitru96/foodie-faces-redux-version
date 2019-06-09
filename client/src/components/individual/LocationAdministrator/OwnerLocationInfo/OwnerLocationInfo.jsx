@@ -33,8 +33,9 @@ const styles = {
 class OwnerLocationInfo extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props);
         this.state = {
-            availableSeats: null
+            availableSeats: 0,
         };
         this.onUpdateSeatsSocketSend = this.onUpdateSeatsSocketSend.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
@@ -50,7 +51,7 @@ class OwnerLocationInfo extends Component {
     render() {
     
         return (
-            <div>
+            <div className="location-details-administrator-content">
                 {this.props.locationDetails ? 
                     <div>
                         
@@ -108,7 +109,7 @@ class OwnerLocationInfo extends Component {
                                 this.props.locationDetails.availableSeats
                                     ?
                                     <div className="information-average-price information-item">
-                                        <i class="fas fa-chair"> Available Seats: </i>
+                                        <i className="fas fa-chair"> Available Seats: </i>
                                         <span className="information-average-price-span main-information-details">
                                             {this.props.locationDetails.availableSeats}
                                         </span>
@@ -121,7 +122,7 @@ class OwnerLocationInfo extends Component {
                         {this.props.locationDetails.images ? 
                             <div>
                         
-                                <p class="owner-location-info-title">Images</p>
+                                <p className="owner-location-info-title">Images</p>
                                 {
                                     this.props.locationDetails.images.length > 0
                                         ?
@@ -140,7 +141,7 @@ class OwnerLocationInfo extends Component {
                                                 ))}
                                             </GridList>
                                         </div>
-                                        : <p class="location-item-no-description">There are no images yet</p>
+                                        : <p className="location-item-no-description">There are no images yet</p>
                                 }
                             </div>
                             : 
@@ -180,7 +181,7 @@ class OwnerLocationInfo extends Component {
                                     label="Number"
                                     onChange={this.handleOnChange}
                                     type="number"
-                                    // value={this.props.availableSeats ? this.props.availableSeats : 0}
+                                    value={this.state.availableSeats}
                                     margin="normal"
                                     variant="outlined"
                                 />
@@ -204,7 +205,12 @@ class OwnerLocationInfo extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchLocationById(this.props.selectedLocationId);
+        this.props.fetchLocationById(this.props.selectedLocationId).then(() => {
+            // console.log(this.props.locationDetails);
+            this.setState({
+                availableSeats: this.props.locationDetails.availableSeats
+            })
+        })
     }
 
     onUpdateSeatsSocketSend = () => {
