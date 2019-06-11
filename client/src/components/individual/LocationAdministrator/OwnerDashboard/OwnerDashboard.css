@@ -31,10 +31,17 @@
 .choose-location-wrapper {
     height: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    /* padding-top: 180px; */
     align-items: center;
+}
+
+.choose-location-elements-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(87, 111, 56, 0.8);
+    border-radius: 24px;
+    padding: 24px;
 }
 
 .choose-location-button {

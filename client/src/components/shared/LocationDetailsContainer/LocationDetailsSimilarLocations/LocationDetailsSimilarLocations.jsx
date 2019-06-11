@@ -71,10 +71,11 @@ class LocationDetailsSimilarLocations extends Component {
             },
             cityLocation: locationDetails.city
         }
-        this.props.fetchSimilarLocations(locationInfo, locationDetails._id);  
+        this.props.fetchSimilarLocations(locationInfo, locationDetails._id); 
+        console.log(this.props.similarLocations); 
     }
     componentWillReceiveProps(newProps) {
-        if(newProps.locationDetails && this.props.locationDetails !== newProps.locationDetails) {
+        if(newProps.locationDetails && JSON.stringify(this.props.locationDetails) !== JSON.stringify(newProps.locationDetails)) {
             this._getSimilarLocations(newProps.locationDetails); 
         }
         

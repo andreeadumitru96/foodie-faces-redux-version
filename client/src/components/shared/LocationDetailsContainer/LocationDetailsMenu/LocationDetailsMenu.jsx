@@ -36,10 +36,10 @@ class LocationDetailsMenu extends Component {
                                         nestedItems={
                                             this._getFormattedMenuByCategory()[key].map((item) => {
                                                 return (<ListItem
-                                                    leftAvatar={<Avatar icon={<img src={item.image} alt="" />} />}
+                                                    leftIcon={<img src={item.image} alt="" className="element-menu-image"/>}
                                                     key={item.name}
                                                     primaryText={item.name}
-                                                    rightIcon={<span>{Math.round(item.price * 10) / 10}€</span>}
+                                                    rightIcon={<span className="dish-item-price">{Math.round(item.price * 10) / 10}€</span>}
                                                 />)
                                             })
                                         }
@@ -94,13 +94,6 @@ class LocationDetailsMenu extends Component {
             }
         });
         return formattedMenu;
-    }
-
-    componentWillReceiveProps(newProps) {
-        // if(newProps.locationDetails && newProps.locationDetails.menu.length > 1) {
-        //     debugger
-        //     this._getFormattedMenuByCategory();
-        // }
     }
 
 }

@@ -8,6 +8,7 @@ class WishList extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            wishList: []
         };
         this._updateWishListAfterRemoving = this._updateWishListAfterRemoving.bind(this);
     }
