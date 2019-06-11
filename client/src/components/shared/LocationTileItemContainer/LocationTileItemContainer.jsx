@@ -141,9 +141,9 @@ class LocationTileItemContainer extends Component {
 
         this.props.removeLocationFromWishList(locationToRemove).then(() => {
             if(Object.keys(this.props.userDetails).length === 0 && this.props.userDetails.constructor === Object) {
-                notificationError('A problem have been occurred while deleting the location... ');
+                notificationError('A problem occurred while deleting the location... ');
             } else {
-                successNotification('The location has been removed to wish list.');
+                successNotification('The location has been removed from wish list.');
                 cookies.set('user', this.props.userDetails);
             }
             

@@ -20,7 +20,6 @@ class MyAccountContainer extends Component {
     render() {
         return (
             <MyAccount
-                wishListLocations = {this.props.wishListLocations}
                 wishListFormattedByName = {this.state.wishListFormattedByName}
                 isLocationDetailsMount = {this.state.isLocationDetailsMount}
             />

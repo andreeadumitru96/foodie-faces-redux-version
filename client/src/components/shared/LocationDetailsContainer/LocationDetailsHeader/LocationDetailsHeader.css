@@ -13,6 +13,14 @@
     align-items: center;
 }
 
+.title-container__rating {
+    padding: 10px;
+}
+
+.title-container__rating span {
+    color: rgb(46, 125, 50) !important;
+}
+
 /* .location-details-header__information {
     display: flex;
     flex-direction: row;

@@ -21,7 +21,6 @@ class MyAccount extends Component {
                     className="my-account__header"
                     isMyAccountMount={true}
                     wishListFormattedByName={this.props.wishListFormattedByName}
-                    wishList={this.props.wishList}
                 />
                 {this.state.isLocationDetailsMount ?
                     <div>
@@ -33,11 +32,9 @@ class MyAccount extends Component {
                 :
                     <div className="my-account__wish-list">
                         <div className="wish-list-title">
-                            <h1>Your wish list</h1>
+                            <h1>My wishlist</h1>
                         </div>
-                        <WishList
-                            wishListLocations = {this.props.wishListLocations}
-                        />
+                        <WishList />
                     </div>
                 }
 

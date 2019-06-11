@@ -70,7 +70,8 @@ export const locationReducer = (state = initialState, action) => {
         case SAVE_LOCATION_WISH_LIST: 
           return {
               ...state, 
-              userDetails: action.payload
+              userDetails: action.payload.userDetails,
+              wishListLocations: action.payload.wishListLocations              
           };
         case FETCH_SIMILAR_LOCATIONS: 
           return {
@@ -85,7 +86,8 @@ export const locationReducer = (state = initialState, action) => {
         case REMOVE_LOCATION_WISH_LIST: 
             return {
                 ...state,
-                userDetails: action.payload
+                userDetails: action.payload.userDetails,
+                wishListLocations: action.payload.wishListLocations
             };  
         case ADD_MENU_DISH: 
             return {
@@ -292,7 +294,6 @@ export const getLocationById = (locationId, locationsType) => {
         if(locationsType === "SimilarLocationsComponent") {
             locationsList = getState().locations.similarLocations;
         } else if(locationsType === 'WishListComponent') {
-            // console.log(getState().locations.allLocations);
             locationsList = getState().locations.allLocations;
         } else {
             locationsList = getState().locations.locationsList;
@@ -304,7 +305,8 @@ export const getLocationById = (locationId, locationsType) => {
 }
 
 export const saveLocationToWishList = (data) => {
-    return(dispatch) => {
+    console.log(data);
+    return(dispatch, getState) => {
         return new Promise((resolve, reject) => {
             fetch(`http://${HOST_URL}:${API_PORT_URL}/api/saveLocationWishList`, {
                 headers: {
@@ -315,12 +317,17 @@ export const saveLocationToWishList = (data) => {
                 body: JSON.stringify(data)
             }).then((response) => {
                 if(response.status === 200) {
-                    console.log(response);
                     response.json().then((userDetails) => {
-                        console.log(userDetails);
+                        const locationToAdd = getState().locations.allLocations.find(location => location._id === data.locationId);
+                        const newWishListLocations = getState().locations.wishListLocations;
+                        newWishListLocations.push(locationToAdd);
+                        
                         dispatch({
                             type: SAVE_LOCATION_WISH_LIST,
-                            payload: userDetails
+                            payload: {
+                                userDetails,
+                                wishListLocations: newWishListLocations
+                            }
                         });
                         resolve();
                     });
@@ -331,7 +338,7 @@ export const saveLocationToWishList = (data) => {
 }
 
 export const removeLocationFromWishList = (locationToRemove) => {
-    return(dispatch) => {
+    return(dispatch, getState) => {
         return new Promise((resolve, reject) => {
             fetch(`http://${HOST_URL}:${API_PORT_URL}/api/removeLocationWishList`, {
                 headers: {
@@ -343,9 +350,14 @@ export const removeLocationFromWishList = (locationToRemove) => {
             }).then((response) => {
                 if(response.status === 200) {
                     response.json().then((userDetails) => {
+                        const newLocationsList = getState().locations.wishListLocations.filter((location) => location._id !== locationToRemove.locationId)
+                        
                         dispatch({
                             type: REMOVE_LOCATION_WISH_LIST,
-                            payload: userDetails
+                            payload: {
+                                userDetails,
+                                wishListLocations: newLocationsList
+                            }
                         });
                         resolve();
                                       
@@ -406,6 +418,7 @@ export const fetchWishListLocations = (userId) => {
             }).then(function (response) {
                 if(response.status === 200) {
                     response.json().then((wishListLocations) => {
+
                         dispatch({
                             type: 'FETCH_WISHLIST_LOCATIONS',
                             payload: wishListLocations

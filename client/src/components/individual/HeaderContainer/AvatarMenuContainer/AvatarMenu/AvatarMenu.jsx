@@ -35,7 +35,7 @@ class AvatarMenu extends Component {
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                     targetOrigin={{ vertical: 'top', horizontal: 'left' }}
                 >
-                    <MenuItem primaryText="My account" onClick={this._onMyAccountComponent}/>
+                    <MenuItem primaryText="My wishlist" onClick={this._onMyAccountComponent}/>
                     <MenuItem primaryText="Search food" onClick={this._onGoogleSearchFoodComponent}/>
                     <MenuItem primaryText="Sign Out" onClick={this.props.onSignOut}/>
                     <div className="avatar-menu__redirect-myaccount">
