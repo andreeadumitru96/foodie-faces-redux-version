@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import socketIOClient from "socket.io-client";
+
+import { API_URL } from '../../constants';
+import { API_PORT_URL, HOST_URL } from '../../constants'
 
 import ReactStars from 'react-stars'
 import { fetchLocationById } from '../../../../reducers/locationReducer/index';
@@ -9,7 +13,9 @@ class LocationDetailsHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            
         };
+        this._onListenSocket = this._onListenSocket.bind();
 
     }
 
@@ -96,9 +102,22 @@ class LocationDetailsHeader extends Component {
         );
     }
 
+    _onListenSocket = () => {
+        const socket = socketIOClient(`http://${HOST_URL}:${API_PORT_URL}`);
+        socket.on('onSendUpdatedLocation', (updatedLocation) => {
+
+            if(updatedLocation._id === this.props.locationDetails._id) {
+                this.props.locationDetails = updatedLocation
+            }
+        
+        });
+
+    }
+
     componentDidMount() {
         
         this.props.fetchLocationById(this.props.locationId);
+        this._onListenSocket();
 
     }
 

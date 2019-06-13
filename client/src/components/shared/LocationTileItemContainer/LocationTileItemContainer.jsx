@@ -53,7 +53,7 @@ class LocationTileItemContainer extends Component {
         
         let locationItem = this.props.getLocationById(this.props.locationId, this.props.locationsTypeFlag);
 
-        if(locationItem) {
+        if(locationItem) { 
             this.setState({
                 locationItem: locationItem
             }, () => {
