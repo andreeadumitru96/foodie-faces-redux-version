@@ -29,7 +29,7 @@ class ChooseLocationDropdown extends Component {
     render() {
         return(  
             <div className="choose-location-wrapper">
-                <div class="choose-location-elements-container">
+                <div className="choose-location-elements-container">
                     <p className="choose-location-title">Choose your location in order to modify something...</p>
                     <div className="choose-location-dropdown">
                         <DropDownMenu

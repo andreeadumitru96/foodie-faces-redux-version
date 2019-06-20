@@ -53,7 +53,7 @@ class OwnerLocationInfo extends Component {
         return (
             <div className="location-details-administrator-content">
                 {this.props.locationDetails ? 
-                    <div>
+                    <div class="location-details-wrapper-administrator">
                         
                         <div className="location-details-header__title-container">
                             <div className="title-container__name">
@@ -181,7 +181,7 @@ class OwnerLocationInfo extends Component {
                                     label="Number"
                                     onChange={this.handleOnChange}
                                     type="number"
-                                    value={this.state.availableSeats}
+                                    value={this.state.availableSeats ? this.state.availableSeats : 0}
                                     margin="normal"
                                     variant="outlined"
                                 />
