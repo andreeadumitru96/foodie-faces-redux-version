@@ -13,16 +13,17 @@ class LocationDetailsHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            locationDetails: props.locationDetails
             
         };
-        this._onListenSocket = this._onListenSocket.bind();
+        // this._onListenSocket = this._onListenSocket.bind();
 
     }
 
     render() {
         return (
             <div className="location-details-header">
-                {Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object ?
+                {Object.entries(this.state.locationDetails).length === 0 && this.state.locationDetails.constructor === Object ?
 
                     null
 
@@ -30,7 +31,7 @@ class LocationDetailsHeader extends Component {
                     <div>
                         <div className="location-details-header__title-container">
                             <div className="title-container__name">
-                                {this.props.locationDetails.name}
+                                {this.state.locationDetails.name}
                             </div>
                             <div className="title-container__rating">
                                 <ReactStars
@@ -39,7 +40,7 @@ class LocationDetailsHeader extends Component {
                                     color2={'black'}
                                     half={false}
                                     edit={false}
-                                    value={this.props.locationDetails.tripAdvisorRating}
+                                    value={this.state.locationDetails.tripAdvisorRating}
                                 />
                             </div>
                         </div>
@@ -47,45 +48,45 @@ class LocationDetailsHeader extends Component {
                         <div className="location-details-header__information">
                             <div className="information__general">
                                 {
-                                    this.props.locationDetails.address
+                                    this.state.locationDetails.address
                                         ?
                                         <div className="information-address information-item">
                                             <i className="fa fa-map-marker"> Address: </i>
                                             <span className="information-address-span main-information-details">
-                                                {this.props.locationDetails.address}
+                                                {this.state.locationDetails.address}
                                             </span>
                                         </div>
                                         : null
                                 }
                                 {
-                                    this.props.locationDetails.phone
+                                    this.state.locationDetails.phone
                                         ?
                                         <div className="information-phone information-item">
                                             <i className="fa fa-phone"> Phone Number: </i>
                                             <span className="information-phone-span main-information-details">
-                                                {this.props.locationDetails.phone[0]}
+                                                {this.state.locationDetails.phone[0]}
                                             </span>
                                         </div>
                                         : null
                                 }
                                 {
-                                    this.props.locationDetails.price
+                                    this.state.locationDetails.price
                                         ?
                                         <div className="information-average-price information-item">
                                             <i className="fa fa-money"> Price Range: </i>
                                             <span className="information-average-price-span main-information-details">
-                                                {this.props.locationDetails.price}
+                                                {this.state.locationDetails.price}
                                             </span>
                                         </div>
                                         : null
                                 }
                                 {
-                                    this.props.locationDetails.availableSeats
+                                    this.state.locationDetails.availableSeats
                                         ?
-                                        <div className="information-average-price information-item">
+                                        <div className="information-available-seats information-item">
                                             <i class="fas fa-chair"> Available Seats: </i>
-                                            <span className="information-average-price-span main-information-details">
-                                                {this.props.locationDetails.availableSeats}
+                                            <span className="information-available-seats-span main-information-details">
+                                                {this.state.locationDetails.availableSeats}
                                             </span>
                                         </div>
                                         : null
@@ -106,9 +107,9 @@ class LocationDetailsHeader extends Component {
         const socket = socketIOClient(`http://${HOST_URL}:${API_PORT_URL}`);
         socket.on('onSendUpdatedLocation', (updatedLocation) => {
 
-            if(updatedLocation._id === this.props.locationDetails._id) {
-                this.props.locationDetails = updatedLocation
-            }
+            this.setState({
+                locationDetails: updatedLocation
+            })
         
         });
 
@@ -122,6 +123,11 @@ class LocationDetailsHeader extends Component {
     }
 
     componentWillReceiveProps(newProps) {
+        if(newProps) {
+            this.setState({
+                locationDetails: newProps.locationDetails
+            });
+        }
         if(newProps.locationDetails._id !== newProps.locationId) {
             this.props.fetchLocationById(this.props.locationId);
             

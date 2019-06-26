@@ -7,7 +7,7 @@
 }
 
 .location-details-administrator-content {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     background-color: white;
 }
@@ -28,6 +28,8 @@
     font-size: 26px;
     font-weight: bold;
     padding-bottom: 12px;
+    display: flex;
+    justify-content: center;
 }
 
 .location-item-padding {

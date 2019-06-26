@@ -26,8 +26,13 @@
     flex-direction: row;
 } */
 
-.location-details-header__information .fa {
+.location-details-header__information .fa, .fas {
     color: rgb(46, 125, 50);
+}
+
+.information-available-seats {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .information__general {

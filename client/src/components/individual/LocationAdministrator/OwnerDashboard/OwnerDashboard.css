@@ -9,10 +9,13 @@
 }
 
 .location-administrator-wrapper {
-    /* background-color: #f6f4f4; */
+    background-color: #f6f4f4;
     height: 100%;
 }
 
+.location-details-administrator-content {
+    height: 100%;
+}
 .location-details-wrapper-administrator .location-details-header__title-container {
     margin-top: 0px !important;
 }

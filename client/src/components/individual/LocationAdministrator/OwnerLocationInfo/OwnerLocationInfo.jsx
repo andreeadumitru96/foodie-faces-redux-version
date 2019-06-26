@@ -105,7 +105,7 @@ class OwnerLocationInfo extends Component {
                                     </div>
                                     : null
                             }
-                            {
+                            {/* {
                                 this.props.locationDetails.availableSeats
                                     ?
                                     <div className="information-average-price information-item">
@@ -115,7 +115,7 @@ class OwnerLocationInfo extends Component {
                                         </span>
                                     </div>
                                     : null
-                            }
+                            } */}
                             
                         </div>
                         <div className="owner-location-images location-item-padding">
@@ -181,7 +181,7 @@ class OwnerLocationInfo extends Component {
                                     label="Number"
                                     onChange={this.handleOnChange}
                                     type="number"
-                                    value={this.state.availableSeats ? this.state.availableSeats : 0}
+                                    value={this.state.availableSeats ? this.state.availableSeats : null}
                                     margin="normal"
                                     variant="outlined"
                                 />
