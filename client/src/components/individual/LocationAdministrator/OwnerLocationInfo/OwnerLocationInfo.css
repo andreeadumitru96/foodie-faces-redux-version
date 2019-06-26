@@ -12,6 +12,12 @@
     background-color: white;
 }
 
+.owner-location-images-wrapper .location-details-grid > div > div {
+    width: 100% !important;
+    height: 420px !important;
+
+}
+
 .modify-seats-wrapper {
     display: flex;
     flex-direction: column;

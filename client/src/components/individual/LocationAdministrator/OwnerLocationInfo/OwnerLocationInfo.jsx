@@ -53,7 +53,7 @@ class OwnerLocationInfo extends Component {
         return (
             <div className="location-details-administrator-content">
                 {this.props.locationDetails ? 
-                    <div class="location-details-wrapper-administrator">
+                    <div className="location-details-wrapper-administrator">
                         
                         <div className="location-details-header__title-container">
                             <div className="title-container__name">
@@ -120,26 +120,26 @@ class OwnerLocationInfo extends Component {
                         </div>
                         <div className="owner-location-images location-item-padding">
                         {this.props.locationDetails.images ? 
-                            <div>
+                            <div class="owner-location-images-wrapper">
                         
                                 <p className="owner-location-info-title">Images</p>
                                 {
                                     this.props.locationDetails.images.length > 0
                                         ?
                                         <div style={styles.root} className="location-details-grid">
-                                            <GridList
+                                            {/* <GridList
                                                 cols={2}
                                                 cellHeight={200}
                                                 padding={1}
                                                 style={styles.gridList}
-                                            >
+                                            > */}
                                                 {this.props.locationDetails.images.map((image, index) => (
 
-                                                    <GridTile key={image} cols={index % 3 === 0 ? 2 : 1} rows={index % 3 === 0 ? 2 : 1}>
+                                                    <div key={image}>
                                                         <img src={image} alt=""/>
-                                                    </GridTile>
+                                                    </div>
                                                 ))}
-                                            </GridList>
+                                            {/* </GridList> */}
                                         </div>
                                         : <p className="location-item-no-description">There are no images yet</p>
                                 }
