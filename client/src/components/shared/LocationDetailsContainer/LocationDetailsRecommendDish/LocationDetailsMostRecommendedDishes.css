@@ -49,3 +49,18 @@
     padding-top: 20px;
     font-style: italic;
 }
+
+.title-no-map {
+    font-size: 22px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-style: italic;
+    padding-left: 30px;
+    border-bottom: 5px solid #f6f6f6
+
+}
+
+.list-padding {
+    padding-left: 30px;
+    padding-top: 30px;
+}

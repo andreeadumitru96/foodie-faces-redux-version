@@ -89,7 +89,7 @@ class OwnerLocationInfo extends Component {
                                     : null
                             }
                             {
-                                this.props.locationDetails.phone
+                                this.props.locationDetails.phone.length > 0 && this.state.locationDetails.phone[0] !== ''
                                     ?
                                     <div className="information-phone information-item">
                                         <i className="fa fa-phone"> Phone Number: </i>

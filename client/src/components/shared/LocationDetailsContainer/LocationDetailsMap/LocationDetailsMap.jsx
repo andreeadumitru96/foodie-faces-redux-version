@@ -15,29 +15,41 @@ class LocationDetailsMap extends Component {
     }
 
     render() {
+        console.log("++++", this.props.locationDetails)
+        const Fragment = React.Fragment;
         return (
-            <div className="google-maps">
+            <Fragment>
                 {
                     Object.entries(this.props.locationDetails).length === 0 && this.props.locationDetails.constructor === Object ?
                         null
-                        :
-                        <GoogleMapReact
-                            defaultCenter={this.props.center}
-                            onChange={this._onChange}
-                            defaultZoom={this._getCenterZoom()}
-                            center={this._getCenterCoordinates()}
-                        >
-                            <PinPoint
-                                text={this.props.locationDetails.name}
-                                lat={parseFloat(this.props.locationDetails.coordinates.latitude)}
-                                lng={parseFloat(this.props.locationDetails.coordinates.longitude)}
-                                key={this.props.locationDetails.name} />
-                        </GoogleMapReact>
-                        
+                        : <Fragment>
+                            {
+                                this.props.locationDetails.hasOwnProperty('coordinates') && this.props.locationDetails['coordinates'].latitude ?
+                                    <div className="google-maps">
+                                        <GoogleMapReact
+                                            defaultCenter={this.props.center}
+                                            onChange={this._onChange}
+                                            defaultZoom={this._getCenterZoom()}
+                                            center={this._getCenterCoordinates()}
+                                        >
+                                            <PinPoint
+                                                text={this.props.locationDetails.name}
+                                                lat={parseFloat(this.props.locationDetails.coordinates.latitude)}
+                                                lng={parseFloat(this.props.locationDetails.coordinates.longitude)}
+                                                key={this.props.locationDetails.name}
+                                            />
 
+                                        </GoogleMapReact>
+                                    </div>
+                                        
+                                    : <Fragment>
+                                        <div className="list-title list-padding">Find your location...</div>
+                                        <div className="title-no-map">Google maps is not available for this location</div>
+                                    </Fragment>
+                            }
+                        </Fragment>
                 }
-
-            </div>
+            </Fragment>
         );
     }
 

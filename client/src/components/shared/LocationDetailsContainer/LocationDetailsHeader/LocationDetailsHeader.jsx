@@ -59,7 +59,7 @@ class LocationDetailsHeader extends Component {
                                         : null
                                 }
                                 {
-                                    this.state.locationDetails.phone
+                                    this.state.locationDetails.phone.length > 0 && this.state.locationDetails.phone[0] !== ''
                                         ?
                                         <div className="information-phone information-item">
                                             <i className="fa fa-phone"> Phone Number: </i>
