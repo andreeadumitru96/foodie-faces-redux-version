@@ -55,6 +55,19 @@
     width: 100%;
  }
 
+.back-button-container {
+    font-size: 28px;
+    color: rgb(46, 125, 50);
+    padding: 24px 0px 12px 24px !important;
+    cursor: pointer;
+    
+ }
+
+ .owner-location-images-wrapper .location-details-header__title-container {
+     padding-top: 0 !important;
+     padding-bottom: 12px !important;
+ }
+
 @media all and (max-width: 421px) {
     .owner-location-images-wrapper .location-details-grid > div {
         max-width: 300px;

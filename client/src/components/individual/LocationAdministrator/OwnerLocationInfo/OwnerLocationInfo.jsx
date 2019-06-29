@@ -39,6 +39,7 @@ class OwnerLocationInfo extends Component {
         };
         this.onUpdateSeatsSocketSend = this.onUpdateSeatsSocketSend.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
+        this._onGoBack = this._onGoBack.bind(this);
     }
 
     handleOnChange = event => {
@@ -54,7 +55,11 @@ class OwnerLocationInfo extends Component {
             <div className="location-details-administrator-content">
                 {this.props.locationDetails ? 
                     <div className="location-details-wrapper-administrator">
-                        
+                        <div className="back-button-container">
+                            <i class="fa fa-arrow-left" aria-hidden="true" onClick={ this._onGoBack }>
+
+                            </i>
+                        </div>
                         <div className="location-details-header__title-container">
                             <div className="title-container__name">
                                 {this.props.locationDetails.name}
@@ -222,6 +227,9 @@ class OwnerLocationInfo extends Component {
         }
 
         socket.emit('onUpdateSeatsEvent', locationToUpdate);    
+    }
+    _onGoBack = () => {
+        window.location = '/';
     }    
 
 }
