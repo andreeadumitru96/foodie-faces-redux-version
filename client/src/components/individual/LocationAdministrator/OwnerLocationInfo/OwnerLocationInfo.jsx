@@ -120,7 +120,7 @@ class OwnerLocationInfo extends Component {
                         </div>
                         <div className="owner-location-images location-item-padding">
                         {this.props.locationDetails.images ? 
-                            <div class="owner-location-images-wrapper">
+                            <div className="owner-location-images-wrapper">
                         
                                 <p className="owner-location-info-title">Images</p>
                                 {
@@ -181,7 +181,7 @@ class OwnerLocationInfo extends Component {
                                     label="Number"
                                     onChange={this.handleOnChange}
                                     type="number"
-                                    value={this.state.availableSeats ? this.state.availableSeats : null}
+                                    value={this.state.availableSeats ? this.state.availableSeats : undefined}
                                     margin="normal"
                                     variant="outlined"
                                 />
