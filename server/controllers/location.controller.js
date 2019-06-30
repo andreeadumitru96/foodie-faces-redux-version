@@ -226,7 +226,7 @@ exports.addDish = function(req, res) {
                     if(err) {
                         res.status(500).send({message: err});
                     } else {
-                        res.status(200).send({message: 'Temporary Menu Updated'});
+                        res.status(200).send({ updatedLocation });
                     }
                 });
             } else if (occurenceDishNumber === 2){
