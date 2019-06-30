@@ -174,6 +174,7 @@ class LocationDetailsAddDish extends Component {
                     }
 
                     this.props.addDishInMenu(newDish).then(() => {
+                        console.log(this.props.locationDetails);
                         this._onPressAddDish();
                     }).catch(() => {
                         notificationError("It may be a problem when adding a menu dish...");

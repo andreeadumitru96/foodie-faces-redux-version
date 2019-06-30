@@ -449,12 +449,12 @@ export const addDishInMenu = (newDish) => {
                 body: JSON.stringify(newDish),
             }).then(function (response) {
                 if (response.status === 200) {
-                    response.json().then((message) => {
-                        console.log(message);
-                        // dispatch({
-                        //     type: 'ADD_MENU_DISH',
-                        //     payload: updatedLocation.updatedLocation
-                        // });
+                    response.json().then((data) => {
+                        console.log(data.updatedLocation);
+                        dispatch({
+                            type: 'ADD_MENU_DISH',
+                            payload: data.updatedLocation
+                        });
                         resolve();
                     });
                     
