@@ -19,7 +19,7 @@ class BodyContainer extends Component {
             isMostRatedLocationsMount: this.props.componentToMount === 'MostRatedLocationsComponent' ? true : false,
             isLocationSearchMount: this.props.componentToMount === 'LocationSearchComponent' ? true : false,
             isLocationDetailsMount: this.props.componentToMount === 'LocationDetailsComponent' ? true : false,
-            locationDetailsId: null
+            locationDetailsId: props.locationId
         };
         this._triggeredBody = this._triggeredBody.bind(this);
     }
@@ -61,6 +61,8 @@ class BodyContainer extends Component {
             isMostRatedLocationsMount: newProps.componentToMount === 'MostRatedLocationsComponent' ? true : false,
             isLocationSearchMount: newProps.componentToMount === 'LocationSearchComponent' ? true : false,
             isLocationDetailsMount: newProps.componentToMount === 'LocationDetailsComponent' ? true : false,
+        }, () => {
+            this.props.manageBodyComponents(newProps.componentToMount);
         })
     }
 
@@ -68,8 +70,10 @@ class BodyContainer extends Component {
         this.setState({
             isLocationDetailsMount: componentToMount === 'LocationDetailsComponent' ? true : false,
             isMostRatedLocationsMount: false,
-            isLocationSearchMount: false,
-            locationDetailsId: locationId
+            isLocationSearchMount: componentToMount === 'LocationSearchComponent',
+            locationDetailsId: locationId ? locationId : this.state.locationDetailsId
+        }, () => {
+            this.props.manageBodyComponents(componentToMount, locationId);
         });
     }
 }

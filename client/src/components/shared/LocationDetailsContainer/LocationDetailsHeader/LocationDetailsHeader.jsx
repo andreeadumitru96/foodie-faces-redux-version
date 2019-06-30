@@ -116,7 +116,6 @@ class LocationDetailsHeader extends Component {
     }
 
     componentDidMount() {
-        
         this.props.fetchLocationById(this.props.locationId);
         this._onListenSocket();
 
@@ -128,6 +127,7 @@ class LocationDetailsHeader extends Component {
                 locationDetails: newProps.locationDetails
             });
         }
+
         if(newProps.locationDetails._id !== newProps.locationId) {
             this.props.fetchLocationById(this.props.locationId);
             

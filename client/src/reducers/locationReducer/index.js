@@ -92,7 +92,7 @@ export const locationReducer = (state = initialState, action) => {
         case ADD_MENU_DISH: 
             return {
                 ...state,
-                
+                locationDetails: action.payload
             }; 
         case ADD_LOCATION_REVIEW: 
             return {
@@ -449,8 +449,12 @@ export const addDishInMenu = (newDish) => {
                 body: JSON.stringify(newDish),
             }).then(function (response) {
                 if (response.status === 200) {
-                    response.json().then((data) => {
-                        console.log(data);
+                    response.json().then((message) => {
+                        console.log(message);
+                        // dispatch({
+                        //     type: 'ADD_MENU_DISH',
+                        //     payload: updatedLocation.updatedLocation
+                        // });
                         resolve();
                     });
                     
@@ -514,7 +518,7 @@ export const recommendLocationDish = (menuDish) => {
                     response.json().then((updatedLocation) => {
                         dispatch({
                             type: 'RECOMMEND_LOCATION_DISH',
-                            payload: updatedLocation
+                            payload: updatedLocation.updatedLocation
                         });
                         resolve();
                     });

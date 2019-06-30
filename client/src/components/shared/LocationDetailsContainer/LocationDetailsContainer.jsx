@@ -24,6 +24,7 @@ class LocationDetailsContainer extends Component {
     }
 
     componentDidMount() {
+        this.props.triggeredBody('LocationDetailsComponent', this.props.locationId);
         window.scrollTo(0,0);
     }
 
