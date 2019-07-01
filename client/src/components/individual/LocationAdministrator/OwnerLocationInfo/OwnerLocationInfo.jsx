@@ -89,7 +89,7 @@ class OwnerLocationInfo extends Component {
                                     : null
                             }
                             {
-                                this.props.locationDetails.phone.length > 0 && this.state.locationDetails.phone[0] !== ''
+                                this.props.locationDetails.phone
                                     ?
                                     <div className="information-phone information-item">
                                         <i className="fa fa-phone"> Phone Number: </i>
@@ -167,7 +167,6 @@ class OwnerLocationInfo extends Component {
                                             style={styles.gridList}
                                         >
                                             {this.props.locationDetails.images.map((image, index) => (
-
                                                 <GridTile key={image} cols={index % 3 === 0 ? 2 : 1} rows={index % 3 === 0 ? 2 : 1}>
                                                     <img src={image} onClick={() => this._onClickFullSizeImage(image)} />
                                                 </GridTile>

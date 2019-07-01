@@ -274,6 +274,7 @@ export const fetchLocationById = (id) => {
             }).then(function(response){
                 if(response.status === 200) {
                     response.json().then((location) => {
+                        console.log(location);
                         dispatch({
                             type: FETCH_LOCATION_BY_ID,
                             payload: location
