@@ -6,7 +6,7 @@
     "babel-core": "^6.26.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "socket.io": "*",
     "mongoose": "^4.13.6",
     "node-geocoder": "^3.22.0",
